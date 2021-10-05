@@ -136,7 +136,10 @@ Route::resource('Faqs', 'FaqsController');
 //Front uniquement
 Route::get('/about', 'FrontController@about')->name('about');
 Route::get('/contact', 'ContactController@contact')->name('contact');
+Route::get('/confirm', 'FrontController@confirm')->name('confirm');
 Route::get('/shop', 'FrontController@shop')->name('shop');
-
+Route::post('/validation', 'ContactController@store')->name('validation');
+Route::post('/devis','ContactController@devis_store')->name('devis_store');
+Route::post('/intervention','ContactController@intervention_store')->name('intervention_store');
 Route::post('/validation', 'FrontController@store')->name('validation');
 Route::get('/getCategory/{id}', [Add_categoriesController::class, 'getCategory'])->name('getCategory');

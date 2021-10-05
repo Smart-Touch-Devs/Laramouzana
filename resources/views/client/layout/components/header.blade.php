@@ -5,27 +5,169 @@
             <div class="container">
                 <div class="d-flex align-items-center">
                     <div class="topbar-left">
-                        <a href="#" class="text-gray-110 font-size-13 u-header-topbar__nav-link">Bienvenue chez
+                        <a href="{{asset('contact')}}" class="text-gray-110 font-size-13 u-header-topbar__nav-link">Bienvenue chez
                             Repears</a>
                     </div>
                     <div class="topbar-right ml-auto">
                         <ul class="list-inline mb-0">
                             <li
                                 class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
-                                <a href="/contact" class="u-header-topbar__nav-link"><i
-                                        class="ec ec-map-pointer mr-1"></i>Localisation</a>
+                                <a type="button" data-toggle="modal" data-target="#exampleModalLong"><i
+                                        class="fab fa-deviantart"></i>
+                                    Demande de dévis
+                                </a>
+                                <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content text-black-50">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title text-center " id="exampleModalLongTitle ">Vous pouvez procédez à la Demande de dévis maintenant</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="">
+                                            <div class="wrapper1">
+                                                <section class="form1 signup">
+                                                    <header class="head">Demande de Dévis</header>
+                                                    <form class="form2" action="{{route('devis_store')}}"  method="post">
+                                                    {{csrf_field()}}
+                                                        @if(Session::has('Dévis'))
+                                                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                                <strong>Bien réçu!</strong>{{ Session::get('Dévis') }}
+                                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                        @endif
+                                                        <div class="name-details ">
+                                                            <div class="field input">
+                                                                <label for="">Nom</label>
+                                                                <input type="text" name="first_name" placeholder="Entrez votre nom" required>
+                                                                @if($errors->has('first_name'))
+                                                                    <p>{{ $errors->first('first_name') }}</p>
+                                                                @endif
+                                                            </div>
+                                                            <div class="field input">
+                                                                <label for="">Prénoms</label>
+                                                                <input type="text" name="last_name" placeholder="Entrez votre prénoms" required>
+                                                                @if($errors->has('last_name'))
+                                                                    <p>{{ $errors->first('last_name') }}</p>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                        <div class="field input">
+                                                            <label for="">Adresse email</label>
+                                                            <input type="email" name="email" placeholder="Entrez votre adresse email" required>
+                                                        </div>
+                                                        <div class="field input">
+                                                            <label for="">Number</label>
+                                                            <input type="tel" name="number" placeholder="Entrer votre Numéro" required>
+                                                            @if($errors->has('number'))
+                                                                <p>{{ $errors->first('number') }}</p>
+                                                            @endif
+                                                        </div>
+                                                        <div class="field input">
+                                                            <label for="">Demande de dévis</label>
+                                                            <textarea rows="5" cols="5" name="message" type="text" placeholder="Entrez votre message" required></textarea>
+                                                                @if($errors->has('message'))
+                                                                    <p>{{ $errors->first('message') }}</p>
+                                                                @endif 
+                                                        </div>
+                                                    
+                                                        <div class="field button">
+                                                            <input type="submit" value="Soumettre votre demande">
+                                                        </div>
+
+                                                    </form>
+                                                </section>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </li>
                             <li
                                 class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single">
                                 <div class="d-flex align-items-center">
-                                    <!-- SHOP -->
                                     <div class="position-relative">
-                                        <a href="/shop" class="u-header-topbar__nav-link">
-                                            <i class="ec ec-shopping-bag"></i>
-                                            <span>Boutique</span>
+                                        <a type="button" data-toggle="modal" data-target="#exampleModal"><i
+                                                class="fab fa-deviantart"></i>
+                                            Demande d'intervention
                                         </a>
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content text-black-50">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Vous pouvez procédez à la Demande d'une intervention</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="">
+                                                    <div class="wrapper1">
+                                                        <section class="form1 signup">
+                                                            <header class="head">Demande d'intervention</header>
+                                                            <form class="form2" action="{{route('intervention_store')}}" method="post">
+                                                            {{csrf_field()}}
+                                                                @if(Session::has('Intervention'))
+                                                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                                    <strong>Bien réçu!</strong>{{ Session::get('Intervention') }}
+                                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                @endif
+                                                                <div class="name-details ">
+                                                                    <div class="field input">
+                                                                        <label for="">Nom</label>
+                                                                        <input type="text"  name="first_name" placeholder="Entrez votre nom" required>
+                                                                        @if($errors->has('first_name'))
+                                                                            <p>{{ $errors->first('first_name') }}</p>
+                                                                        @endif
+                                                                    </div>
+                                                                    <div class="field input">
+                                                                        <label for="">Prénoms</label>
+                                                                        <input type="text" name="last_name" placeholder="Entrez votre prénoms" required>
+                                                                        @if($errors->has('last_name'))
+                                                                            <p>{{ $errors->first('last_name') }}</p>
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+                                                                <div class="field input">
+                                                                    <label for="">Adresse email</label>
+                                                                    <input type="email" name="email" placeholder="Entrez votre addresse mail" required>
+                                                                    @if($errors->has('email'))
+                                                                        <p>{{ $errors->first('email') }}</p>
+                                                                    @endif
+                                                                </div>
+                                                                <div class="field input">
+                                                                    <label for="">Numéro</label>
+                                                                    <input type="text" name="number" placeholder="Entrez votre numéro" required>
+                                                                    @if($errors->has('number'))
+                                                                        <p>{{ $errors->first('number') }}</p>
+                                                                    @endif
+                                                                </div>
+                                                                <div class="field input">
+                                                                    <label for="">Demande d'intervention</label>
+                                                                    <textarea rows="5" cols="5" name="message" type="text" placeholder="Entrez votre message" required></textarea> 
+                                                                    @if($errors->has('message'))
+                                                                        <p>{{ $errors->first('message') }}</p>
+                                                                    @endif
+                                                                </div>                                                            
+                                                                <div class="field button">
+                                                                    <input type="submit" value="Soumettre votre demande">
+                                                                </div>
+                                                            </form>
+                                                        </section>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <!-- END SHOP -->
                                 </div>
                             </li>
                             <li
@@ -43,6 +185,14 @@
                                 data-unfold-animation-in="fadeInRight"
                                 data-unfold-animation-out="fadeOutRight"
 
+                                <a id="sidebarNavToggler" href="{{ asset('login') }}" role="button"
+                                    class="u-header-topbar__nav-link" aria-controls="sidebarContent"
+                                    aria-haspopup="true" aria-expanded="false" data-unfold-event="click"
+                                    data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent"
+                                    data-unfold-type="css-animation" data-unfold-animation-in="fadeInRight"
+                                    data-unfold-animation-out="fadeOutRight" data-unfold-duration="500">
+                                    <i class="ec ec-user mr-1"></i>Se connecter
+                                </a>
                                 data-unfold-duration="500">
                                 <i class="ec ec-user mr-1"></i>Mon compte
                             </a>
@@ -62,6 +212,7 @@
                                 <i class="ec ec-user mr-1"></i>Se connecter
                             </a>
                                 @endif
+
                                 <!-- End Account Sidebar Toggle Button -->
                             </li>
                         </ul>

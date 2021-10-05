@@ -218,7 +218,7 @@
                 </li>
             </ul>
                 <li>
-                    <a href="" class="top-menu">
+                    <a href="/Faqs" class="top-menu">
                         <div class="top-menu__icon">
                             <i data-feather="hash"></i>
                         </div>
