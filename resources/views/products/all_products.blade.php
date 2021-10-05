@@ -192,7 +192,7 @@
                         @empty
                         <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-18 text-theme-9">
                             <div class="m-auto">
-                                <p> Aucune catégorie disponible</p>
+                                <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-17 text-theme-11"> <i data-feather="alert-circle" class="w-6 h-6 mr-2"></i> Aucun produit disponible </div>
                             </div>
                         </div>
                     </tr>

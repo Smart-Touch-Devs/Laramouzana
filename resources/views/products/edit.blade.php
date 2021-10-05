@@ -105,18 +105,33 @@
         <label>image 1</label>
             <div class="relative mt-2">
                 <input type="file" class="input pr-12 w-full border col-span-4" placeholder="" accept="image/*" name="picture1">
+                @if ($products->picture1 === null)
+                <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-17 text-theme-11"> <i data-feather="alert-circle" class="w-6 h-6 mr-2"></i> Aucune image </div>
+                @else
+                <img alt=""  width="75px" height="75px"   src="{{asset('assets/product_Picture').'/'.$products->picture1}}">
+                @endif
             </div>
         </div>
         <div class="mt-3">
             <label>image 2</label>
                 <div class="relative mt-2">
                     <input type="file" class="input pr-12 w-full border col-span-4" placeholder="" accept="image/*" name="picture2">
+                    @if ($products->picture2 === null)
+                    <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-17 text-theme-11"> <i data-feather="alert-circle" class="w-6 h-6 mr-2"></i> Aucune image </div>
+                    @else
+                    <img alt=""  width="75px" height="75px"   src="{{asset('assets/product_Picture').'/'.$products->picture2}}">
+                    @endif
                 </div>
             </div>
             <div class="mt-3">
                 <label>image 3</label>
                     <div class="relative mt-2">
-                        <input type="file" class="input pr-12 w-full border col-span-4" placeholder="" accept="image/*" name="picture3">
+                        <input type="file" class="input pr-12 w-full border col-span-4" placeholder="" accept="image/*" name="picture2">
+                    @if ($products->picture3 === null)
+                    <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-17 text-theme-11"> <i data-feather="alert-circle" class="w-6 h-6 mr-2"></i> Aucune image </div>
+                    @else
+                    <img alt=""  width="75px" height="75px"   src="{{asset('assets/product_Picture').'/'.$products->picture3}}">
+                    @endif
                     </div>
                 </div>
                 <div class="text-right mt-5">

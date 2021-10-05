@@ -50,7 +50,7 @@ class Add_categoriesController extends Controller
             $input['picture'] = "$pic";
         };
         categories::create($input);
-        return redirect()->intended('add_categories')->with('success', 'Catégorie  ajouté avec succes');
+        return redirect()->intended('staff/add_categories')->with('success', 'Catégorie  ajouté avec succes');
     }
 
     /**
@@ -102,7 +102,7 @@ class Add_categoriesController extends Controller
         };
 
         categories::whereId($id)->update($input);
-        return redirect()->intended('add_categories')->with('success', 'Categorie mise à jour avec succès');
+        return redirect()->intended('staff/add_categories')->with('success', 'Categorie mise à jour avec succès');
     }
 
     /**
@@ -115,7 +115,7 @@ class Add_categoriesController extends Controller
     {
         $categories = categories::find($id);
         $categories->delete();
-        return redirect('add_categories')->with('success', 'La catégorie a été retiré avec succes');
+        return redirect()->intended('staff/add_categories')->with('success', 'La catégorie a été retiré avec succes');
     }
 
     public function getCategory($id)
