@@ -1,0 +1,325 @@
+
+.bx-chevron-down:before {
+    content: "\e9ac";
+}
+
+a {
+    color: #5846f9;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #8577fb;
+    text-decoration: none;
+    list-style: none;
+}
+
+h2,
+h3 {
+    font-family: "Poppins", sans-serif;
+}
+
+section {
+    padding: 100px 0;
+    overflow: hidden;
+}
+
+.section-bg {
+    background-color: #f9f8ff;
+}
+
+.section-titl {
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.section-titl h2 {
+    font-size: 32px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    color: #000;
+    position: relative;
+}
+
+.section-titl h2::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #5846f9;
+    bottom: 0;
+    left: calc(50% - 25px);
+}
+
+.section-titl p {
+    margin-bottom: 0;
+    font-size: 16px;
+}
+
+.contact .info-box {
+    color: #444444;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(214, 215, 216, 0.6);
+    padding: 20px 0 30px 0;
+    background: #fff;
+}
+
+.contact .info-box i {
+    font-size: 32px;
+    color: #02ACF0;
+    border-radius: 50%;
+    padding: 8px;
+}
+
+.contact .info-box h3 {
+    font-size: 20px;
+    color: #2c4964;
+    font-weight: 700;
+    margin: 10px 0;
+}
+
+.contact .info-box p {
+    padding: 0;
+    line-height: 24px;
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+.contact .php-email-form {
+    box-shadow: 0 0 30px rgba(214, 215, 216, 0.6);
+    padding: 30px;
+    background: #fff;
+}
+
+.contact .php-email-form .sent-message {
+    display: none;
+    color: #fff;
+    background: #18d26e;
+    text-align: center;
+    padding: 15px;
+    font-weight: 600;
+}
+
+.contact .php-email-form input,
+.contact .php-email-form textarea {
+    border-radius: 5px;
+    box-shadow: none;
+    font-size: 14px;
+}
+
+.contact .php-email-form input:focus,
+.contact .php-email-form textarea:focus {
+    border-color: #02ACF0;
+}
+
+.contact .php-email-form input {
+    padding: 10px 15px;
+}
+
+.contact .php-email-form textarea {
+    padding: 12px 15px;
+}
+
+.contact .php-email-form button[type="submit"] {
+    background: #02ACF0;
+    border: 0;
+    padding: 10px 24px;
+    color: #fff;
+    transition: 0.4s;
+    border-radius: 5px;
+}
+
+.contact .php-email-form button[type="submit"]:hover {
+    background: #7b27d8;
+}
+
+@-webkit-keyframes animate-loading {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes animate-loading {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.faq {
+    background: linear-gradient(42deg, #2c4964 0%, #2c4964 10%);
+    user-select: none;
+}
+
+.faq .section-titl h2,
+.faq .section-titl p {
+    color: #fff;
+}
+
+.faq .section-titl h2::after {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.faq .faq-list {
+    padding: 0 100px;
+}
+
+.faq .faq-list ul {
+    padding: 0;
+    list-style: none;
+}
+
+.faq .faq-list li+li {
+    margin-top: 15px;
+}
+
+.faq .faq-list li {
+    padding: 30px;
+    background: #fff;
+    border-radius: 5px;
+    position: relative;
+}
+
+.faq .faq-list a {
+    text-decoration: none;
+    display: block;
+    position: relative;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    padding: 0 30px;
+    outline: none;
+    cursor: pointer;
+}
+
+.faq .faq-list .fa-question-circle {
+    font-size: 24px;
+    position: absolute;
+    right: 0;
+    margin-bottom:10px;
+    left: 25px;
+    color: #8577fb;
+}
+
+.faq .faq-list .fa-chevron-down,
+.faq .faq-list .fa-chevron-up {
+    font-size: 24px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.faq .faq-list p {
+    margin-bottom: 0;
+    padding: 10px 0 0 0;
+}
+
+.faq .faq-list .fa-chevron-down {
+    display: none;
+}
+
+.faq .faq-list a.collapsed {
+    color: #2c4964;
+}
+
+.faq .faq-list a.collapsed:hover {
+    color: #5846f9;
+}
+
+.faq .faq-list a.collapsed .fa-chevron-down {
+    display: inline-block;
+}
+
+.faq .faq-list a.collapsed .fa-chevron-up {
+    display: none;
+}
+
+
+@media (max-width: 1200px) {
+    .faq .faq-list {
+        padding: 0;
+    }
+}
+
+.about {
+    padding: 120px 0;
+}
+
+.about .content h3 {
+    font-weight: 600;
+    font-size: 32px;
+    color: #2c4964;
+}
+
+.about .content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.about .content ul li {
+    padding-bottom: 10px;
+}
+
+.about .content ul i {
+    font-size: 20px;
+    padding-right: 4px;
+    color: #5846f9;
+}
+
+.about .content p:last-child {
+    margin-bottom: 0;
+}
+
+.x-y {
+    margin-top: -7%;
+}
+
+.question{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.question h5{
+    font-size: 1.2rem;
+    margin-left:19px;
+    color:#02ACF0;
+}
+.answer{
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 1.4s ease;
+}
+.answer p{
+    padding-top: 1rem;
+    line-height: 1.6;
+    font-size: 1.4rem;
+}
+.faqList.active .answer{
+    max-height: 300px;
+    animation: fade 1s ease-in-out;
+}
+.faqList.active svg{
+    transform: rotate(180deg);
+}
+svg{
+    transition: transform 0.5s ease-in;
+}
+@keyframes fade{
+    from{
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to{
+        opacity: O;
+        transform: translateY(0px);
+    }
+}

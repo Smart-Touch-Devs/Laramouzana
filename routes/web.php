@@ -1,0 +1,142 @@
+<?php
+
+use App\Http\Controllers\AccountantController;
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\Add_categoriesController;
+use App\Http\Controllers\AdminController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\ClientAuthController;
+use App\Http\Controllers\DelivererController;
+use App\Http\Controllers\Single_productController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\ShowDeliveredProductController;
+use App\Mail\TestMail;
+use Illuminate\Support\Facades\Mail;
+
+
+//Client
+
+Route::resource('/', 'HomeController');
+
+Route::get('single_product/{id}', 'Single_productController@index')->name('single_product');
+Route::get('cat1_product/{id}', 'Single_productController@cat1_product')->name('cat1_product');
+Route::get('cat2_product/{id}', 'Single_productController@cat2_product')->name('cat2_product');
+Route::get('shop_product/{id}', 'Single_productController@shop_product')->name('shop_product');
+
+
+//user account
+Route::middleware('auth')->group(function () {
+    Route::get('/account', [AccountController::class, 'returnAccount'])->name('account.index');
+    Route::get('/account/update', [AccountController::class, 'updateIndex'])->name('account.updateIndex');
+    Route::post('/account/update', [AccountController::class, 'update'])->name('account.update');
+    Route::get('/account/deposit', [AccountController::class, 'depositIndex'])->name('account.depositIndex');
+    Route::post('/account/deposit', [AccountController::class, 'depposit'])->name('account.deposit');
+    Route::get('/account/send', [AccountController::class, 'sendMoneyIndex'])->name('account.sendMoneyIndex');
+    Route::post('/account/send', [AccountController::class, 'sendMoney'])->name('account.sendMoney');
+    Route::get('/account/withdraw', [AccountController::class, 'withdrawIndex'])->name('account.withdrawIndex');
+    Route::post('/account/withdraw', [AccountController::class, 'withdraw'])->name('account.withdraw');
+    Route::get('/account/orders', [AccountController::class, 'orders'])->name('account.orders');
+    Route::get('/account/transactions', [AccountController::class, 'transactions'])->name('account.transactions');
+    Route::get('/account/changePassword', [AccountController::class, 'changePw'])->name('account.changePw');
+    Route::post('/account/changePassword', [AccountController::class, 'updatePw'])->name('account.updatePw');
+});
+Route::get('/cart', [AccountController::class, 'returnCart'])->name('client.cart');
+
+//Admin
+
+Route::prefix('staff')->middleware('loggedin')->group(function () {
+    Route::get('/login', [AuthController::class, 'loginView'])->name('login-view');
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+    Route::get('/register', [AuthController::class, 'registerView'])->name('register-view');
+    Route::post('/register', [AuthController::class, 'register'])->name('register');
+    Route::post('/register', [AuthController::class, 'register'])->name('register');
+});
+
+Route::prefix('staff')->group(function() {
+    Route::get('/chart_line_data', [AdminController::class, 'lineChartData']);
+});
+
+Route::prefix('staff')->middleware('admin')->group(function () {
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    //Admin part
+    Route::middleware('admin.isadmin')->group(function () {
+        Route::get('/', [AdminController::class, 'index'])->name('dashboard');
+        Route::resource('all_products', 'All_productsController');
+        Route::resource('add_products', 'Add_productsController');
+        Route::resource('add_categories', 'Add_categoriesController');
+
+
+        //Users management
+
+        Route::get('/users/{users?}', [UsersController::class, 'index']);
+        Route::post('/add_client', [UsersController::class, 'addClient'])->name('users.addClient');
+        Route::post('/add_staffmember', [UsersController::class, 'addStaff'])->name('users.addStaffMember');
+        Route::get('/delete_client/{clientId}', [UsersController::class, 'deleteClient'])->name('users.delete_client');
+        Route::get('/delete_staff/{staffId}', [UsersController::class, 'deleteStaff'])->name('users.delete_staff');
+        Route::get('/showClient/{clientId}', [UsersController::class, 'showClient'])->name('user.showClient');
+        Route::get('/showStaff/{staffId}', [UsersController::class, 'showStaff'])->name('user.showStaff');
+    });
+    //Deliverer part
+    Route::prefix('deliverer')->middleware('admin.isdeliverer')->group(function() {
+        Route::get('/dashboard', [DelivererController::class, 'index'])->name('deliverer.index');
+        Route::get('/update/{command_id}', [DelivererController::class, 'update'])->name('deliverer.update');
+        Route::get('/history', [DelivererController::class, 'history'])->name('deliverer.history');
+    });
+
+
+    //Acountant part
+    Route::prefix('accountant')->middleware('admin.isaccountant')->group(function() {
+        Route::get('/dashboard', [AccountantController::class, 'index'])->name('accountant.index');
+        Route::get('/deposit', [AccountantController::class, 'deposit'])->name('accountant.deposit');
+        Route::get('/withdraw', [AccountantController::class, 'withdraw'])->name('accountant.withdraw');
+        Route::get('/remittance', [AccountantController::class, 'remittance'])->name('accountant.remittance');
+    });
+
+    Route::get('/users/{users?}', [UsersController::class, 'index']);
+    Route::post('/add_client', [UsersController::class, 'addClient'])->name('users.addClient');
+    Route::post('/add_staffmember', [UsersController::class, 'addStaff'])->name('users.addStaffMember');
+    Route::get('/delete_client/{clientId}', [UsersController::class, 'deleteClient'])->name('users.delete_client');
+    Route::get('/delete_staff/{staffId}', [UsersController::class, 'deleteStaff'])->name('users.delete_staff');
+    Route::get('/showClient/{clientId}', [UsersController::class, 'showClient'])->name('user.showClient');
+    Route::get('/showStaff/{staffId}', [UsersController::class, 'showStaff'])->name('user.showStaff');
+    //products and categories
+    Route::resource('all_products', 'All_productsController');
+    Route::resource('add_products', 'Add_productsController');
+    Route::resource('add_categories', 'Add_categoriesController');
+    Route::resource('commands', 'CommandsController');
+
+
+});
+
+Route::middleware('clientisloggedin')->group(function () {
+    Route::get('/login', [ClientAuthController::class, 'loginView'])->name('client.loginView');
+    Route::post('/login', [ClientAuthController::class, 'login'])->name('client.login');
+    Route::get('/register', [ClientAuthController::class, 'registerView'])->name('client.registerView');
+    Route::post('/register', [ClientAuthController::class, 'register'])->name('client.register');
+    Route::get('/verify/{hashedMail}', [ClientAuthController::class, 'confirmMail'])->name('client.confirmMail');
+    Route::get('/reset', [ClientAuthController::class, 'forgotten_pw'])->name('client.forgotPassword');
+    Route::post('/reset', [ClientAuthController::class, 'send_reset_email'])->name('client.sendResetMail');
+    Route::get('new_password/{token?}', [ClientAuthController::class, 'resetRedirect'])->name('client.resetRedirect');
+    Route::post('/reset_password', [ClientAuthController::class, 'resetPassword'])->name('client.resetPassword');
+});
+
+Route::get('/logout', [ClientAuthController::class, 'logout'])->name('client.logout');
+
+
+
+
+//Accordion
+Route::resource('accordion', 'AccordionController');
+Route::resource('Faqs', 'FaqsController');
+
+
+//Front uniquement
+Route::get('/about', 'FrontController@about')->name('about');
+Route::get('/contact', 'ContactController@contact')->name('contact');
+Route::get('/shop', 'FrontController@shop')->name('shop');
+
+Route::post('/validation', 'FrontController@store')->name('validation');
+Route::get('/getCategory/{id}', [Add_categoriesController::class, 'getCategory'])->name('getCategory');
