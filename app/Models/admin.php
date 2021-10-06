@@ -22,4 +22,10 @@ class admin extends Authenticatable
     {
         return $this->hasMany(Command::class);
     }
+    public function Country() {
+        return $this->belongsTo(Country::class, 'country');
+    }
+    public function City() {
+        return $this->belongsTo(City::class, 'city');
+    }
 }

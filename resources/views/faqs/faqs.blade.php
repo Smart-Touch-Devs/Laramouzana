@@ -1,7 +1,7 @@
 @extends('layout/top-menu')
 
 @section('subhead')
-<title>ACCORDION - Midone - Tailwind HTML Admin Template</title>
+<title>Gestion des FAQs</title>
 @endsection
 
 @section('subcontent')

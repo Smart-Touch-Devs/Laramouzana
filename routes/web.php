@@ -6,14 +6,9 @@ use App\Http\Controllers\Add_categoriesController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\PageController;
 use App\Http\Controllers\ClientAuthController;
 use App\Http\Controllers\DelivererController;
-use App\Http\Controllers\Single_productController;
 use App\Http\Controllers\UsersController;
-use App\Http\Controllers\ShowDeliveredProductController;
-use App\Mail\TestMail;
-use Illuminate\Support\Facades\Mail;
 
 
 //Client
@@ -60,7 +55,9 @@ Route::prefix('staff')->group(function() {
 
 Route::prefix('staff')->middleware('admin')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-
+    Route::get('/profile', [AuthController::class, 'profile'])->name('admin.profile');
+    Route::get('/change_pw', [AdminController::class, 'adminChangePwIndex'])->name('admin.changePwIndex');
+    Route::post('/changePw', [AdminController::class, 'changePw'])->name('admin.changePw');
     //Admin part
     Route::middleware('admin.isadmin')->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('dashboard');
@@ -74,6 +71,9 @@ Route::prefix('staff')->middleware('admin')->group(function () {
         Route::get('/users/{users?}', [UsersController::class, 'index']);
         Route::post('/add_client', [UsersController::class, 'addClient'])->name('users.addClient');
         Route::post('/add_staffmember', [UsersController::class, 'addStaff'])->name('users.addStaffMember');
+        Route::get('/showShopManager/{shopManagerId}', [UsersController::class, 'showShopManager'])->name('users.showShopManager');
+        Route::get('/deleteShopManager/{shopManagerId}', [UsersController::class, 'deleteShopManager'])->name('users.deleteShopManager');
+        Route::post('/addShopManager', [UsersController::class, 'addShopManager'])->name('users.addShopManager');
         Route::get('/delete_client/{clientId}', [UsersController::class, 'deleteClient'])->name('users.delete_client');
         Route::get('/delete_staff/{staffId}', [UsersController::class, 'deleteStaff'])->name('users.delete_staff');
         Route::get('/showClient/{clientId}', [UsersController::class, 'showClient'])->name('user.showClient');

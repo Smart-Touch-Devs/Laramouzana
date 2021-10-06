@@ -103,21 +103,19 @@
                                 Administrateur
                             @elseif(Auth::guard('admin')->user()->role_id === 4)
                                 Livreur
-                            @else
+                            @elseif(Auth::guard('admin')->user()->role_id === 3)
                                 Comptable
+                            @else
+                                ShopManager
                             @endif
                         </div>
                     </div>
                     <div class="p-2">
-                        <a href=""
+                        <a href="{{ route('admin.profile') }}"
                             class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md">
                             <i data-feather="user" class="w-4 h-4 mr-2"></i> Profil
                         </a>
-                        <a href=""
-                            class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md">
-                            <i data-feather="edit" class="w-4 h-4 mr-2"></i> Ajouter un admin
-                        </a>
-                        <a href=""
+                        <a href="{{ route('admin.changePwIndex') }}"
                             class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md">
                             <i data-feather="lock" class="w-4 h-4 mr-2"></i> Changer de mot de passe
                         </a>
@@ -138,7 +136,7 @@
 <!-- BEGIN: Top Menu -->
 <nav class="top-nav">
     <ul>
-        @if (Auth::guard('admin')->user()->role_id === 5)
+        @if (Auth::guard('admin')->user()->role_id === 5 || Auth::guard('admin')->user()->role_id === 6)
         <li>
             <a href="{{ route('dashboard') }}" class="top-menu @if(Request::route()->uri === 'staff') top-menu--active @endif">
                 <div class="top-menu__icon">
@@ -177,6 +175,7 @@
             </ul>
         </li>
 
+        @if (Auth::guard('admin')->user()->role_id === 5)
         <li>
             <a href="#" class="top-menu @if(stristr(Request::route()->uri,'staff/users/')) top-menu--active @endif">
                 <div class="top-menu__icon">
@@ -216,7 +215,15 @@
                         </div>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ asset('/staff/users/shop_manager') }}" class="top-menu">
+                        <div class="top-menu__title">
+                            ShopManagers
+                        </div>
+                    </a>
+                </li>
             </ul>
+            @endif
                 <li>
                     <a href="/Faqs" class="top-menu">
                         <div class="top-menu__icon">
@@ -235,6 +242,8 @@
                         </li>
                     </ul>
                 </li>
+
+
         @elseif (Auth::guard('admin')->user()->role_id === 3)
         <li>
             <a href="{{ route('accountant.index') }}" class="top-menu @if(stristr(Request::route()->uri, 'accountant/dashboard')) top-menu--active @endif">

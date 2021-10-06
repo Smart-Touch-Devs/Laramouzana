@@ -51,6 +51,7 @@ class UsersController extends Controller
             ->where('role_id', '=', '3')
             ->get();
 
+        $shopManagers = admin::where('role_id', 6)->get(['id', 'last_name', 'first_name', 'email', 'birthday', 'phone']);
         //Get Countries and Cities
 
         $countries = Country::all(['id', 'countryName', 'indicative']);
@@ -60,6 +61,7 @@ class UsersController extends Controller
         switch ($id) {
             case 'clients':
                 return view('users.clients', [
+                    'pageTitle' => 'Gestion de clients',
                     'clients' => $clients,
                     'userRole' => 1,
                     'lisTitle' => "Liste des clients",
@@ -71,6 +73,7 @@ class UsersController extends Controller
 
             case 'technicians':
                 return view('users.clients', [
+                    'pageTitle' => 'Gestion de techniciens',
                     'clients' => $technicians,
                     'userRole' => 2,
                     'lisTitle' => "Liste des techniciens",
@@ -81,6 +84,7 @@ class UsersController extends Controller
                 break;
             case 'deliverers':
                 return view('users.otherStaffMember', [
+                    'pageTitle' => 'Gestion de livreurs',
                     'staffMembers' => $deliverer,
                     'userRole' => 4,
                     'lisTitle' => "Liste des livreurs",
@@ -91,6 +95,7 @@ class UsersController extends Controller
                 break;
             case 'accountants':
                 return view('users.otherStaffMember', [
+                    'pageTitle' => 'Gestion de comptables',
                     'staffMembers' => $accountant,
                     'userRole' => 3,
                     'lisTitle' => "Liste des comptables",
@@ -99,16 +104,51 @@ class UsersController extends Controller
                     'cities' => $cities
                 ]);
                 break;
-            case null:
-                return view('pages.error-page');
+            case 'shop_manager':
+                return view('users.shopManager', [
+                    'shopManagers' => $shopManagers,
+                    'countries' => $countries,
+                    'cities' => $cities
+                ]);
                 break;
             default:
-                return view('pages.error-page');
+                return view('errors.404');
                 break;
         }
     }
-    //Client
+    public function showShopManager($id)
+    {
+        $staffDetails = DB::table('admins')
+            ->select([
+                'last_name',
+                'first_name',
+                'birthday',
+                'email',
+                'phone',
+                'countryName',
+                'cityName',
+            ])
+            ->join('countries', 'admins.country', '=', 'countries.id')
+            ->join('cities', 'admins.city', '=', 'cities.id')
+            ->where('admins.id', '=', $id)
+            ->get()[0];
 
+        $returnData = [
+            'Nom' => $staffDetails->last_name,
+            'Prénom' => $staffDetails->first_name,
+            'Date de naissance' => date('d/M/Y', strtotime($staffDetails->birthday)),
+            'Addresse email' => $staffDetails->email,
+            'Téléphone' => $staffDetails->phone,
+            'Pays' => $staffDetails->countryName,
+            'Ville' => $staffDetails->cityName
+        ];
+
+        return $returnData;
+    }
+
+
+
+    //Client
     public function addClient(Request $request)
     {
         $request->validate([
@@ -199,6 +239,45 @@ class UsersController extends Controller
         return redirect()->back(302);
     }
 
+    public function addShopManager(Request $request) {
+        $request->validate([
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+            'email' => 'email|required|same:confirm_email|unique:admins,email',
+            'confirm_email' => 'required',
+            'birthday' => 'required',
+            'phone' => 'required',
+            'country' => 'required',
+            'city' => 'required',
+            'password' => 'required',
+            'confirm_password' => 'required|same:password'
+        ]);
+
+        $country = DB::table('countries')
+            ->select('id')
+            ->where('countryName', '=', $request->country)
+            ->get();
+
+        $city = DB::table('cities')
+            ->select('id')
+            ->where('cityName', '=', $request->city)
+            ->get();
+
+
+        admin::create([
+            'role_id' => 6,
+            'country' => $country[0]->id,
+            'city' => $city[0]->id,
+            'first_name' => $request->firstname,
+            'last_name' => $request->lastname,
+            'email' => $request->email,
+            'birthday' => new DateTime($request->birthday),
+            'phone' => $request->phone,
+            'password' => Hash::make($request->password)
+        ]);
+        return redirect()->back(302)->with('success', 'Le shop manager a été ajouté avec succès!');
+    }
+
 
     public function deleteClient($id)
     {
@@ -213,6 +292,13 @@ class UsersController extends Controller
         if (admin::find($id)->delete()) {
             Session::put('deleteSucessful', 'La suppression a été un succès!');
             return redirect()->back(302);
+        }
+    }
+
+    public function deleteShopManager($id)
+    {
+        if (admin::find($id)->delete()) {
+            return redirect()->back()->with('deleteSucessful', 'La suppression a été un succès!');
         }
     }
 
@@ -236,20 +322,20 @@ class UsersController extends Controller
             ->where('clients.id', '=', $id)
             ->get()[0];
 
-            $returnData = [
-                'Nom' => $clientDetails->lastname,
-                'Prénom' => $clientDetails->firstname,
-                'Date de naissance' => date('d/M/Y', strtotime($clientDetails->birthday)),
-                'Addresse email' => $clientDetails->email,
-                'Téléphone' => $clientDetails->phone,
-                'CNIB' => $clientDetails->cnib,
-                'Pays' => $clientDetails->countryName,
-                'Ville' => $clientDetails->cityName,
-                'Code de parrainnage' => $clientDetails->affiliate_code,
-                'Parrain' =>$clientDetails->sup_code
-            ];
+        $returnData = [
+            'Nom' => $clientDetails->lastname,
+            'Prénom' => $clientDetails->firstname,
+            'Date de naissance' => date('d/M/Y', strtotime($clientDetails->birthday)),
+            'Addresse email' => $clientDetails->email,
+            'Téléphone' => $clientDetails->phone,
+            'CNIB' => $clientDetails->cnib,
+            'Pays' => $clientDetails->countryName,
+            'Ville' => $clientDetails->cityName,
+            'Code de parrainnage' => $clientDetails->affiliate_code,
+            'Parrain' => $clientDetails->sup_code
+        ];
 
-            return $returnData;
+        return $returnData;
     }
 
     public function showStaff($id)
@@ -271,12 +357,12 @@ class UsersController extends Controller
 
         $returnData = [
             'Nom' => $staffDetails->last_name,
-                'Prénom' => $staffDetails->first_name,
-                'Date de naissance' => date('d/M/Y', strtotime($staffDetails->birthday)),
-                'Addresse email' => $staffDetails->email,
-                'Téléphone' => $staffDetails->phone,
-                'Pays' => $staffDetails->countryName,
-                'Ville' => $staffDetails->cityName
+            'Prénom' => $staffDetails->first_name,
+            'Date de naissance' => date('d/M/Y', strtotime($staffDetails->birthday)),
+            'Addresse email' => $staffDetails->email,
+            'Téléphone' => $staffDetails->phone,
+            'Pays' => $staffDetails->countryName,
+            'Ville' => $staffDetails->cityName
         ];
 
         return $returnData;
