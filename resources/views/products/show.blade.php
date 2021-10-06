@@ -47,7 +47,7 @@
                             <div class="font-medium whitespace-no-wrap">
                                 @if ($product->delivery_time === null)
                                   <div>
-                                      <h3>Indisponible</h3>
+                                    <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-17 text-theme-11"> <i data-feather="alert-circle" class="w-6 h-6 mr-2"></i>Indisponible </div>
                                   </div>
                                 @else
                                 <div class="font-medium whitespace-no-wrap">{{ $product->delivery_time }} Jours</div>
@@ -58,15 +58,25 @@
                     <td class="w-40 border-b">
                         <div class="flex items-center sm:justify-center ">
                             <div class="font-medium whitespace-no-wrap">
-                                <img alt="" class="" width="50px" height="60px" src="{{asset('/pdf/PDF.jpg')}}">
+                               @if ($product->pdf1 === null)
+                               <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-17 text-theme-11"> <i data-feather="alert-circle" class="w-6 h-6 mr-2"></i>Aucun Pdf </div>
+                            </div>
+                               @else
+                               <img alt="" class="" width="50px" height="60px" src="{{asset('/pdf/PDF.jpg')}}">
+                               @endif
                             </div>
                         </div>
                     </td>
                     <td class="w-40 border-b">
                         <div class="flex items-center sm:justify-center ">
                             <div class="font-medium whitespace-no-wrap">
-
+                                @if ($product->picture1 === null)
+                                <div>
+                                    <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-17 text-theme-11"> <i data-feather="alert-circle" class="w-6 h-6 mr-2"></i> Aucune image </div>
+                                </div>
+                            @else
                                 <img alt="" class="" src="{{asset('assets/product_Picture').'/'.$product->picture1}}">
+                            @endif
                             </div>
                         </div>
                     </td>
@@ -74,9 +84,7 @@
                         <div class="flex items-center sm:justify-center ">
                             <div class="font-medium whitespace-no-wrap">
                                 @if ($product->picture2 === null)
-                                    <div>
-                                        <h3>Aucune image</h3>
-                                    </div>
+                                        <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-17 text-theme-11"> <i data-feather="alert-circle" class="w-6 h-6 mr-2"></i> Aucune image </div>
                                 @else
                                     <img alt="" class="" src="{{asset('assets/product_Picture').'/'.$product->picture2}}">
                                 @endif
@@ -86,9 +94,9 @@
                     <td class="w-40 border-b">
                         <div class="flex items-center sm:justify-center ">
                             <div class="font-medium whitespace-no-wrap">
-                                @if ($product->picture2 === null)
+                                @if ($product->picture3 === null)
                                 <div>
-                                    <h3>Aucune image</h3>
+                                    <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-17 text-theme-11"> <i data-feather="alert-circle" class="w-6 h-6 mr-2"></i> Aucune image </div>
                                 </div>
                             @else
                                 <img alt="" class="" src="{{asset('assets/product_Picture').'/'.$product->picture3}}">
@@ -98,7 +106,11 @@
                     </td>
                     <td class="w-40 border-b">
                         <div class="flex items-center sm:justify-center ">
+                            @if ($product->product_desc === null )
+                            <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-17 text-theme-11"> <i data-feather="alert-circle" class="w-6 h-6 mr-2"></i> Aucune description </div>
+                            @else
                             <div class="font-medium whitespace-wrap">{{ strip_tags( $product->product_desc )}} </div>
+                            @endif
                         </div>
                     </td>
                 </tr>
