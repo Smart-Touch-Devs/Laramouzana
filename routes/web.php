@@ -54,7 +54,7 @@ Route::prefix('staff')->middleware('loggedin')->group(function () {
     Route::post('/register', [AuthController::class, 'register'])->name('register');
 });
 
-Route::prefix('staff')->group(function() {
+Route::prefix('staff')->group(function () {
     Route::get('/chart_line_data', [AdminController::class, 'lineChartData']);
 });
 
@@ -80,7 +80,7 @@ Route::prefix('staff')->middleware('admin')->group(function () {
         Route::get('/showStaff/{staffId}', [UsersController::class, 'showStaff'])->name('user.showStaff');
     });
     //Deliverer part
-    Route::prefix('deliverer')->middleware('admin.isdeliverer')->group(function() {
+    Route::prefix('deliverer')->middleware('admin.isdeliverer')->group(function () {
         Route::get('/dashboard', [DelivererController::class, 'index'])->name('deliverer.index');
         Route::get('/update/{command_id}', [DelivererController::class, 'update'])->name('deliverer.update');
         Route::get('/history', [DelivererController::class, 'history'])->name('deliverer.history');
@@ -88,7 +88,7 @@ Route::prefix('staff')->middleware('admin')->group(function () {
 
 
     //Acountant part
-    Route::prefix('accountant')->middleware('admin.isaccountant')->group(function() {
+    Route::prefix('accountant')->middleware('admin.isaccountant')->group(function () {
         Route::get('/dashboard', [AccountantController::class, 'index'])->name('accountant.index');
         Route::get('/deposit', [AccountantController::class, 'deposit'])->name('accountant.deposit');
         Route::get('/withdraw', [AccountantController::class, 'withdraw'])->name('accountant.withdraw');
@@ -107,8 +107,7 @@ Route::prefix('staff')->middleware('admin')->group(function () {
     Route::resource('add_products', 'Add_productsController');
     Route::resource('add_categories', 'Add_categoriesController');
     Route::resource('commands', 'CommandsController');
-
-
+    Route::get('/delivered_product', [DelivererController::class, 'history']);
 });
 
 Route::middleware('clientisloggedin')->group(function () {
@@ -139,7 +138,7 @@ Route::get('/contact', 'ContactController@contact')->name('contact');
 Route::get('/confirm', 'FrontController@confirm')->name('confirm');
 Route::get('/shop', 'FrontController@shop')->name('shop');
 Route::post('/validation', 'ContactController@store')->name('validation');
-Route::post('/devis','ContactController@devis_store')->name('devis_store');
-Route::post('/intervention','ContactController@intervention_store')->name('intervention_store');
+Route::post('/devis', 'ContactController@devis_store')->name('devis_store');
+Route::post('/intervention', 'ContactController@intervention_store')->name('intervention_store');
 Route::post('/validation', 'FrontController@store')->name('validation');
 Route::get('/getCategory/{id}', [Add_categoriesController::class, 'getCategory'])->name('getCategory');

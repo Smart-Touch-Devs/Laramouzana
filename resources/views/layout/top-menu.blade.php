@@ -218,7 +218,7 @@
                 </li>
             </ul>
                 <li>
-                    <a href="/Faqs" class="top-menu">
+                    <a href="{{asset('/Faqs')}}" class="top-menu">
                         <div class="top-menu__icon">
                             <i data-feather="hash"></i>
                         </div>
@@ -227,14 +227,31 @@
                         </div>
                     </a>
                         <li>
-                            <a href="{{ asset('staff/commands') }}" class="top-menu @if(stristr(Request::route()->uri, 'commands')) top-menu--active @endif">
+                            <a href="#"  class="top-menu @if(stristr(Request::route()->uri, 'staff/commands')) top-menu--active @endif>
                                 <div class="top-menu__icon">
                                     <i data-feather="command"></i>
                                 </div>
                                 <div class="top-menu__title">
                                     Commandes
+                                    <i data-feather="chevron-down" class="top-menu__sub-icon"></i>
                                 </div>
                             </a>
+                            <ul>
+                                <li>
+                                    <a href="{{ asset('staff/commands') }}" class="top-menu">
+                                        <div class="top-menu__title">
+                                           Toutes les commandes
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ asset('/staff/delivered_product') }}" class="top-menu">
+                                        <div class="top-menu__title">
+                                           Commandes Livrées
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </li>
