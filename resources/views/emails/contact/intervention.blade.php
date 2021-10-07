@@ -36,11 +36,11 @@
             <h1 style="font-size: 40px; margin: auto; color: #3D3D3D;">Reapers</h1>
         </div>
         <div style="width: 100%; height: fit-content; text-align: center">
-            <h1 class="h2">Mail de contact</h1>
+            <h1 class="h2">Demande d'intervention</h1>
             <div style="font-size: 19px; margin-top: 30px; padding-left: 15px; padding-right: 15px;">
-                <p>Nom:{{ $contact['name'] }}</p>
-                <p>{{ $contact['email'] }}</p>
-                <p>{{ $contact['message'] }}</p>
+                <p>Nom:{{ $intervention['first_name'] }}</p>
+                <p>Email:{{ $intervention['email'] }}</p>
+                <p>{{ $intervention['message'] }}</p>
             </div>
             <footer class="blockquote-footer pt-4 mt-4 border-top">
                 <cite title="Source Title">Titre de la source:Repears</cite>

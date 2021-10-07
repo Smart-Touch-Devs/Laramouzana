@@ -41,7 +41,7 @@
         <div class="intro-y datatable-wrapper box p-5 ">
             <table class="table table-report table-report--bordered display datatable w-full">
 
-                <thead>
+                <!-- <thead>
                     <tr>
                         <th style="width: 1%">
                             N°
@@ -57,48 +57,60 @@
                         </td>
 
                     </tr>
+                </thead> -->
+                <thead>
+                    <tr>
+                        <th class="border-b-2 whitespace">N°</th>
+                        <th class="border-b-2 text-center whitespace-no-wrap">Titre</th>
+                        <th class="border-b-2 text-center whitespace-no-wrap">Contenu</th>
+                       
+                        <th class="border-b-2 text-center whitespace-no-wrap">ACTIONS</th>
+                    </tr>
                 </thead>
                 @forelse($faqs as $faq)
                 <tbody>
                     <tr>
-                        <td>
-                            {{ $faq->id }}
+                       
+
+                        <td class="border-b">
+                            <div class="font-medium whitespace-no-wrap">{{ $faq->id }}</div>
                         </td>
-                        <td class="text-center">
-                            {{ $faq->titre }}
+                        <td class="text-center border-b">
+                            <div class="font-medium whitespace-no-wrap"> {{ $faq->titre }}</div>
                         </td>
-                        <td class="text-center">
-                            {{ $faq->contenu }}
+                        <td class="text-center border-b">
+                            <div class="font-medium ">{{ $faq->contenu }}</div>
                         </td>
+                        
 
 
+                        
                         <td class="border-b w-5">
                             <div class="flex sm:justify-center items-center">
-                                <div class="flex items-center mr-3" href="">
+                                <a class="flex items-center mr-3" href=" {{ route('Faqs.edit',$faq->id) }}">
+                                    <button class="button px-2 mr-1 mb-2 bg-theme-3 text-white">
+                                        <span class="w-5 h-5 flex items-center justify-center">
                                     <i data-feather="check-square" class="w-4 h-4 mr-1"></i>
-                                    <div><a href=" {{ route('Faqs.edit',$faq->id) }} " data-toggle="modal"
-                                            data-target="#small-modal-size-preview" class="edit_btn">Editer</a> </div>
-                                </div>
+                                </button>
+                                </a>
+                                
                                 <form action="{{ route('Faqs.destroy',$faq->id) }}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="flex items-center text-theme-6" onclick="myFunction()" type="submit" >
-                                        <i data-feather="trash-2" class="w-4 h-4 mr-1" ></i> Supprimer
+                                    <button class="button px-2 mr-1 mb-2 bg-theme-6 text-white flex items-center" type="submit">
+                                        <span class="w-5 h-5 flex items-center justify-center">
+                                            <i data-feather="trash-2" class="w-4 h-4"></i>
+                                        </span>
                                     </button>
-                                </form>
+                               </form>
                             </div>
                         </td>
 
                         @empty
-                        <div class="alert alert-warning col-md-12 col-xs-12" role="alert">
-                            <p class='font-weight-bolder text-center '>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
-                                    <path
-                                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                                </svg>
-                                Aucun faq disponible
-                            </p>
+                        <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-18 text-theme-9">
+                            <div class="m-auto">
+                                <p> Aucune réponse disponible pour le moment</p>
+                            </div>
                         </div>
                     </tr>
                 </tbody>

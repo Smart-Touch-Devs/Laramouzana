@@ -141,5 +141,4 @@ Route::get('/shop', 'FrontController@shop')->name('shop');
 Route::post('/validation', 'ContactController@store')->name('validation');
 Route::post('/devis','ContactController@devis_store')->name('devis_store');
 Route::post('/intervention','ContactController@intervention_store')->name('intervention_store');
-Route::post('/validation', 'FrontController@store')->name('validation');
 Route::get('/getCategory/{id}', [Add_categoriesController::class, 'getCategory'])->name('getCategory');
