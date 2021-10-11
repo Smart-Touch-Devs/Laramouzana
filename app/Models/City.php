@@ -4,11 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
 
 class City extends Model
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
 
     protected $fillable = ['belongedCountry', 'cityName'];
     public function client() {

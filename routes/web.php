@@ -128,13 +128,13 @@ Route::get('/logout', [ClientAuthController::class, 'logout'])->name('client.log
 
 
 //Accordion
-Route::resource('accordion', 'AccordionController');
+Route::resource('faqs', 'AccordionController');
 Route::resource('Faqs', 'FaqsController');
 
 
 //Front uniquement
 Route::get('/about', 'FrontController@about')->name('about');
-Route::get('/contact', 'ContactController@contact')->name('contact');
+Route::get('/contacts', 'ContactController@contact')->name('contact');
 Route::get('/confirm', 'FrontController@confirm')->name('confirm');
 Route::get('/shop', 'FrontController@shop')->name('shop');
 Route::post('/validation', 'ContactController@store')->name('validation');

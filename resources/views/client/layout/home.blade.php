@@ -18,7 +18,7 @@
             <div class="col-xl-3 col-wd-auto d-none d-xl-block">
                 <div class="max-width-270 min-width-270 pt-xl-13 mt-xl-13">
                     <!-- Image Banner -->
-                    <aside class="mb-8">
+                    <aside class="mb-8 bannerSection">
                         <a href="../shop/shop.html" class="d-block">
                             <img class="img-fluid" src="{{ asset('assets/img/270X428/img1.jpg') }}" alt="Image Description">
                         </a>
@@ -26,7 +26,7 @@
                     <!-- End Image Banner -->
 
                     <!-- Feature Product -->
-                    <aside class="mb-8">
+                    <aside class="mb-8 bannerSection">
                         <!-- Featured Products -->
                         <div class="position-relative">
                             <div class="border-bottom border-color-1 mb-2">
@@ -155,7 +155,7 @@
                         <div class="tab-pane fade pt-2 show active" id="pills-one-example1" role="tabpanel" aria-labelledby="pills-one-example1-tab" data-target-group="groups">
                             <ul class="row list-unstyled products-group no-gutters">
                                 @foreach ($new_products as $new_product)
-                                <li class="col-6 col-md-4 col-xl product-item">
+                                <li class="col-6 col-md-4 col-xl product-item newProduct">
                                     <div class="product-item__outer h-100">
                                         <div class="product-item__inner px-xl-4 p-3">
                                             <div class="product-item__body pb-xl-2">
@@ -215,7 +215,7 @@
                         <h3 class="section-title mb-0 pb-2  text-capitalize font-size-22">{{ $product_cat_names[0][0]->category_name }}</h3>
                     </div>
                     <div class="row">
-                        <div class="col-auto">
+                        <div class="col-auto bannerSection">
                             <a href="../shop/shop.html" class="d-block">
                                 <img alt="" width="212px" height="305px" src="{{asset('assets/categorie_Picture').'/'.$product_cat_pics[0][0]->picture }}">
                             </a>
@@ -223,7 +223,7 @@
                         <div class="col">
                             <ul class="row list-unstyled products-group no-gutters">
                                 @foreach ($display_prods_cat_1  as $display_prods_cat1)
-                                <li class="col-6 col-md-4 col-wd-3 product-item">
+                                <li class="col-6 col-md-6 col-wd-3 product-item">
                                     <div class="product-item__outer h-100">
                                         <div class="product-item__inner px-xl-4 p-3">
                                             <div class="product-item__body pb-xl-2">
@@ -255,7 +255,7 @@
                         <h3 class="section-title mb-0 pb-2 font-size-22">{{ $product_cat_names[1][0]->category_name }}</h3>
                     </div>
                     <div class="row">
-                        <div class="col-auto">
+                        <div class="col-auto bannerSection">
                             <a href="../shop/shop.html" class="d-block">
                                 <img alt="" width="212px" height="305px" src="{{asset('assets/categorie_Picture').'/'.$product_cat_pics[1][0]->picture }}">
                             </a>
@@ -263,7 +263,7 @@
                         <div class="col">
                             <ul class="row list-unstyled products-group no-gutters">
                                 @foreach ($display_prods_cat_2  as $display_prods_cat2)
-                                <li class="col-6 col-md-4 col-wd-3 product-item">
+                                <li class="col-6 col-md-6 col-wd-3 product-item">
                                     <div class="product-item__outer h-100">
                                         <div class="product-item__inner px-xl-4 p-3">
                                             <div class="product-item__body pb-xl-2">
