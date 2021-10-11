@@ -80,11 +80,7 @@
                         </td>
                         <td class="text-center border-b">
                             <div class="font-medium ">{{ $faq->contenu }}</div>
-                        </td>
-                        
-
-
-                        
+                        </td> 
                         <td class="border-b w-5">
                             <div class="flex sm:justify-center items-center">
                                 <a class="flex items-center mr-3" href=" {{ route('Faqs.edit',$faq->id) }}">

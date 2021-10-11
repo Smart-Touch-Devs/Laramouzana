@@ -1,42 +1,4 @@
 <footer>
-    <!-- Footer-newsletter -->
-    <div class="bg-primary py-3">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-7 mb-md-3 mb-lg-0">
-                    <div class="row align-items-center">
-                        <div class="col-auto flex-horizontal-center">
-                            <i class="ec ec-newsletter font-size-40"></i>
-                            <h2 class="font-size-20 mb-0 ml-3">Inscrivez-vous à la newsletter</h2>
-                        </div>
-                        <div class="col my-4 my-md-0">
-                            <h5 class="font-size-15 ml-4 mb-0">...et recevoir<strong>Coupon de 1000F FCA pour le
-                                    premier achats.</strong></h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5">
-                    <!-- Subscribe Form -->
-                    <form class="js-validate js-form-message">
-                        <label class="sr-only" for="subscribeSrEmail">Adresse Email</label>
-                        <div class="input-group input-group-pill">
-                            <input type="email" class="form-control border-0 height-40" name="email"
-                                id="subscribeSrEmail" placeholder="Email address" aria-label="Email address"
-                                aria-describedby="subscribeButton" required
-                                data-msg="Please enter a valid email address.">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-dark btn-sm-wide height-40 py-2"
-                                    id="subscribeButton">S'inscrire</button>
-                            </div>
-                        </div>
-                    </form>
-                    <!-- End Subscribe Form -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Footer-newsletter -->
-    <!-- Footer-bottom-widgets -->
     <div class="pt-8 pb-4 bg-gray-13">
         <div class="container mt-1">
             <div class="row">
@@ -103,10 +65,11 @@
                     <div class="mb-4">
                         <h6 class="mb-1 font-weight-bold">Informations de contact</h6>
                         <address class="">
-                            Rue 11.12 Dapoya nemnin
+                            Rue 11.12 Dapoya nemnin <br>
+                            contact@repears.com
                         </address>
                     </div>
-                    <div class="my-4 my-md-4">
+                    <!-- <div class="my-4 my-md-4">
                         <ul class="list-inline mb-0 opacity-7">
                             <li class="list-inline-item mr-0">
                                 <a class="btn font-size-20 btn-icon btn-soft-dark btn-bg-transparent rounded-circle"
@@ -121,34 +84,30 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-lg-7">
                     <div class="row">
                         <div class="col-12 col-md mb-4 mb-md-0">
-                            <h6 class="mb-3 font-weight-bold">Trouvez-le rapidement</h6>
+                            <h6 class="mb-3 font-weight-bold">Toutes les categories</h6>
                             <!-- List Group -->
                             <ul class="list-group list-group-flush list-group-borderless mb-0 list-group-transparent">
-                                <li><a class="list-group-item list-group-item-action" href="">Ordinateurs portables et
-                                        ordinateurs</a>
+                                <!-- <li><a class="list-group-item list-group-item-action" href="">Ordinateurs portables et
+                                        ordinateurs</a> -->
                                 </li>
-                                <li><a class="list-group-item list-group-item-action" href="">Frigo
+                                <li><a class="list-group-item list-group-item-action" href="">Electromenager
                                     </a></li>
-                                <li><a class="list-group-item list-group-item-action" href="">Smart Phones &
-                                        Tablets</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="">Plaque solaire
+                                <li><a class="list-group-item list-group-item-action" href="">Solaire</a></li>
+                                <li><a class="list-group-item list-group-item-action" href="">Domotique
                                     </a></li>
-                                <li><a class="list-group-item list-group-item-action" href="">Amboule</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="">Cameras</a></li>
-                                <li><a class="list-group-item list-group-item-action" href="">Voiture Électronique et
-                                        GPS</a>
-                                </li>
+                                <li><a class="list-group-item list-group-item-action" href="">Electricité</a></li>
+                                
                             </ul>
                             <!-- End List Group -->
                         </div>
 
                         <div class="col-12 col-md mb-4 mb-md-0">
-                            <!-- List Group -->
+                         
                             <ul
                                 class="list-group list-group-flush list-group-borderless mb-0 list-group-transparent mt-md-6">
                                 <li><a class="list-group-item list-group-item-action" href="">Imprimantes et encre</a>
@@ -161,7 +120,7 @@
                                 </li>
                                 <li><a class="list-group-item list-group-item-action" href="">Accesoirs</a></li>
                             </ul>
-                            <!-- End List Group -->
+                            
                         </div>
 
                         <div class="col-12 col-md mb-4 mb-md-0">
@@ -177,7 +136,7 @@
                                 <li><a class="list-group-item list-group-item-action" href="/about">A propos</a></li>
                                 <li><a class="list-group-item list-group-item-action" href="/accordion">FAQs</a>
                                 </li>
-                                <li><a class="list-group-item list-group-item-action" href="">Suivi de commande</a></li>
+                                <li><a class="list-group-item list-group-item-action" href=""></a></li>
 
 
                             </ul>
@@ -188,32 +147,4 @@
             </div>
         </div>
     </div>
-    <!-- End Footer-bottom-widgets -->
-    <!-- Footer-copy-right -->
-    <div class="bg-gray-14 py-2">
-        <div class="container">
-            <div class="flex-center-between d-block d-md-flex">
-                <div class="mb-3 mb-md-0">© <a href="#" class="font-weight-bold text-gray-90">Laramouzana</a> - Tous
-                    droits Réservé</div>
-                <div class="text-md-right">
-                    <span class="d-inline-block bg-white border rounded p-1">
-                        <img class="max-width-5" src="../../assets/img/100X60/electro.png" alt="Image Description">
-                    </span>
-                    <span class="d-inline-block bg-white border rounded p-1">
-                        <img class="max-width-5" src="../../assets/img/100X60/electro.png" alt="Image Description">
-                    </span>
-                    <span class="d-inline-block bg-white border rounded p-1">
-                        <img class="max-width-5" src="../../assets/img/100X60/electro.png" alt="Image Description">
-                    </span>
-                    <span class="d-inline-block bg-white border rounded p-1">
-                        <img class="max-width-5" src="../../assets/img/100X60/electro.png" alt="Image Description">
-                    </span>
-                    <span class="d-inline-block bg-white border rounded p-1">
-                        <img class="max-width-5" src="../../assets/img/100X60/electro.png" alt="Image Description">
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Footer-copy-right -->
 </footer>
