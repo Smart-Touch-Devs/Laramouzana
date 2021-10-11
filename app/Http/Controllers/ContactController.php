@@ -15,6 +15,7 @@ class ContactController extends Controller
     public function contact()
     {
         $categories = categories::all();
+
         return view('client.layout.contact', compact('categories'));
     }
     public function store(Request $request)
@@ -46,9 +47,13 @@ class ContactController extends Controller
         ]);
         Mail::to('dev.smtgroup@gmail.com')->send(new DevisMail($request->except('_token')));
         return redirect()->back()->with('Dévis', 'Votre message de demande de dévis a éte envoyer!');
+
+        return view('client.layout.contact',compact('categories'));
+
     }
     public function intervention_store(Request $request)
     {
+
 
         $intervention = request()->validate([
             'first_name' => ['required'],

@@ -5,8 +5,19 @@
 @endsection
 
 @section('subcontent')
+
     <div class="grid grid-cols-12 gap-6">
         <div class="col-span-12 xxl:col-span-9 grid grid-cols-12 gap-6">
+            @if($message = Session::get('success'))
+                <div class="col-span-12 rounded-md flex justify-between px-5 py-4 my-2 bg-theme-18 text-theme-9 successAlert">
+                    <div class="flex">
+                        <i data-feather="alert-triangle" class="w-6 h-6 mr-2"></i>
+                        <span>{{ $message }}</span>
+                        {{Session::forget('success')}}
+                    </div>
+                <button class="closeBtn"><i data-feather="x" style="cursor: pointer;" class="w-4 h-4 ml-auto"></i></button>
+                </div>
+            @endif
             <!-- BEGIN: General Report -->
             <div class="col-span-12 mt-8">
                 <div class="intro-y flex items-center h-10">
@@ -91,62 +102,39 @@
             <!-- BEGIN: Weekly Top Seller -->
             <div class="col-span-12 sm:col-span-6 lg:col-span-3 mt-8">
                 <div class="intro-y flex items-center h-10">
-                    <h2 class="text-lg font-medium truncate mr-5">Statistique de la semaine</h2>
+                    <h2 class="text-lg font-medium truncate mr-5">Les produits les plus vendus</h2>
                 </div>
                 <div class="intro-y box p-5 mt-5">
-                    <canvas class="mt-3" id="report-pie-chart" height="280"></canvas>
-                    <div class="mt-8">
-                        <div class="flex items-center">
-                            <div class="w-2 h-2 bg-theme-11 rounded-full mr-3"></div>
-                            <span class="truncate">17 - 30 Years old</span>
-                            <div class="h-px flex-1 border border-r border-dashed border-gray-300 mx-3 xl:hidden"></div>
-                            <span class="font-medium xl:ml-auto">62%</span>
-                        </div>
-                        <div class="flex items-center mt-4">
-                            <div class="w-2 h-2 bg-theme-1 rounded-full mr-3"></div>
-                            <span class="truncate">31 - 50 Years old</span>
-                            <div class="h-px flex-1 border border-r border-dashed border-gray-300 mx-3 xl:hidden"></div>
-                            <span class="font-medium xl:ml-auto">33%</span>
-                        </div>
-                        <div class="flex items-center mt-4">
-                            <div class="w-2 h-2 bg-theme-12 rounded-full mr-3"></div>
-                            <span class="truncate">>= 50 Years old</span>
-                            <div class="h-px flex-1 border border-r border-dashed border-gray-300 mx-3 xl:hidden"></div>
-                            <span class="font-medium xl:ml-auto">10%</span>
-                        </div>
-                    </div>
+                    <ul class="font-semibold">
+                        @foreach ($mostSaledProducts as $mostSaledProduct)
+                            <li class="py-2 border-b flex justify-between">
+                                <span>{{ $mostSaledProduct->products->product_name }}</span>
+                                <span class="text-theme-9">{{ $mostSaledProduct->quantity * $mostSaledProduct->products->price }} FCFA</span>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            <div class="col-span-12 sm:col-span-6 lg:col-span-3 mt-8">
+                <div class="intro-y flex items-center h-10">
+                    <h2 class="text-lg font-medium truncate mr-5">Les produits par stock(Décroissant)</h2>
+                </div>
+                <div class="intro-y box p-5 mt-5">
+                    <ul class="font-semibold">
+                        @foreach ($orderDescProducts as $product)
+                            <li class="py-2 border-b flex justify-between">
+                                <span>
+                                    {{ $product->product_name }}
+                                </span>
+                                <span class="text-theme-6">
+                                    {{ $product->stock }}
+                                </span>
+                            </li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
             <!-- END: Weekly Top Seller -->
-            <!-- BEGIN: Sales Report -->
-            <div class="col-span-12 sm:col-span-6 lg:col-span-3 mt-8">
-                <div class="intro-y flex items-center h-10">
-                </div>
-                <div class="intro-y box p-5 mt-5">
-                    <canvas class="mt-3" id="report-donut-chart" height="280"></canvas>
-                    <div class="mt-8">
-                        <div class="flex items-center">
-                            <div class="w-2 h-2 bg-theme-11 rounded-full mr-3"></div>
-                            <span class="truncate">17 - 30 Years old</span>
-                            <div class="h-px flex-1 border border-r border-dashed border-gray-300 mx-3 xl:hidden"></div>
-                            <span class="font-medium xl:ml-auto">62%</span>
-                        </div>
-                        <div class="flex items-center mt-4">
-                            <div class="w-2 h-2 bg-theme-1 rounded-full mr-3"></div>
-                            <span class="truncate">31 - 50 Years old</span>
-                            <div class="h-px flex-1 border border-r border-dashed border-gray-300 mx-3 xl:hidden"></div>
-                            <span class="font-medium xl:ml-auto">33%</span>
-                        </div>
-                        <div class="flex items-center mt-4">
-                            <div class="w-2 h-2 bg-theme-12 rounded-full mr-3"></div>
-                            <span class="truncate">>= 50 Years old</span>
-                            <div class="h-px flex-1 border border-r border-dashed border-gray-300 mx-3 xl:hidden"></div>
-                            <span class="font-medium xl:ml-auto">10%</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- END: Sales Report -->
             <!-- BEGIN: Official Store -->
 
         </div>
@@ -174,4 +162,9 @@
             </div>
         </div>
     </div>
+    <script>
+        document.querySelector('.closeBtn').addEventListener('click', function() {
+            document.querySelector('.successAlert').classList.add('hidden')
+        })
+    </script>
 @endsection

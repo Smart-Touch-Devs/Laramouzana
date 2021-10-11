@@ -199,4 +199,5 @@ class AccountController extends Controller
         $categories = categories::all();
         return view('client.account.layouts.transactions', ['categories' => $categories]);
     }
+
 }

@@ -93,7 +93,7 @@ class All_productsController extends Controller
         };
         products::create($input);
 
-        return redirect()->intended('all_products')->with('success', 'Produits  ajouté avec succes');
+        return redirect()->intended('staff/all_products')->with('success', 'Produits  ajouté avec succes');
     }
 
     /**
@@ -204,6 +204,6 @@ class All_productsController extends Controller
     {
         $all_products = products::find($id);
         $all_products->delete();
-        return redirect('all_products')->with('success', 'La suppression a été effectué avec succes');
+        return redirect('staff/all_products')->with('success', 'La suppression a été effectué avec succes');
     }
 }

@@ -48,8 +48,15 @@ class AuthController extends Controller
                 case 5:
                     return redirect()->route('dashboard');
                     break;
+                case 6:
+                    return redirect()->route('dashboard');
+                    break;
             }
         } else return Redirect::back()->with('error', 'Email ou mot de passe incorrect!');
+    }
+
+    public function profile() {
+        return view('profile');
     }
 
     /**

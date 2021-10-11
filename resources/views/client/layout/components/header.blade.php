@@ -73,9 +73,9 @@
                                                             <textarea rows="5" cols="5" name="message" type="text" placeholder="Entrez votre message" required></textarea>
                                                                 @if($errors->has('message'))
                                                                     <p>{{ $errors->first('message') }}</p>
-                                                                @endif 
+                                                                @endif
                                                         </div>
-                                                    
+
                                                         <div class="field button">
                                                             <input type="submit" value="Soumettre votre demande">
                                                         </div>
@@ -153,11 +153,11 @@
                                                                 </div>
                                                                 <div class="field input">
                                                                     <label for="">Demande d'intervention</label>
-                                                                    <textarea rows="5" cols="5" name="message" type="text" placeholder="Entrez votre message" required></textarea> 
+                                                                    <textarea rows="5" cols="5" name="message" type="text" placeholder="Entrez votre message" required></textarea>
                                                                     @if($errors->has('message'))
                                                                         <p>{{ $errors->first('message') }}</p>
                                                                     @endif
-                                                                </div>                                                            
+                                                                </div>
                                                                 <div class="field button">
                                                                     <input type="submit" value="Soumettre votre demande">
                                                                 </div>
@@ -183,9 +183,7 @@
                                 data-unfold-target="#sidebarContent"
                                 data-unfold-type="css-animation"
                                 data-unfold-animation-in="fadeInRight"
-                                data-unfold-animation-out="fadeOutRight"
-
-                                <a id="sidebarNavToggler" href="{{ asset('login') }}" role="button"
+                                data-unfold-animation-out="fadeOutRight" id="sidebarNavToggler" href="{{ asset('login') }}" role="button"
                                     class="u-header-topbar__nav-link" aria-controls="sidebarContent"
                                     aria-haspopup="true" aria-expanded="false" data-unfold-event="click"
                                     data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent"
@@ -314,7 +312,33 @@
                                             </button>
                                         </div>
                                         <!-- End Toggle Button -->
-
+                                        <nav
+                                        class="js-mega-menu navbar navbar-expand u-header__navbar u-header__navbar--no-space">
+                                        <!-- Navigation -->
+                                        <div id="navBar" class="collapse navbar-collapse u-header__navbar-collapse">
+                                            <ul class="navbar-nav u-header__navbar-nav customNav">
+                                                <!-- Home -->
+                                                <li class="nav-item hs-has-sub-menu u-header__nav-item">
+                                                    <a id="HomeMegaMenu" class="nav-link u-header__nav-link @if(Request::route()->uri === '/') activeNav @endif"
+                                                        href="/">Accueil</a>
+                                                </li>
+                                                <li class="nav-item hs-has-mega-menu u-header__nav-item">
+                                                    <a id="pagesMegaMenu" class="nav-link u-header__nav-link @if(Request::route()->uri === 'shop') activeNav @endif"
+                                                        href="{{ asset('shop') }}">Boutique</a>
+                                                </li>
+                                                <li class="nav-item u-header__nav-item">
+                                                    <a class="nav-link u-header__nav-link @if(Request::route()->uri === 'about') activeNav @endif" href="{{asset('about')}}">À propos</a>
+                                                </li>
+                                                <li class="nav-item u-header__nav-item">
+                                                    <a class="nav-link u-header__nav-link @if(Request::route()->uri === 'contacts') activeNav @endif" href="{{asset('contacts')}}">Contactez-nous</a>
+                                                </li>
+                                                <li class="nav-item u-header__nav-item">
+                                                    <a class="nav-link u-header__nav-link @if(Request::route()->uri === 'faqs') activeNav @endif" href="{{asset('faqs')}}">FAQs</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <!-- End Navigation -->
+                                    </nav>
 
                                         <!-- End Content -->
                                     </div>
@@ -331,25 +355,25 @@
                             <nav
                                 class="js-mega-menu navbar navbar-expand-md u-header__navbar u-header__navbar--no-space">
                                 <!-- Navigation -->
-                                <div id="navBar" class="collapse navbar-collapse u-header__navbar-collapse">
+                                <div id="navBar" class="d-block">
                                     <ul class="navbar-nav u-header__navbar-nav">
                                         <!-- Home -->
                                         <li class="nav-item hs-has-sub-menu u-header__nav-item">
-                                            <a id="HomeMegaMenu" class="nav-link u-header__nav-link"
+                                            <a id="HomeMegaMenu" class="nav-link u-header__nav-link @if(Request::route()->uri === '/') activeNav @endif"
                                                 href="/">Accueil</a>
                                         </li>
                                         <li class="nav-item hs-has-mega-menu u-header__nav-item">
-                                            <a id="pagesMegaMenu" class="nav-link u-header__nav-link"
-                                                href="/shop">Boutique</a>
+                                            <a id="pagesMegaMenu" class="nav-link u-header__nav-link @if(Request::route()->uri === 'shop') activeNav @endif"
+                                                href="{{ asset('shop') }}">Boutique</a>
                                         </li>
                                         <li class="nav-item u-header__nav-item">
-                                            <a class="nav-link u-header__nav-link" href="{{asset('about')}}">À propos</a>
+                                            <a class="nav-link u-header__nav-link @if(Request::route()->uri === 'about') activeNav @endif" href="{{asset('about')}}">À propos</a>
                                         </li>
                                         <li class="nav-item u-header__nav-item">
-                                            <a class="nav-link u-header__nav-link" href="{{asset('contact')}}">Contactez-nous</a>
+                                            <a class="nav-link u-header__nav-link @if(Request::route()->uri === 'contacts') activeNav @endif" href="{{asset('contacts')}}">Contactez-nous</a>
                                         </li>
                                         <li class="nav-item u-header__nav-item">
-                                            <a class="nav-link u-header__nav-link" href="{{asset('accordion')}}">FAQs</a>
+                                            <a class="nav-link u-header__nav-link @if(Request::route()->uri === 'faqs') activeNav @endif" href="{{asset('faqs')}}">FAQs</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -381,7 +405,7 @@
         <!-- End Logo and Menu -->
 
         <!-- Vertical-and-Search-Bar -->
-        <div class="d-none d-xl-block bg-primary">
+        <div class="d-none d-md-block bg-primary">
             <div class="container">
                 <div class="row align-items-stretch min-height-50">
                     <!-- Vertical Menu -->

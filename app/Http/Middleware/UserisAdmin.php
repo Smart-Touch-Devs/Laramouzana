@@ -17,7 +17,8 @@ class UserisAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::guard('admin')->user()->role_id !== 5) {
+        $role = Auth::guard('admin')->user()->role_id;
+        if(!in_array($role, [5, 6])) {
             return redirect()->back();
         } else return $next($request);
     }

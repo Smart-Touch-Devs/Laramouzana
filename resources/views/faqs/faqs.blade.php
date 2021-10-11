@@ -1,7 +1,7 @@
 @extends('layout/top-menu')
 
 @section('subhead')
-<title>ACCORDION - Midone - Tailwind HTML Admin Template</title>
+<title>Gestion des FAQs</title>
 @endsection
 
 @section('subcontent')
@@ -103,10 +103,13 @@
                         </td>
 
                         @empty
+
                         <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-18 text-theme-9">
                             <div class="m-auto">
                                 <p> Aucune réponse disponible pour le moment</p>
                             </div>
+
+                        
                         </div>
                     </tr>
                 </tbody>

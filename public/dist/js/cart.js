@@ -1,10 +1,10 @@
-
 const productsList = document.querySelector('#productList')
 const updateCard = document.querySelector('#updateCard')
-window.onload = () => {
+
     let reaper_cart = []
     if(localStorage.getItem('cart')) {
         reaper_cart = Array.from(JSON.parse(localStorage.getItem('cart')))
+        
     }
 
     if(reaper_cart !== []) {
@@ -54,7 +54,6 @@ window.onload = () => {
         localStorage.clear();
         productNum.innerHTML = '0'
         productPriceSum.innerHTML = '0 FCFA'
+        productsList.innerHTML = ''
     })
-}
-
 

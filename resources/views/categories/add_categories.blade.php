@@ -27,7 +27,7 @@
                 <div class="mt-3">
                     <label>image </label>
                         <div class="relative mt-2">
-                            <input type="file" class="input pr-12 w-full border col-span-4" placeholder="" accept="image/*" name="picture">
+                            <input type="file" class="input pr-12 w-full border col-span-4" placeholder=""  accept="image/*" name="picture">
                         </div>
                     </div>
                 <div class="mt-3">
@@ -67,10 +67,10 @@
                             <div class="flex items-center sm:justify-center ">
                                @if ($categorie->picture === null)
                             <div>
-                                <h3>Aucune image</h3>
+                                <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-17 text-theme-11"> <i data-feather="alert-circle" class="w-6 h-6 mr-2"></i> Aucune image </div>
                             </div>
                                @else
-                               <img alt=""  src="{{asset('assets/categorie_Picture').'/'.$categorie->picture}}">
+                               <img alt=""  width="75px" height="75px"   src="{{asset('assets/categorie_Picture').'/'.$categorie->picture}}">
                                @endif
                             </div>
                         </td>
@@ -79,7 +79,7 @@
                                 @if($categorie->category_desc === null)
                                 <div>
                                     <h3>
-                                        Aucune image
+                                        <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-17 text-theme-11"> <i data-feather="alert-circle" class="w-6 h-6 mr-2"></i> Aucune description </div>
                                     </h3>
                                 </div>
                                 @else
@@ -89,15 +89,21 @@
                         </td>
                         <td class="border-b w-5">
                             <div class="flex sm:justify-center items-center">
-                                <div class="flex items-center mr-3" href="">
-                                    <i data-feather="check-square" class="w-4 h-4 mr-1"></i>
-                                     <a href=" {{ route('add_categories.edit',$categorie->id) }} ">Editer</a>
+                                <div class="flex items-center mr-3" >
+                                     <a href=" {{ route('add_categories.edit',$categorie->id) }} ">
+                                        <button class="button px-2 mr-1 mb-2 bg-theme-3 text-white">
+                                            <span class="w-5 h-5 flex items-center justify-center">
+                                        <i data-feather="check-square" class="w-4 h-4 mr-1"></i>
+                                    </button>
+                                    </a>
                                 </div>
                                 <form action="{{ route('add_categories.destroy',$categorie->id) }}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="flex items-center text-theme-6" onclick="myFunction()" type="submit" >
-                                        <i data-feather="trash-2" class="w-4 h-4 mr-1" ></i> Supprimer
+                                    <button class="button px-2 mr-1 mb-2 bg-theme-6 text-white flex items-center" onclick="myFunction()" type="submit">
+                                        <span class="w-5 h-5 flex items-center justify-center">
+                                            <i data-feather="trash-2" class="w-4 h-4"></i>
+                                        </span>
                                     </button>
                                 </form>
                             </div>
@@ -106,7 +112,7 @@
                     @empty
                     <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-18 text-theme-9">
                         <div class="m-auto">
-                            <p> Aucune catégorie disponible</p>
+                            <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-17 text-theme-11"> <i data-feather="alert-circle" class="w-6 h-6 mr-2"></i> Aucune categorie disponible</div>
                         </div>
                     </div>
                 </tbody>

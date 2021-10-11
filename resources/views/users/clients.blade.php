@@ -1,7 +1,7 @@
 @extends('layout/top-menu')
 
 @section('subhead')
-<title>Gestion d'utilisateurs</title>
+<title>{{ $pageTitle }}</title>
 @endsection
 
 @section('subcontent')

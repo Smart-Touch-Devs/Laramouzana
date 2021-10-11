@@ -1,4 +1,4 @@
-@extends('../layout/main')
+@extends('layout.main')
 
 @section('head')
 @yield('subhead')
@@ -26,64 +26,16 @@
         <!-- BEGIN: Search -->
         <div class="intro-x relative mr-3 sm:mr-6">
             <div class="search hidden sm:block">
-                <input type="text" class="search__input input dark:bg-dark-1 placeholder-theme-13"
-                    placeholder="Search...">
+                <input type="text" id="searchBar" class="search__input input dark:bg-dark-1 placeholder-theme-13" data-origin="{{ Request::header()['host'][0] }}"
+                    placeholder="Rechercher...">
                 <i data-feather="search" class="search__icon dark:text-gray-300"></i>
             </div>
-            <a class="notification notification--light sm:hidden" href="">
-                <i data-feather="search" class="notification__icon dark:text-gray-300"></i>
-            </a>
             <div class="search-result">
                 <div class="search-result__content">
-                    <div class="search-result__content__title">Pages</div>
-                    <div class="mb-5">
-                        <a href="" class="flex items-center">
-                            <div class="w-8 h-8 bg-theme-18 text-theme-9 flex items-center justify-center rounded-full">
-                                <i class="w-4 h-4" data-feather="inbox"></i>
-                            </div>
-                            <div class="ml-3">Mail Settings</div>
-                        </a>
-                        <a href="" class="flex items-center mt-2">
-                            <div
-                                class="w-8 h-8 bg-theme-17 text-theme-11 flex items-center justify-center rounded-full">
-                                <i class="w-4 h-4" data-feather="users"></i>
-                            </div>
-                            <div class="ml-3">Users & Permissions</div>
-                        </a>
-                        <a href="" class="flex items-center mt-2">
-                            <div
-                                class="w-8 h-8 bg-theme-14 text-theme-10 flex items-center justify-center rounded-full">
-                                <i class="w-4 h-4" data-feather="credit-card"></i>
-                            </div>
-                            <div class="ml-3">Transactions Report</div>
-                        </a>
+                    <div class="search-result__content__title">Resultats de recherches</div>
+                    <div class="mb-5" id="searchLinksContainer">
+
                     </div>
-                    <div class="search-result__content__title">Users</div>
-                    <div class="mb-5">
-                        @foreach (array_slice($fakers, 0, 4) as $faker)
-                        <a href="" class="flex items-center mt-2">
-                            <div class="w-8 h-8 image-fit">
-                                <img alt="Midone Tailwind HTML Admin Template" class="rounded-full"
-                                    src="{{ asset('dist/images/' . $faker['photos'][0]) }}">
-                            </div>
-                            <div class="ml-3">{{ $faker['users'][0]['name'] }}</div>
-                            <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">
-                                {{ $faker['users'][0]['email'] }}</div>
-                        </a>
-                        @endforeach
-                    </div>
-                    <div class="search-result__content__title">Products</div>
-                    @foreach (array_slice($fakers, 0, 4) as $faker)
-                    <a href="" class="flex items-center mt-2">
-                        <div class="w-8 h-8 image-fit">
-                            <img alt="Midone Tailwind HTML Admin Template" class="rounded-full"
-                                src="{{ asset('dist/images/' . $faker['images'][0]) }}">
-                        </div>
-                        <div class="ml-3">{{ $faker['products'][0]['name'] }}</div>
-                        <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">
-                            {{ $faker['products'][0]['category'] }}</div>
-                    </a>
-                    @endforeach
                 </div>
             </div>
         </div>
@@ -103,21 +55,19 @@
                                 Administrateur
                             @elseif(Auth::guard('admin')->user()->role_id === 4)
                                 Livreur
-                            @else
+                            @elseif(Auth::guard('admin')->user()->role_id === 3)
                                 Comptable
+                            @else
+                                ShopManager
                             @endif
                         </div>
                     </div>
                     <div class="p-2">
-                        <a href=""
+                        <a href="{{ route('admin.profile') }}"
                             class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md">
                             <i data-feather="user" class="w-4 h-4 mr-2"></i> Profil
                         </a>
-                        <a href=""
-                            class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md">
-                            <i data-feather="edit" class="w-4 h-4 mr-2"></i> Ajouter un admin
-                        </a>
-                        <a href=""
+                        <a href="{{ route('admin.changePwIndex') }}"
                             class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md">
                             <i data-feather="lock" class="w-4 h-4 mr-2"></i> Changer de mot de passe
                         </a>
@@ -138,7 +88,7 @@
 <!-- BEGIN: Top Menu -->
 <nav class="top-nav">
     <ul>
-        @if (Auth::guard('admin')->user()->role_id === 5)
+        @if (Auth::guard('admin')->user()->role_id === 5 || Auth::guard('admin')->user()->role_id === 6)
         <li>
             <a href="{{ route('dashboard') }}" class="top-menu @if(Request::route()->uri === 'staff') top-menu--active @endif">
                 <div class="top-menu__icon">
@@ -177,6 +127,7 @@
             </ul>
         </li>
 
+        @if (Auth::guard('admin')->user()->role_id === 5)
         <li>
             <a href="#" class="top-menu @if(stristr(Request::route()->uri,'staff/users/')) top-menu--active @endif">
                 <div class="top-menu__icon">
@@ -216,9 +167,17 @@
                         </div>
                     </a>
                 </li>
-            </ul>
                 <li>
-                    <a href="/Faqs" class="top-menu">
+                    <a href="{{ asset('/staff/users/shop_manager') }}" class="top-menu">
+                        <div class="top-menu__title">
+                            ShopManagers
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            @endif
+                <li>
+                    <a href="{{asset('/Faqs')}}" class="top-menu">
                         <div class="top-menu__icon">
                             <i data-feather="hash"></i>
                         </div>
@@ -227,14 +186,36 @@
                         </div>
                     </a>
                         <li>
-                            <a href="{{ asset('staff/commands') }}" class="top-menu @if(stristr(Request::route()->uri, 'commands')) top-menu--active @endif">
+                            <a href="#"  class="top-menu @if(stristr(Request::route()->uri, 'staff/commands')) top-menu--active @endif">
+                                <div class="top-menu__icon">
+                                    <i data-feather="command"></i>
+                                </div>
                                 <div class="top-menu__title">
                                     Commandes
+                                    <i data-feather="chevron-down" class="top-menu__sub-icon"></i>
                                 </div>
                             </a>
+                            <ul>
+                                <li>
+                                    <a href="{{ asset('staff/commands') }}" class="top-menu">
+                                        <div class="top-menu__title">
+                                           Toutes les commandes
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ asset('/staff/delivered_product') }}" class="top-menu">
+                                        <div class="top-menu__title">
+                                           Commandes Livrées
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </li>
+
+
         @elseif (Auth::guard('admin')->user()->role_id === 3)
         <li>
             <a href="{{ route('accountant.index') }}" class="top-menu @if(stristr(Request::route()->uri, 'accountant/dashboard')) top-menu--active @endif">

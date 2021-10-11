@@ -23,7 +23,9 @@
                                 <div class="row">
                                     <div class="col-md-4 col-lg-4 col-xs-12">
                                         @if ($display_prods_cat_2->pdf1 === null)
-                                        <h4>Aucun Pdf</h4>
+                                        <div class="alert alert-primary text-white" role="alert">
+                                            Aucun Pdf
+                                          </div>
                                         @else
                                         <a href="{{asset('pdf/pdf_notice').'/'.$display_prods_cat_2->pdf1}}" target="_blank"><img alt="" class="" width="60px" height="70px"  src="{{asset('/pdf/PDF.jpg')}}"><div class="ml-1 font-weight-bold">
                                             notice</div></a>
@@ -31,7 +33,9 @@
                                     </div>
                                         <div class="col-md-4 col-lg-4 col-xs-12">
                                            @if ($display_prods_cat_2->pdf2 === null)
-                                           <h4>Aucun Pdf</h4>
+                                           <div class="alert alert-primary text-white" role="alert">
+                                            Aucun Pdf
+                                          </div>
                                            @else
                                            <a href="{{asset('pdf/pdf_notice').'/'.$display_prods_cat_2->pdf2}}" target="_blank">
                                             <img alt="" class="" width="60px" height="70px"  src="{{asset('/pdf/PDF.jpg')}}"><span class="font-weight-bold">caracteristique</span></a>
@@ -40,7 +44,9 @@
 
                                         <div class="col-md-4 col-lg-4 col-xs-12">
                                             @if ($display_prods_cat_2->pdf3 === null)
-                                         <h4>Aucun Pdf</h4>
+                                            <div class="alert alert-primary text-white" role="alert">
+                                                Aucun Pdf
+                                              </div>
                                          @else
                                          <a href="{{asset('pdf/pdf_notice').'/'.$display_prods_cat_2->pdf3}}">
                                             <img alt="" class="" width="60px" height="70px"  src="{{asset('/pdf/PDF.jpg')}}" target="_blank"><span class="font-weight-bold">présentation</span></a>
@@ -49,21 +55,27 @@
                                         <div class="row">
                                             <div class="col-md-4 col-lg-4 col-xs-12">
                                                @if ($display_prods_cat_2->picture1 === null)
-                                               <h4>Aucune image</h4>
+                                               <div class="alert alert-primary text-white" role="alert">
+                                                Aucune image
+                                              </div>
                                                @else
                                                <img class="" width="100%" height="100%" src="{{asset('assets/product_Picture').'/'.$display_prods_cat_2->picture1}}" alt="Image Description">
                                                @endif
                                             </div>
                                             <div class="col-md-4 col-lg-4 col-xs-12">
                                                 @if ($display_prods_cat_2->picture2 === null)
-                                               <h4>Aucune image</h4>
+                                                <div class="alert alert-primary text-white" role="alert">
+                                                    Aucune image
+                                                  </div>
                                                @else
                                                <img class="" width="100%" height="100%" src="{{asset('assets/product_Picture').'/'.$display_prods_cat_2->picture2}}" alt="Image Description">
                                                @endif
                                             </div>
                                             <div class="col-md-4 col-lg-4 col-xs-12">
                                                 @if ($display_prods_cat_2->picture3 === null)
-                                               <h4>Aucune image</h4>
+                                                <div class="alert alert-primary text-white" role="alert">
+                                                    Aucune image
+                                                  </div>
                                                @else
                                                <img class="" width="100%" height="100%" src="{{asset('assets/product_Picture').'/'.$display_prods_cat_2->picture3}}" alt="Image Description">
                                                @endif

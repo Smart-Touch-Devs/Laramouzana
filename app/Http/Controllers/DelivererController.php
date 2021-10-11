@@ -71,4 +71,21 @@ class DelivererController extends Controller
             ->back()
             ->with('success', 'Status de la commande changé avec succès!');
     }
+    public function delivered_product()
+    {
+        $commands = Command::where('is_delivered', 0)->get();
+        $toReturnCommands = [];
+
+        foreach ($commands as $key => $command) {
+            $toReturnCommands[$key] = [];
+            $commandedProducts = [];
+            $prix = 0;
+            foreach (Commanded_products::where('command_id', $command->id)->get() as $commandedProduct) {
+                array_push($commandedProducts, $commandedProduct->products->product_name . '(' . $commandedProduct->quantity . ')');
+                $prix += $commandedProduct->products->price * $commandedProduct->quantity;
+            }
+            array_push($toReturnCommands[$key], $command->id, implode(',', $commandedProducts), $prix, $command->clients->firstname . ' ' . $command->clients->lastname, $command->clients->phone, $command->admins);
+        }
+        return view('/staff/delivered_product',compact('toReturnCommands'));
+    }
 }

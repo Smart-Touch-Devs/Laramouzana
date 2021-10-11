@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\admin;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\clients;
 use App\Models\Commanded_products;
 use App\Models\products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -31,6 +33,9 @@ class AdminController extends Controller
         ->where('created_at', '<=', date('Y-m-d', strtotime(date('Y') . '-' . (int) date('m') -1 . '-' . date('t', strtotime(date('Y') . '-' . (int) date('m') -1 . '-01')))))
         ->get();
 
+        $saledProducts = Commanded_products::orderBy('quantity', 'DESC')->limit(10)->get();
+        $orderDescProducts = products::orderBy('stock', 'ASC')->limit(10)->get();
+        //dd($orderDescProducts);
 
         // $weekIncomingProducts = Commanded_products::where('created_at', 'BETWEEN', date('Y-m-d', strtotime('this week')), 'AND', date('Y-m-d', strtotime(date('Y-m', strtotime('this week')) . '-' . (int) date('d', strtotime('this week')) + 6)));
 
@@ -44,6 +49,7 @@ class AdminController extends Controller
         $this->setCurrentMonthIncoming($currentMonthIncomingProducts);
         $this->setLastMonthIncoming($lastMonthIncomingProducts);
 
+
         // dd($this->getLastMonthIncoming());
 
         return view('layout.adminBoard', [
@@ -52,7 +58,9 @@ class AdminController extends Controller
             'saleProductsNumber' => $this->getSaleProductsNumber(),
             'newCommandsNumber' => $this->getNewCommandsNumber(),
             'currentMonthIncoming' => $this->getCurrentMonthIncoming(),
-            'lastMonthIncoming' => $this->getLastMonthIncoming()
+            'lastMonthIncoming' => $this->getLastMonthIncoming(),
+            'mostSaledProducts' => $saledProducts,
+            'orderDescProducts' => $orderDescProducts
         ]);
     }
 
@@ -74,13 +82,6 @@ class AdminController extends Controller
         }
 
         return $data;
-    }
-
-    public function pieChartData() {
-        $data = [];
-        $weekIncomingProducts = DB::select('select c.*, p.price from commanded_products c inner join products p where c.created_at between ? and ? and c.product_id = p.id', [date('Y-m-d', strtotime('this week')), date('Y-m-d', strtotime(date('Y-m', strtotime('this week')) . '-' . (int) date('d', strtotime('this week')) + 6))]);
-
-
     }
 
 
@@ -177,10 +178,6 @@ class AdminController extends Controller
         return $this->lastMonthIncoming;
     }
 
-    public function getWeekIncoming(): int {
-        return $this->weekIncoming;
-    }
-
     //Extract method
 
     public function extractArrayFrom(Collection $collection): array
@@ -192,5 +189,19 @@ class AdminController extends Controller
         }
 
         return $array;
+    }
+
+    public function adminChangePwIndex() {return view('layout.changePw');}
+
+    public function changePw(Request $request) {
+        $request->validate([
+            'password' => 'required',
+            'confirm_password' => 'required|same:password',
+            'id' => 'required'
+        ]);
+
+        admin::find($request->id)->update(['password' => Hash::make($request->password)]);
+
+        return redirect()->intended('/staff')->with('success', 'Mot de passe changé avec succès!');
     }
 }

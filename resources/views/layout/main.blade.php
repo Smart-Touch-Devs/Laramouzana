@@ -1,4 +1,4 @@
-@extends('../layout/base')
+@extends('layout.base')
 
 @section('body')
     <body class="app">
@@ -8,6 +8,10 @@
         <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=["your-google-map-api"]&libraries=places"></script>
         <script src="{{ mix('dist/js/app.js') }}"></script>
+        <script src="{{ asset('dist/js/search.js') }}" type="module">
+        const searchJsonFilePath = "{{__DIR__ . '/dist/json/search.json'}}"
+
+        </script>
         <!-- END: JS Assets-->
 
         @yield('script')

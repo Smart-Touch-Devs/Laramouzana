@@ -30,6 +30,10 @@
 
     <!-- CSS Electro Template -->
     <link rel="stylesheet" href="{{ asset('assets/css/theme.css') }}">
+
+    {{-- Custom CSS --}}
+
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
 </head>
 
 <body>

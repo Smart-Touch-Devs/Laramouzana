@@ -1,0 +1,47 @@
+[
+    {
+        "tableau de bord" : "staff",
+        "statistique générale" : "staff",
+        "statistique de vente" : "staff",
+        "les produits les plus vendus" : "staff",
+        "les produits par stock" : "staff",
+        "les transactions" : "staff"
+    },
+    {
+        "ajouter un produit" : "staff/all_products",
+        "liste des produits" : "staff/all_products"
+    },
+    {
+        "ajouter une catégorie" : "staff/add_categories",
+        "liste des catégories" : "staff/add_categories"
+    },
+    {
+        "liste des clients" : "staff/users/clients",
+        "ajouter un client" : "staff/users/clients"
+    },
+    {
+        "liste des techniciens" : "staff/users/technicians",
+        "ajouter un techniciens" : "staff/users/technicians"
+    },
+    {
+        "liste des comptables" : "staff/users/accountants",
+        "ajouter un comptables" : "staff/users/accountants"
+    },
+    {
+        "liste des livreurs" : "staff/users/deliverers",
+        "ajouter un livreurs" : "staff/users/deliverers"
+    },
+    {
+        "liste des questions récurrents" : "Faqs",
+        "ajouter une question" : "Faqs",
+        "foire aux questions" : "Faqs",
+        "faqs" : "Faqs"
+    },
+    {
+        "liste des commandes" : "staff/commands",
+        "assigner à un journaliste" : "staff/commands"
+    },
+    {
+        "listes des commandes livrés": "staff/delivered_product"
+    }
+]
