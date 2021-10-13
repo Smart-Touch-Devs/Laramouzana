@@ -40,7 +40,7 @@ class ClientAuthController extends Controller
         ]);
 
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect()->intended('/', 302);
+            return redirect()->route('client.home');
         } else {
             return redirect()->back()->withErrors(['passwordError' => 'Le mot de passe entré est incorrect!'])->withInput(['email' => $request->email]);
         }

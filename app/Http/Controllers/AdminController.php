@@ -151,33 +151,31 @@ class AdminController extends Controller
 
     //Getters
 
-    public function getSaleProductsNumber(): int
+    public function getSaleProductsNumber(): int|null
     {
         return $this->saleProductsNumber;
     }
 
-    public function getClientsNumber(): int
+    public function getClientsNumber(): int|null
     {
         return $this->clientsNumber;
     }
 
-    public function getAvailableProductsNumber(): int
+    public function getAvailableProductsNumber(): int|null
     {
         return $this->availableProductsNumber;
     }
 
-    public function getNewCommandsNumber(): int
+    public function getNewCommandsNumber(): int|null
     {
         return $this->newCommandsNumber;
     }
 
-    public function getCurrentMonthIncoming(): int
-    {
+    public function getCurrentMonthIncoming(): int|null {
         return $this->currentMonthIncoming;
     }
 
-    public function getLastMonthIncoming(): int
-    {
+    public function getLastMonthIncoming(): int|null {
         return $this->lastMonthIncoming;
     }
 

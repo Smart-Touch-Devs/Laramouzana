@@ -16,8 +16,16 @@ class FrontController extends Controller
         $categories = categories::all();
     	return view('client.layout.about',compact('categories'));
     }
-    public function shop() {
-        $show_all_products = products::orderBy('created_at', 'DESC')->cursorPaginate(15);
+    public function shop($category = null) {
+        $categoryExist = categories::where('category_name', $category)->first();
+        if($categoryExist) {
+            $show_all_products = products::where('category_id', $categoryExist->id)
+            ->orderBy('created_at', 'DESC')
+            ->cursorPaginate(15);
+        } else {
+            $show_all_products = products::orderBy('created_at', 'DESC')->cursorPaginate(15);
+        }
+
         $categories = categories::all();
     	return view('client.layout.shop',compact('categories','show_all_products'));
     }
@@ -40,5 +48,16 @@ class FrontController extends Controller
 
 	    ]);
         return redirect()->back()->with('message', 'Votre message a éte envoyer nous vous remerci pour votre fidélité!');
+    }
+
+    public function search($searchValue = null) {
+        if($searchValue === null) {
+            return json_encode(['nothing' => "Aucun résultat trouvé"]);
+        } else {
+            $products = products::where('product_name', 'LIKE', '%' . $searchValue . '%')
+            ->limit(10)
+            ->get(['id', 'product_name', 'picture1']);
+            return json_encode($products);
+        }
     }
 }

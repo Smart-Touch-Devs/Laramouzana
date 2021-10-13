@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             AdminAccountSeeder::class,
             ClientAccountSeeder::class,
             CommandSeeder::class,
-            CommandedProductSeeder::class
+           // CommandedProductSeeder::class
         ]);
     }
 }

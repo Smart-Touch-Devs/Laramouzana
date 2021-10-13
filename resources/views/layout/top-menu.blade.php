@@ -46,7 +46,7 @@
                 <img alt="Midone Tailwind HTML Admin Template"
                     src="{{ asset('dist/images/' . $fakers[9]['photos'][0]) }}">
             </div>
-            <div class="dropdown-box w-56">
+            <div class="dropdown-box w-56" style="position: absolute; top: 50px; right: 20px;" id="_qpwzbdttb">
                 <div class="dropdown-box__content box bg-theme-38 dark:bg-dark-6 text-white">
                     <div class="p-4 border-b border-theme-40 dark:border-dark-3">
                         <div class="font-medium">{{ Auth::guard('admin')->user()->first_name . ' ' . Auth::guard('admin')->user()->last_name }}</div>

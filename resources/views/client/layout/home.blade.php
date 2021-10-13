@@ -170,8 +170,6 @@
                                                     </div>
                                                     <div class="d-none d-xl-block prodcut-add-cart">
 
-                                                        {{-- <a href="{{ route('single_product',$new_product->id) }}" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a> --}}
-
                                                         <a href="#" data-product_info='{"productId": {{ $new_product->id }}, "productName": "{{ $new_product->product_name }}", "price": {{ $new_product->price }}, "img": "{{$new_product->picture1}}"}' class=" add-cart btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
 
                                                     </div>
