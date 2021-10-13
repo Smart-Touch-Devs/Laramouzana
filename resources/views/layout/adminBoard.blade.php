@@ -34,7 +34,7 @@
                                     <i data-feather="shopping-cart" class="report-box__icon text-theme-10"></i>
                                     <div class="text-base text-gray-600 mt-1 ml-2">Produits vendus</div>
                                 </div>
-                                <div class="text-3xl font-bold leading-8 mt-6">{{ $saleProductsNumber }}</div>
+                                <div class="text-3xl font-bold leading-8 mt-6">{{ $saleProductsNumber ?? 0 }}</div>
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                                     <i data-feather="credit-card" class="report-box__icon text-theme-11"></i>
                                     <div class="text-base text-gray-600 mt-1 ml-2">Nouvelles commandes</div>
                                 </div>
-                                <div class="text-3xl font-bold leading-8 mt-6">{{ $newCommandsNumber }}</div>
+                                <div class="text-3xl font-bold leading-8 mt-6">{{ $newCommandsNumber ?? 0 }}</div>
                             </div>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                                     <i data-feather="monitor" class="report-box__icon text-theme-12"></i>
                                     <div class="text-base text-gray-600 mt-1 ml-2">Stock total</div>
                                 </div>
-                                <div class="text-3xl font-bold leading-8 mt-6">{{ $availableProductsNumber }}</div>
+                                <div class="text-3xl font-bold leading-8 mt-6">{{ $availableProductsNumber ?? 0 }}</div>
                             </div>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                                     <i data-feather="user" class="report-box__icon text-theme-9"></i>
                                     <div class="text-base text-gray-600 mt-1 ml-2">Nombre de clients</div>
                                 </div>
-                                <div class="text-3xl font-bold leading-8 mt-6">{{ $clientsNumber }}</div>
+                                <div class="text-3xl font-bold leading-8 mt-6">{{ $clientsNumber ?? 0  }}</div>
                             </div>
                         </div>
                     </div>
@@ -106,6 +106,11 @@
                 </div>
                 <div class="intro-y box p-5 mt-5">
                     <ul class="font-semibold">
+                        @if(count($mostSaledProducts) === 0)
+                        <li class="py-2 flex justify-between">
+                            <span>Aucun résultat pour le moment</span>
+                        </li>
+                        @endif
                         @foreach ($mostSaledProducts as $mostSaledProduct)
                             <li class="py-2 border-b flex justify-between">
                                 <span>{{ $mostSaledProduct->products->product_name }}</span>
@@ -121,6 +126,11 @@
                 </div>
                 <div class="intro-y box p-5 mt-5">
                     <ul class="font-semibold">
+                        @if(count($orderDescProducts) === 0)
+                        <li class="py-2 flex justify-between">
+                            <span>Aucun résultat pour le moment</span>
+                        </li>
+                        @endif
                         @foreach ($orderDescProducts as $product)
                             <li class="py-2 border-b flex justify-between">
                                 <span>

@@ -16,7 +16,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 <div class="container my-5" style="font-family: Roboto;">
     <div class="row my-5">
-        <div class="col-md-2 py-sm-3 rounded" style="background: #f8f8f8;">
+        <div class="d-none d-md-block col-md-2 py-sm-3 rounded" style="background: #f8f8f8;">
             <ul class="navbar-nav u-header__navbar-nav text-center">
                 <div class="row justify-content-center">
                     <li class="nav-item u-header__nav-item li">

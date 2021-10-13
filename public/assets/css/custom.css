@@ -1,4 +1,26 @@
 .activeNav {border-bottom: 3px solid  #02ACF0;}
+.fit-content {width: fit-content;}
+.searchResult {
+    width: 70%;
+    height: fit-content;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    position: absolute;
+    top: 125%;
+    left: 15%;
+    box-shadow: -0.5px 1px 3px #aaa7a7;
+}
+
+.searchResult ul li {
+    width: 100%;
+    list-style: none;
+    font-weight: 600;
+}
+
+.searchResult ul li:hover {
+    background: #eee;
+}
 
 @media(max-width: 1183px) {
     .bannerSection {display: none;}

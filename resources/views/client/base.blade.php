@@ -91,6 +91,8 @@
 
     <!-- <script src="{{ asset('assets/vendor/bootstrap/bootstrap.bundle.min.js') }}"></script> -->
     <script src="{{ asset('dist/js/add_to_cart.js') }}"></script>
+    <script src="{{ asset('dist/js/clientSearch.js') }}"></script>
+
 
 
     <!-- JS Plugins Init. -->

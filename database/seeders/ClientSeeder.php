@@ -52,5 +52,41 @@ class ClientSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
+            DB::table('clients')
+            ->insert([
+                'role' => 1,
+                'firstname' => "John",
+                'lastname' => "Doe",
+                'email' => 'johndoe@gmail.com',
+                'email_verified' => now(),
+                'birthday' => now(),
+                'phone' => '07845692',
+                'phone_verified' => now(),
+                'country' => 2,
+                'city' => 3,
+                'sup_code' => 'samed0050',
+                'affiliate_code' => "johndoe55",
+                'password' => Hash::make('samed'),
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+            DB::table('clients')
+            ->insert([
+                'role' => 1,
+                'firstname' => "Jane",
+                'lastname' => "Doe",
+                'email' => 'janedoe@gmail.com',
+                'email_verified' => now(),
+                'birthday' => now(),
+                'phone' => '06854932',
+                'phone_verified' => now(),
+                'country' => 2,
+                'city' => 3,
+                'sup_code' => 'johndoe55',
+                'affiliate_code' => "jane7548",
+                'password' => Hash::make('samed'),
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
     }
 }
