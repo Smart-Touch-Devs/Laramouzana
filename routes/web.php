@@ -64,6 +64,7 @@ Route::prefix('staff')->middleware('admin')->group(function () {
         Route::resource('all_products', 'All_productsController');
         Route::resource('add_products', 'Add_productsController');
         Route::resource('add_categories', 'Add_categoriesController');
+        
 
 
         //Users management
@@ -130,6 +131,7 @@ Route::get('/logout', [ClientAuthController::class, 'logout'])->name('client.log
 //Accordion
 Route::resource('faqs', 'AccordionController');
 Route::resource('Faqs', 'FaqsController');
+
 
 
 //Front uniquement

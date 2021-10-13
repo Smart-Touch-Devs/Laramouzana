@@ -75,11 +75,9 @@
                                                                     <p>{{ $errors->first('message') }}</p>
                                                                 @endif
                                                         </div>
-
                                                         <div class="field button">
                                                             <input type="submit" value="Soumettre votre demande">
                                                         </div>
-
                                                     </form>
                                                 </section>
                                             </div>
@@ -189,10 +187,8 @@
                                     data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent"
                                     data-unfold-type="css-animation" data-unfold-animation-in="fadeInRight"
                                     data-unfold-animation-out="fadeOutRight" data-unfold-duration="500">
-                                    <i class="ec ec-user mr-1"></i>Se connecter
+                                    <i class="ec ec-user mr-1"></i>Mon compte
                                 </a>
-                                data-unfold-duration="500">
-                                <i class="ec ec-user mr-1"></i>Mon compte
                             </a>
                                 @else
                                 <a id="sidebarNavToggler" href="{{ route('client.login') }}" role="button" class="u-header-topbar__nav-link"

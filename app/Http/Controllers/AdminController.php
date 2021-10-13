@@ -26,12 +26,12 @@ class AdminController extends Controller
         $allProducts = products::all();
         $commandedProducts = Commanded_products::all();
         $currentMonthIncomingProducts = Commanded_products::where('created_at', '<', date('Y-m-d', strtotime(date('Y') . '-' . (int) date('m') + 1 . '-01')))
-        ->where('created_at', '>', date('Y-m-d', strtotime(date('Y') . '-' . (int) date('m') -1 . '-' . date('t', strtotime(date('Y') . '-' . (int) date('m') -1 . '-01')))))
-        ->get();
+            ->where('created_at', '>', date('Y-m-d', strtotime(date('Y') . '-' . (int) date('m') - 1 . '-' . date('t', strtotime(date('Y') . '-' . (int) date('m') - 1 . '-01')))))
+            ->get();
 
         $lastMonthIncomingProducts = Commanded_products::where('created_at', '>=', date('Y-m-d', strtotime(date('Y') . '-' . (int) date('m') - 1 . '-01')))
-        ->where('created_at', '<=', date('Y-m-d', strtotime(date('Y') . '-' . (int) date('m') -1 . '-' . date('t', strtotime(date('Y') . '-' . (int) date('m') -1 . '-01')))))
-        ->get();
+            ->where('created_at', '<=', date('Y-m-d', strtotime(date('Y') . '-' . (int) date('m') - 1 . '-' . date('t', strtotime(date('Y') . '-' . (int) date('m') - 1 . '-01')))))
+            ->get();
 
         $saledProducts = Commanded_products::orderBy('quantity', 'DESC')->limit(10)->get();
         $orderDescProducts = products::orderBy('stock', 'ASC')->limit(10)->get();
@@ -127,7 +127,8 @@ class AdminController extends Controller
         $this->newCommandsNumber = count($resultedCommands);
     }
 
-    public function setCurrentMonthIncoming(Collection $commandedProducts) {
+    public function setCurrentMonthIncoming(Collection $commandedProducts)
+    {
         $TotalAmount = 0;
         $products = $this->extractArrayFrom($commandedProducts);
         foreach ($products as $commandedProduct) {
@@ -137,14 +138,14 @@ class AdminController extends Controller
         $this->currentMonthIncoming = $TotalAmount;
     }
 
-    public function setLastMonthIncoming(Collection $commandedProducts) {
+    public function setLastMonthIncoming(Collection $commandedProducts)
+    {
         $TotalAmount = 0;
         foreach ($commandedProducts as $commandedProduct) {
             $TotalAmount += $commandedProduct->quantity * $commandedProduct->products->price;
         }
 
         $this->lastMonthIncoming = $TotalAmount;
-
     }
 
 
@@ -170,11 +171,13 @@ class AdminController extends Controller
         return $this->newCommandsNumber;
     }
 
-    public function getCurrentMonthIncoming(): int {
+    public function getCurrentMonthIncoming(): int
+    {
         return $this->currentMonthIncoming;
     }
 
-    public function getLastMonthIncoming(): int {
+    public function getLastMonthIncoming(): int
+    {
         return $this->lastMonthIncoming;
     }
 
@@ -191,9 +194,13 @@ class AdminController extends Controller
         return $array;
     }
 
-    public function adminChangePwIndex() {return view('layout.changePw');}
+    public function adminChangePwIndex()
+    {
+        return view('layout.changePw');
+    }
 
-    public function changePw(Request $request) {
+    public function changePw(Request $request)
+    {
         $request->validate([
             'password' => 'required',
             'confirm_password' => 'required|same:password',
