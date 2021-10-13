@@ -1,60 +1,53 @@
-<!DOCTYPE html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//FR">
 <html lang="fr">
+
 <head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet" />
+    <title></title>
 </head>
-<body>
-    <style type="text/css">
-    .blockquote-custom {
-            position: relative;
-            font-size: 1.1rem;
-        }
 
-        .blockquote-custom-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: absolute;
-            top: -25px;
-            left: 50px;
-        }
-
-        body {
-            background: #eff0eb;
-            background-image: url('https://i.postimg.cc/MTbfnkj6/bg.png');
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
-    </style>
-    <section class="py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 mx-auto">
-                    <header class="text-center pb-5">
-                        <h1 class="h2">Demande de dévis</h1>
-                        <p>Vous avez recu un message de demande de
-                            dévis.<br>Nom:{{$devis['first_name']}}<br>Email:{{$devis['email']}}<br>Number:{{$devis['number']}}<a href="" class="font-italic text-info"></a></p>
-                    </header>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 mx-auto">
-
-                    <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
-                        <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
-                        <p class="mb-0 mt-2 font-italic">Méssage:{{$devis['message']}}<a href="#" class="text-info"></a></p>
-                        <footer class="blockquote-footer pt-4 mt-4 border-top">
-                            <cite title="Source Title">Titre de la source:Repears</cite>
-                        </footer>
-                    </blockquote>
-                </div>
-            </div>
+<body style="background: #eee; font-family: Roboto;">
+    <div style="
+        width: 700px;
+        max-width: 100%;
+        height: fit-content;
+        margin: auto;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+      ">
+        <div style="
+          width: 100%;
+          height: 30%;
+          background: #a6e6ff;
+          padding-top: 20px;
+          padding-bottom: 20px;
+          border-top-left-radius: 2px;
+          border-top-right-radius: 2px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        ">
+            <h1 style="font-size: 40px; margin: auto; color: #3D3D3D;">Reapers</h1>
         </div>
-    </section>
-<body>
+        <div style="width: 100%; height: fit-content; text-align: center">
+            <h1 class="h2">Demande de devis</h1>
+            <div style="font-size: 19px; margin-top: 30px; padding-left: 15px; padding-right: 15px;">
+                <p>Nom:{{ $devis['first_name'] }}</p>
+                <p>{{ $devis['email'] }}</p>
+                <p>{{ $devis['message'] }}</p>
+            </div>
+            <footer class="blockquote-footer pt-4 mt-4 border-top">
+                <cite title="Source Title">Titre de la source:Repears</cite>
+            </footer>
+        </div>
+    </div>
+</body>
+
 </html>

@@ -18,21 +18,21 @@
                 <div class="col-lg-6">
                     <div class="info-box mb-4">
                         <i class="bx bx-map"></i>
-                        <h3>Votre Address</h3>
+                        <h3>Notre Address</h3>
                         <p>A108 Yaya, Ouagadougou Wemtenga, Bp 535022</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="info-box  mb-4">
                         <i class="bx bx-envelope"></i>
-                        <h3>Votre Email</h3>
+                        <h3>Notre Email</h3>
                         <p>contact@repears.com</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="info-box  mb-4">
                         <i class="bx bx-phone-call"></i>
-                        <h3>Votre Numéro</h3>
+                        <h3>Notre Numéro</h3>
                         <p>+226 55-89-55-48</p>
                     </div>
                 </div>
