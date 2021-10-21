@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Redirect;
 
 class AuthController extends Controller
 {
-
     /**
      * Show specified view.
      *
