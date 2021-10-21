@@ -212,9 +212,33 @@
                                 </li>
                             </ul>
                         </li>
-                    </ul>
-                </li>
 
+                        <li>
+                            <a href="#"  class="top-menu @if(stristr(Request::route()->uri, 'staff/settings')) top-menu--active @endif">
+                                <div class="top-menu__icon">
+                                    <i data-feather="settings"></i>
+                                </div>
+                                <div class="top-menu__title">
+                                   Paramètrage
+                                    <i data-feather="chevron-down" class="top-menu__sub-icon"></i>
+                                </div>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="{{ asset('staff/setting_percentage') }}" class="top-menu">
+                                        <div class="top-menu__title">
+                                          Paramètre pourcentage
+                                        </div>
+                                    </a>
+                                    <a href="{{ asset('staff/front_picture') }}" class="top-menu">
+                                        <div class="top-menu__title">
+                                          Paramètre images
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                </li>
 
         @elseif (Auth::guard('admin')->user()->role_id === 3)
         <li>

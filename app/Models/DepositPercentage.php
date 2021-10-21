@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class pdf extends Model
+class DepositPercentage extends Model
 {
     use HasFactory;
+    protected $fillable = ['deposit_percentage'];
 }

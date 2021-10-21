@@ -8,14 +8,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientAuthController;
 use App\Http\Controllers\DelivererController;
-use App\Http\Controllers\FrontController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SettingViewController;
 use App\Http\Controllers\UsersController;
 
 
 //Client
 
-Route::get('/', [HomeController::class, 'index'])->name('client.home');
+Route::resource('/', 'HomeController');
 
 Route::get('single_product/{id}', 'Single_productController@index')->name('single_product');
 Route::get('cat1_product/{id}', 'Single_productController@cat1_product')->name('cat1_product');
@@ -43,7 +42,7 @@ Route::get('/cart', [AccountController::class, 'returnCart'])->name('client.cart
 
 //Admin
 
-Route::prefix('staff')->middleware(['prevent_from_client', 'loggedin'])->group(function () {
+Route::prefix('staff')->middleware('loggedin')->group(function () {
     Route::get('/login', [AuthController::class, 'loginView'])->name('login-view');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
     Route::get('/register', [AuthController::class, 'registerView'])->name('register-view');
@@ -51,9 +50,11 @@ Route::prefix('staff')->middleware(['prevent_from_client', 'loggedin'])->group(f
     Route::post('/register', [AuthController::class, 'register'])->name('register');
 });
 
+Route::prefix('staff')->group(function () {
+    Route::get('/chart_line_data', [AdminController::class, 'lineChartData']);
+});
 
 Route::prefix('staff')->middleware('admin')->group(function () {
-    Route::get('/chart_line_data', [AdminController::class, 'lineChartData']);
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/profile', [AuthController::class, 'profile'])->name('admin.profile');
     Route::get('/change_pw', [AdminController::class, 'adminChangePwIndex'])->name('admin.changePwIndex');
@@ -64,7 +65,6 @@ Route::prefix('staff')->middleware('admin')->group(function () {
         Route::resource('all_products', 'All_productsController');
         Route::resource('add_products', 'Add_productsController');
         Route::resource('add_categories', 'Add_categoriesController');
-        
 
 
         //Users management
@@ -104,11 +104,16 @@ Route::prefix('staff')->middleware('admin')->group(function () {
     Route::get('/showClient/{clientId}', [UsersController::class, 'showClient'])->name('user.showClient');
     Route::get('/showStaff/{staffId}', [UsersController::class, 'showStaff'])->name('user.showStaff');
     //products and categories
-    Route::resource('all_products', 'All_productsController');
+    Route::resource('all_products', 'All_productsController')->except(['create']);;
     Route::resource('add_products', 'Add_productsController');
-    Route::resource('add_categories', 'Add_categoriesController');
-    Route::resource('commands', 'CommandsController');
+    Route::resource('add_categories', 'Add_categoriesController')->except(['create','show']);
+    Route::resource('commands', 'CommandsController')->only(['index','edit','update']);
     Route::get('/delivered_product', [DelivererController::class, 'history']);
+    Route::resource('setting_percentage','PercentageDepotController');
+    Route::resource('retrait_percentage','PercentageRetraitController');
+    Route::resource('transfere_percentage','PercentageTransfereController');
+    Route::resource('front_picture','FrontPictureController');
+    Route::get('setting_percentage',[SettingViewController::class,'index']);
 });
 
 Route::middleware('clientisloggedin')->group(function () {
@@ -133,15 +138,13 @@ Route::resource('faqs', 'AccordionController');
 Route::resource('Faqs', 'FaqsController');
 
 
-
 //Front uniquement
 Route::get('/about', 'FrontController@about')->name('about');
 Route::get('/contacts', 'ContactController@contact')->name('contact');
 Route::get('/confirm', 'FrontController@confirm')->name('confirm');
-Route::get('/shop/{category?}', 'FrontController@shop')->name('shop');
+Route::get('/shop', 'FrontController@shop')->name('shop');
 Route::post('/validation', 'ContactController@store')->name('validation');
 Route::post('/devis', 'ContactController@devis_store')->name('devis_store');
 Route::post('/intervention', 'ContactController@intervention_store')->name('intervention_store');
-
+Route::post('/validation', 'FrontController@store')->name('validation');
 Route::get('/getCategory/{id}', [Add_categoriesController::class, 'getCategory'])->name('getCategory');
-Route::get('/search/{searchValue?}', [FrontController::class, 'search'])->name('client.search');
