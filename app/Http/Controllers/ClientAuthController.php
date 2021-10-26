@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\ConfirmMail;
 use App\Models\City;
+use App\Models\ClientAccount;
 use App\Models\clients;
 use App\Models\Country;
 use App\Models\HashedMails;
@@ -40,7 +41,7 @@ class ClientAuthController extends Controller
         ]);
 
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect()->route('client.home');
+            return redirect()->intended('/');
         } else {
             return redirect()->back()->withErrors(['passwordError' => 'Le mot de passe entré est incorrect!'])->withInput(['email' => $request->email]);
         }
@@ -85,7 +86,10 @@ class ClientAuthController extends Controller
             'sup_code' => $request->sup_code,
             'password' => Hash::make($request->password)
         ]);
-
+        ClientAccount::create([
+            'client_id' => $newClient->id,
+            'amount' => 0
+        ]);
         $hashed_email = implode('_', explode('/', Hash::make($newClient->email)));
         $details = [];
 

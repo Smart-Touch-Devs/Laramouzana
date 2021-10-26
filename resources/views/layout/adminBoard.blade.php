@@ -157,15 +157,19 @@
                     </div>
                     <div class="mt-5">
                             <div class="intro-x">
-                                <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
-                                    <div class="ml-4 mr-auto">
-                                        <div class="font-medium">Aboubakary</div>
-                                        <div class="text-gray-600 text-xs">Cissé</div>
+                                @if (count($transactions) === 0)
+                                    Aucune transaction
+                                @else
+                                    <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
+                                        <div class="ml-4 mr-auto">
+                                            <div class="font-medium">{{ $transaction->Sender->firstname . ' ' . $transaction->Sender->lastname }}</div>
+                                            <p class="ml-2">à</p>
+                                            <div class="text-gray-600 text-xs">{{ $transaction->Receiver->firstname . ' ' . $transaction->Receiver->lastname }}</div>
+                                        </div>
+                                        <div class="#">{{ $transaction->amount }}</div>
                                     </div>
-                                    <div class="#">100.000 FCFA</div>
-                                </div>
+                                @endif
                             </div>
-                        <a href="" class="intro-x w-full block text-center rounded-md py-3 border border-dotted border-theme-15 dark:border-dark-5 text-theme-16 dark:text-gray-600">View More</a>
                     </div>
                 </div>
                 <!-- END: Transactions -->

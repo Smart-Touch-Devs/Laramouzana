@@ -8,6 +8,7 @@ use App\Models\clients;
 use App\Models\Commanded_products;
 use App\Models\products;
 use App\Models\rejectedWithdraws;
+use App\Models\Transaction;
 use App\Models\Withdraw;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -27,6 +28,7 @@ class AdminController extends Controller
         $clients = clients::all();
         $allProducts = products::all();
         $commandedProducts = Commanded_products::all();
+        $transactions = Transaction::limit(15)->get();
         $currentMonthIncomingProducts = Commanded_products::where('created_at', '<', date('Y-m-d', strtotime(date('Y') . '-' . (int) date('m') + 1 . '-01')))
             ->where('created_at', '>', date('Y-m-d', strtotime(date('Y') . '-' . (int) date('m') - 1 . '-' . date('t', strtotime(date('Y') . '-' . (int) date('m') - 1 . '-01')))))
             ->get();
@@ -37,11 +39,7 @@ class AdminController extends Controller
 
         $saledProducts = Commanded_products::orderBy('quantity', 'DESC')->limit(10)->get();
         $orderDescProducts = products::orderBy('stock', 'ASC')->limit(10)->get();
-        //dd($orderDescProducts);
 
-        // $weekIncomingProducts = Commanded_products::where('created_at', 'BETWEEN', date('Y-m-d', strtotime('this week')), 'AND', date('Y-m-d', strtotime(date('Y-m', strtotime('this week')) . '-' . (int) date('d', strtotime('this week')) + 6)));
-
-        //dd($weekIncomingProducts);
         //Calling setters for data assignment
 
         $this->setClientsNumber($clients);
@@ -51,9 +49,6 @@ class AdminController extends Controller
         $this->setCurrentMonthIncoming($currentMonthIncomingProducts);
         $this->setLastMonthIncoming($lastMonthIncomingProducts);
 
-
-        // dd($this->getLastMonthIncoming());
-
         return view('layout.adminBoard', [
             'clientsNumber' => $this->getClientsNumber(),
             'availableProductsNumber' => $this->getAvailableProductsNumber(),
@@ -62,7 +57,8 @@ class AdminController extends Controller
             'currentMonthIncoming' => $this->getCurrentMonthIncoming(),
             'lastMonthIncoming' => $this->getLastMonthIncoming(),
             'mostSaledProducts' => $saledProducts,
-            'orderDescProducts' => $orderDescProducts
+            'orderDescProducts' => $orderDescProducts,
+            'transactions' => $transactions
         ]);
     }
 
@@ -173,11 +169,13 @@ class AdminController extends Controller
         return $this->newCommandsNumber;
     }
 
-    public function getCurrentMonthIncoming(): int|null {
+    public function getCurrentMonthIncoming(): int|null
+    {
         return $this->currentMonthIncoming;
     }
 
-    public function getLastMonthIncoming(): int|null {
+    public function getLastMonthIncoming(): int|null
+    {
         return $this->lastMonthIncoming;
     }
 
@@ -212,19 +210,22 @@ class AdminController extends Controller
         return redirect()->intended('/staff')->with('success', 'Mot de passe changé avec succès!');
     }
 
-    public function withdrawRequests() {
+    public function withdrawRequests()
+    {
         $withdrawRequests = Withdraw::where('done', false)->get();
         return view('layout.withdraw_requests', ['withdrawRequests' => $withdrawRequests]);
     }
 
-    public function validateWithdraw() {
+    public function validateWithdraw()
+    {
         $withdrawal = Withdraw::find(request('id'));
         $withdrawal->update(['done' => true]);
-        
+
         return redirect()->back()->with('success', 'Le rétrait a été validé avec succès!');
     }
 
-    public function rejectWithdraw($id) {
+    public function rejectWithdraw($id)
+    {
         $rejectedWithdrawal = Withdraw::find($id);
         rejectedWithdraws::create([
             'client_id' => $rejectedWithdrawal->client_id,

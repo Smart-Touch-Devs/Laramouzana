@@ -10,7 +10,7 @@
         <div class="intro-y box mt-5">
             <div class="flex sm:flex-row items-center p-5 border-b border-gray-200">
                 <h2 class="font-size-16 font-semibold text-base mr-auto">
-                    Toutes les commandes
+                    Tous les retraits
                 </h2>
             </div>
             <div class="p-5" id="responsive-table">
