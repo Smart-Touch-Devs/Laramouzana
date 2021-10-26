@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFrontPicturesTable extends Migration
+class CreateFrontPicture2sTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateFrontPicturesTable extends Migration
      */
     public function up()
     {
-        Schema::create('front_pictures', function (Blueprint $table) {
+        Schema::create('front_picture2s', function (Blueprint $table) {
             $table->id();
-            $table->string('picture_lat1')->nullable();
-            $table->string('picture_lat2')->nullable();
+            $table->string('picture_lat2');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateFrontPicturesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('front_pictures');
+        Schema::dropIfExists('front_picture2s');
     }
 }
