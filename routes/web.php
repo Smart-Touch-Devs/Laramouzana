@@ -9,6 +9,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientAuthController;
 use App\Http\Controllers\DelivererController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PercentageController;
 use App\Http\Controllers\SettingViewController;
 use App\Http\Controllers\UsersController;
 
@@ -109,14 +110,18 @@ Route::prefix('staff')->middleware('admin')->group(function () {
     //products and categories
     Route::resource('all_products', 'All_productsController')->except(['create']);;
     Route::resource('add_products', 'Add_productsController');
-    Route::resource('add_categories', 'Add_categoriesController')->except(['create','show']);
-    Route::resource('commands', 'CommandsController')->only(['index','edit','update']);
+    Route::resource('add_categories', 'Add_categoriesController')->except(['create', 'show']);
+    Route::resource('commands', 'CommandsController')->only(['index', 'edit', 'update']);
     Route::get('/delivered_product', [DelivererController::class, 'history']);
-    Route::resource('setting_percentage','PercentageDepotController');
-    Route::resource('retrait_percentage','PercentageRetraitController');
-    Route::resource('transfere_percentage','PercentageTransfereController');
-    Route::resource('front_picture','FrontPictureController');
-    Route::get('setting_percentage',[SettingViewController::class,'index']);
+    Route::get('/setting_percentage', [PercentageController::class, 'index'])->name('setting_percentage');
+    Route::get('/depot_percentage/{id}', [PercentageController::class, 'depot'])->name('depot_percentage');
+    Route::post('/updateDepot_percentage/{id}', [PercentageController::class, 'updateDepot'])->name('updateDepot_percentage');
+    Route::get('/retraitpercentage/{id}', [PercentageController::class, 'retrait'])->name('retrait_percentage');
+    Route::post('/updateRetrait_percentage/{id}', [PercentageController::class, 'updateRetrait'])->name('updateRetrait_percentage');
+    Route::get('/transfere_percentage/{id}', [PercentageController::class, 'transfere'])->name('transfere_percentage');
+    Route::post('/updateTransfere_percentage/{id}', [PercentageController::class, 'updateTransfere'])->name('updateTransfere_percentage');
+    Route::resource('front_picture', 'FrontPictureController');
+    // Route::get('setting_percentage', [SettingViewController::class, 'index']);
 });
 
 Route::middleware('clientisloggedin')->group(function () {
