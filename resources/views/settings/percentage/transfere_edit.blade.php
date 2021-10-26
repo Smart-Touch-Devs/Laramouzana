@@ -20,7 +20,7 @@
             @endif
             <div class="intro-y box p-5">
                 <div>
-                    <label>Pourcentage Transfere</label>
+                    <label>Pourcentage Transfert</label>
                     <input type="text" class="input w-full border mt-2" name="transfere_percentage" value="{{ $transfere_percentage->transfere_percentage }}">
                     {!! $errors->first('transfere_percentage', '<small class="text-danger">:message</small>') !!}
                 </div>

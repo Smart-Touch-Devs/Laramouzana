@@ -82,7 +82,7 @@
                 <tbody>
                     @foreach ($transfere_percentages as $transfere_percentage )
                     <tr>
-                        <td class="border-b whitespace-no-wrap"> Transfere</td>
+                        <td class="border-b whitespace-no-wrap"> Transfert</td>
                         <td class="border-b whitespace-no-wrap">{{ $transfere_percentage->transfere_percentage }} %</td>
                         <td class="border-b whitespace-no-wrap">
                             <a href="{{route('transfere_percentage',$transfere_percentage->id)}}" style="width: fit-content; height: fit-content;" class="detailBtn" data-toggle="modal" data-target="#userDetails" data-detail_url="">

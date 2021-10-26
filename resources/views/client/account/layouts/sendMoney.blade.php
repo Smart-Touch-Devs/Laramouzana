@@ -14,7 +14,7 @@
               {{Session::forget('success')}}
             @endif
             <h3 class="font-weight-bolder my-5">Faire un transfert</h3>
-            <p class="text-danger font-weight-bold">Les frais de transfert sont de 1% du montant à transféré</p>
+            <p class="text-danger font-weight-bold">Les frais de transfert sont de {{ $percentage }}% du montant à transféré</p>
             <h4 class="my-3">Solde actuel : {{Auth::user()->account->amount}} FCFA</h4>
             <form class="js-validate" action="{{ route('account.sendMoney') }}" method="post">
                 @csrf

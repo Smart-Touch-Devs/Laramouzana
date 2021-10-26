@@ -37,7 +37,7 @@
                     <strong>Procédé : </strong>
                     <span>Veuillez générer un OTP sur votre appareil avec ce code:</span><br>
                     <strong>*144*4*6*<span id="processAmount">montant</span>#</strong><br>
-                    <span class="text-danger font-weight-bold">Les frais de dépot sont de 9% du montant à déposée!</span>
+                    <span class="text-danger font-weight-bold">Les frais de dépot sont de {{ $percentage }}% du montant à déposée!</span>
                 </div>
                 <div class="js-form-message form-group">
                     <label for="otp_code">Entrer le code OTP <span class="text-danger">*</span></label>

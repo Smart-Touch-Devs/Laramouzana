@@ -10,8 +10,11 @@ use App\Models\clients;
 use App\Models\Command;
 use App\Models\Commanded_products;
 use App\Models\Country;
+use App\Models\DepositPercentage;
 use App\Models\rejectedWithdraws;
+use App\Models\RetraitPercentage;
 use App\Models\Transaction;
+use App\Models\TransferePercentage;
 use App\Models\Withdraw;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -144,7 +147,8 @@ class AccountController extends Controller
     public function depositIndex()
     {
         $categories = categories::all();
-        return view('client.account.layouts.deposit', ['categories' => $categories]);
+        $percentage = ((float) DepositPercentage::first()->deposit_percentage) + 4;
+        return view('client.account.layouts.deposit', ['categories' => $categories, 'percentage' => $percentage]);
     }
 
     public function deposit(Request $request)
@@ -163,8 +167,9 @@ class AccountController extends Controller
             'amount' => $request->amount,
             'otp' => $request->otp_code
         ]);
+        $percentage = ((float) DepositPercentage::first()->deposit_percentage) + 4;
 
-        $credit = ((int) $request->amount) - ((((int) $request->amount) * 9) / 100);
+        $credit = ((int) $request->amount) - ((((int) $request->amount) * $percentage) / 100);
 
         $result = json_decode((string) $response->getBody(), true);
         if(((int) $result['status']) === 200) {
@@ -181,8 +186,10 @@ class AccountController extends Controller
     public function sendMoneyIndex()
     {
         $categories = categories::all();
+        $percentage = TransferePercentage::first()->transfere_percentage;
+
         $clients = clients::where('id', '!=', auth()->user()->id)->get(['email', 'firstname', 'lastname']);
-        return view('client.account.layouts.sendMoney', ['categories' => $categories, 'clients' => $clients]);
+        return view('client.account.layouts.sendMoney', ['categories' => $categories, 'clients' => $clients, 'percentage' => $percentage]);
     }
 
     public function sendMoney(Request $request)
@@ -195,12 +202,13 @@ class AccountController extends Controller
         Auth::user()->account->update([
             'amount' => (int) auth()->user()->account->amount - (int) $request->amount
         ]);
+        $percentage = TransferePercentage::first()->transfere_percentage;
 
         $receiverId = clients::where('email', $request->receiver)->first()->id;
 
         $amount = ((int) ClientAccount::where('client_id', $receiverId)
         ->first()
-        ->amount) + (((int) $request->amount) - ((((int) $request->amount) * 1) / 100));
+        ->amount) + (((int) $request->amount) - ((((int) $request->amount) * $percentage) / 100));
 
         ClientAccount::where('client_id', $receiverId)
         ->first()
@@ -218,12 +226,14 @@ class AccountController extends Controller
     public function withdrawIndex()
     {
         $categories = categories::all();
+        $percentage = RetraitPercentage::first()->retrait_percentage;
         $validated_withdrawals = Withdraw::where(['client_id' => auth()->user()->id, 'done'=> true])->get();
         $rejected_withdrawals = rejectedWithdraws::where('client_id', auth()->user()->id)->get();
         return view('client.account.layouts.withdraw', [
             'categories' => $categories,
             'validated_withdrawals' => $validated_withdrawals,
-            'rejected_withdrawals' => $rejected_withdrawals
+            'rejected_withdrawals' => $rejected_withdrawals,
+            'percentage' => $percentage
         ]);
     }
 
@@ -234,7 +244,9 @@ class AccountController extends Controller
         ]);
 
         $client = clients::where('email', $request->client)->first();
-        $withdrawAmount = ((int) $request->withdrawAmount) - ((((int) $request->withdrawAmount) * 5) / 100);
+        $percentage = (float) RetraitPercentage::first()->retrait_percentage;
+
+        $withdrawAmount = ((int) $request->withdrawAmount) - ((((int) $request->withdrawAmount) * $percentage) / 100);
         Withdraw::create([
             'client_id' => $client->id,
             'amount' => $withdrawAmount,
