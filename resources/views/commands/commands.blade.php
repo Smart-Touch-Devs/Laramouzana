@@ -1,7 +1,7 @@
 @extends('layout/top-menu')
 
 @section('subhead')
-<title>CRUD Form - Midone - Tailwind HTML Admin Template</title>
+<title>Gestion des commandes</title>
 @endsection
 
 @section('subcontent')
@@ -22,10 +22,10 @@
         <tbody>
             @foreach ($toReturnCommands as $command)
             <tr class="hover:bg-gray-200">
-                <td class="border text-center ">{{ $command[3]}}</td>
-                <td class="border text-center ">{{ $command[1]}}</td>
-                <td class="border text-center ">{{ $command[2]}} FCFA</td>
-                <td class="border text-center ">{{ $command[4]}}</td>
+                <td class="border text-center ">{{ $command[3] }}</td>
+                <td class="border text-center ">{{ $command[1] }}</td>
+                <td class="border text-center ">{{ $command[2] }} FCFA</td>
+                <td class="border text-center ">{{ $command[4] }}</td>
                 <td class="border text-center ">
                    @if ( $command[5] === null )
                         <h3>Aucun livreur assigné</h3>

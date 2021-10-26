@@ -63,15 +63,13 @@
                         <th class="border-b-2 whitespace">N°</th>
                         <th class="border-b-2 text-center whitespace-no-wrap">Titre</th>
                         <th class="border-b-2 text-center whitespace-no-wrap">Contenu</th>
-                       
+
                         <th class="border-b-2 text-center whitespace-no-wrap">ACTIONS</th>
                     </tr>
                 </thead>
                 @forelse($faqs as $faq)
                 <tbody>
                     <tr>
-                       
-
                         <td class="border-b">
                             <div class="font-medium whitespace-no-wrap">{{ $faq->id }}</div>
                         </td>
@@ -80,7 +78,7 @@
                         </td>
                         <td class="text-center border-b">
                             <div class="font-medium ">{{ $faq->contenu }}</div>
-                        </td> 
+                        </td>
                         <td class="border-b w-5">
                             <div class="flex sm:justify-center items-center">
                                 <a class="flex items-center mr-3" href=" {{ route('Faqs.edit',$faq->id) }}">
@@ -89,7 +87,7 @@
                                     <i data-feather="check-square" class="w-4 h-4 mr-1"></i>
                                 </button>
                                 </a>
-                                
+
                                 <form action="{{ route('Faqs.destroy',$faq->id) }}" method="post">
                                     @csrf
                                     @method('DELETE')
@@ -108,8 +106,6 @@
                             <div class="m-auto">
                                 <p> Aucune réponse disponible pour le moment</p>
                             </div>
-
-                        
                         </div>
                     </tr>
                 </tbody>

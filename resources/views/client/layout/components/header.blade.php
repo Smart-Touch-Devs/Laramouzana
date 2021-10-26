@@ -75,11 +75,9 @@
                                                                     <p>{{ $errors->first('message') }}</p>
                                                                 @endif
                                                         </div>
-
                                                         <div class="field button">
                                                             <input type="submit" value="Soumettre votre demande">
                                                         </div>
-
                                                     </form>
                                                 </section>
                                             </div>
@@ -191,7 +189,6 @@
                                     data-unfold-animation-out="fadeOutRight" data-unfold-duration="500">
                                     <i class="ec ec-user mr-1"></i>Mon compte
                                 </a>
-
                             </a>
                                 @else
                                 <a id="sidebarNavToggler" href="{{ route('client.login') }}" role="button" class="u-header-topbar__nav-link"
@@ -222,7 +219,7 @@
         <!-- Logo and Menu -->
         <div class="py-2 py-xl-4 bg-primary-down-lg">
             <div class="container my-0dot5 my-xl-0">
-                <div class="row align-items-center d-flex justify-content-between">
+                <div class="row align-items-center">
                     <!-- Logo-offcanvas-menu -->
                     <div class="col-auto">
                         <!-- Nav -->
@@ -230,7 +227,7 @@
                             class="navbar navbar-expand u-header__navbar py-0 justify-content-xl-between max-width-270 min-width-270">
                             <!-- Logo -->
                             <a class="order-1 order-xl-0 navbar-brand u-header__navbar-brand u-header__navbar-brand-center"
-                                href="{{ route('client.home') }}" aria-label="Electro">
+                                href="../home/index.html" aria-label="Electro">
                                 <svg version="1.1" x="0px" y="0px" width="175.748px" height="42.52px"
                                     viewBox="0 0 175.748 42.52" enable-background="new 0 0 175.748 42.52"
                                     style="margin-bottom: 0;">
@@ -319,7 +316,7 @@
                                                 <!-- Home -->
                                                 <li class="nav-item hs-has-sub-menu u-header__nav-item">
                                                     <a id="HomeMegaMenu" class="nav-link u-header__nav-link @if(Request::route()->uri === '/') activeNav @endif"
-                                                        href="{{ route('client.home') }}">Accueil</a>
+                                                        href="/">Accueil</a>
                                                 </li>
                                                 <li class="nav-item hs-has-mega-menu u-header__nav-item">
                                                     <a id="pagesMegaMenu" class="nav-link u-header__nav-link @if(Request::route()->uri === 'shop') activeNav @endif"
@@ -365,7 +362,6 @@
                                                 @endauth
                                             </ul>
                                         </div>
-
                                         <!-- End Navigation -->
                                     </nav>
 
@@ -374,7 +370,6 @@
                                 </div>
                             </div>
                         </aside>
-
                         <!-- ========== END HEADER SIDEBAR ========== -->
                     </div>
                     <div class="col-md-auto align-self-center d-block d-lg-none fit-content">
@@ -446,11 +441,11 @@
                                         <!-- Home -->
                                         <li class="nav-item hs-has-sub-menu u-header__nav-item">
                                             <a id="HomeMegaMenu" class="nav-link u-header__nav-link @if(Request::route()->uri === '/') activeNav @endif"
-                                                href="{{ route('client.home') }}">Accueil</a>
+                                                href="/">Accueil</a>
                                         </li>
                                         <li class="nav-item hs-has-mega-menu u-header__nav-item">
                                             <a id="pagesMegaMenu" class="nav-link u-header__nav-link @if(Request::route()->uri === 'shop') activeNav @endif"
-                                                href="{{ route('shop') }}">Boutique</a>
+                                                href="{{ asset('shop') }}">Boutique</a>
                                         </li>
                                         <li class="nav-item u-header__nav-item">
                                             <a class="nav-link u-header__nav-link @if(Request::route()->uri === 'about') activeNav @endif" href="{{asset('about')}}">À propos</a>
@@ -461,10 +456,8 @@
                                         <li class="nav-item u-header__nav-item">
                                             <a class="nav-link u-header__nav-link @if(Request::route()->uri === 'faqs') activeNav @endif" href="{{asset('faqs')}}">FAQs</a>
                                         </li>
-
                                     </ul>
                                 </div>
-
                                 <!-- End Navigation -->
                             </nav>
                         </div>
@@ -493,7 +486,7 @@
         <!-- End Logo and Menu -->
 
         <!-- Vertical-and-Search-Bar -->
-        <div class="d-none d-lg-block bg-primary">
+        <div class="d-none d-md-block bg-primary">
             <div class="container">
                 <div class="row align-items-stretch min-height-50">
                     <!-- Vertical Menu -->
@@ -509,7 +502,7 @@
                                         <button type="button"
                                             class="btn-link btn-remove-focus btn-block d-flex card-btn py-3 text-lh-1 px-4 shadow-none btn-primary rounded-top-lg border-0 font-weight-bold text-gray-90"
                                             data-toggle="collapse" data-target="#basicsCollapseOne"
-                                            aria-expanded="true"
+                                            aria-expanded="{{ Request::route()->uri === 'shop' ? 'false' : 'true' }}"
                                             aria-controls="basicsCollapseOne">
                                             <span class="pl-1 text-gray-90">Catégories</span>
                                             <span class="text-gray-90 ml-3">
@@ -537,7 +530,7 @@
                                                             @foreach ($categories as $categorie)
                                                                 <li class="nav-item u-header__nav-item" data-event="hover"
                                                                     data-position="left">
-                                                                    <a href="{{ route('shop', $categorie->category_name) }}"
+                                                                    <a href="#"
                                                                         class="nav-link u-header__nav-link font-weight-bold text-capitalize">{{ $categorie->category_name }}</a>
                                                                 </li>
                                                             @endforeach
@@ -559,14 +552,27 @@
                     <!-- Search bar -->
                     <div class="col align-self-center">
                         <!-- Search-Form -->
-                        <form class="js-focus-state" id="clientSearchForm" action="{{ route('client.search') }}">
+                        <form class="js-focus-state">
                             <label class="sr-only" for="searchProduct">Rechercher</label>
                             <div class="input-group">
-                                <input type="search" id="searched"
+                                <input type="email"
                                     class="form-control py-2 pl-5 font-size-15 border-0 height-40 rounded-left-pill"
-                                    name="search" id="searchProduct" placeholder="Rechercher un produit"
+                                    name="email" id="searchProduct" placeholder="Rechercher un produit"
                                     aria-label="Rechercher un produit" aria-describedby="searchProduct1" required>
                                 <div class="input-group-append">
+                                    <!-- Select -->
+                                    <select
+                                        class="js-select selectpicker dropdown-select custom-search-categories-select"
+                                        data-style="btn height-40 text-gray-60 font-weight-normal border-0 rounded-0 bg-white px-5 py-2">
+                                            <option selected>Toutes les catégories</option>
+                                        @if (isset($empty))
+                                            <option selected>Toutes les catégories</option>
+                                        @else
+                                            @foreach ($categories as $categorie )
+                                            <option class="text-capitalize">{{ $categorie->category_name }}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
                                     <!-- End Select -->
                                     <button class="btn btn-dark height-40 py-2 px-3 rounded-right-pill" type="button"
                                         id="searchProduct1">
@@ -575,11 +581,6 @@
                                 </div>
                             </div>
                         </form>
-                        <div class="searchResult pt-1 d-none">
-                            <ul>
-
-                            </ul>
-                        </div>
                         <!-- End Search-Form -->
                     </div>
                     <!-- End Search bar -->

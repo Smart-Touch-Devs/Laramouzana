@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Faqs;
+use App\Models\DepositPercentage;
+use App\Models\RetraitPercentage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use PhpParser\Node\Stmt\Return_;
 
-class FaqsController extends Controller
+class PercentageDepotController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +17,6 @@ class FaqsController extends Controller
      */
     public function index()
     {
-        $faqs = Faqs::all();
-        return view('faqs.faqs',compact('faqs'));
     }
 
     /**
@@ -36,27 +37,21 @@ class FaqsController extends Controller
      */
     public function store(Request $request)
     {
-        $data=$request->validate([
-            'titre' => 'required|string|',
-            'contenu' => 'required|string|',
-
+        $request->validate([
+            'deposit_percentage' => 'numeric'
         ]);
-        Faqs::create([
-            'titre' =>$data['titre'],
-            'contenu'=>$data['contenu'],
-
-        ]);
-        
-        return redirect()->intended('Faqs')->with('success', "faq a été ajouté avec succes");
+        $input = $request->all();
+        DepositPercentage::create($input);
+        return back()->with('success', 'la valeur du pourcentage a été validé ave succès');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Faqs  $faqs
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Faqs $faqs)
+    public function show($id)
     {
         //
     }
@@ -64,45 +59,44 @@ class FaqsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Faqs  $faqs
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $faqs = Faqs::find($id);
-        return view('faqs.edit',compact('faqs'))->with('success', "faq a été modifier avec succes");
+        $retrait_percentage = RetraitPercentage::find($id);
+        $deposit_percentage = DepositPercentage::find($id);
+        return view('settings.percentage.edit', compact('deposit_percentage','retrait_percentage'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Faqs  $faqs
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Faqs $faqs)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'titre' => 'required|string|',
-            'contenu' => 'required|string|',
+            'deposit_percentage' => 'numeric'
         ]);
-        $input = [];
-        $input['titre'] = $request->input('titre');
-        $input['contenu'] = $request->input('contenu');
-        $faqs->where('id', $request->input('faqsId'))->update($input);
-        return redirect()->intended('Faqs' )->with('success', 'La modification a été effectué avec succes');
+        $input = $request->all();
+        DepositPercentage::find($id)->update($input);
+
+        return redirect('staff/setting_percentage')->with('success', 'la modification de la valeur de pourcentage de depot a été effectué avec succée');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Faqs  $faqs
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $faqs = Faqs::find($id);
-        $faqs->delete();
+        $deposit_percentage = DepositPercentage::find($id);
+        $deposit_percentage->delete();
         return back()->with('success', 'Suppression reussi!');
     }
 }

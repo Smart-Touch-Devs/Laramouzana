@@ -129,6 +129,31 @@
 
         @if (Auth::guard('admin')->user()->role_id === 5)
         <li>
+            <a href="#"  class="top-menu @if(stristr(Request::route()->uri, 'staff/settings')) top-menu--active @endif">
+                <div class="top-menu__icon">
+                    <i data-feather="settings"></i>
+                </div>
+                <div class="top-menu__title">
+                    Paramètrage
+                    <i data-feather="chevron-down" class="top-menu__sub-icon"></i>
+                </div>
+            </a>
+            <ul>
+                <li>
+                    <a href="{{ asset('staff/setting_percentage') }}" class="top-menu">
+                        <div class="top-menu__title">
+                            Paramètre pourcentage
+                        </div>
+                    </a>
+                    <a href="{{ asset('staff/front_picture') }}" class="top-menu">
+                        <div class="top-menu__title">
+                            Paramètre images
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
             <a href="#" class="top-menu @if(stristr(Request::route()->uri,'staff/users/')) top-menu--active @endif">
                 <div class="top-menu__icon">
                     <i data-feather="user"></i>
@@ -212,6 +237,7 @@
                                 </li>
                             </ul>
                         </li>
+
                         <li>
                             <a href="{{ route('admin.withdrawRequest') }}" class="top-menu @if(Request::route()->uri === 'staff/withdraw_requests') top-menu--active @endif">
                                 <div class="top-menu__icon">
@@ -223,6 +249,8 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+
                 </li>
 
         @elseif (Auth::guard('admin')->user()->role_id === 3)

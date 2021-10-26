@@ -23,7 +23,6 @@ class ShowDeliveredProductController extends Controller
             }
             array_push($toReturnCommands[$key], $command->id, implode(',', $commandedProducts), $prix, $command->clients->firstname . ' ' . $command->clients->lastname, $command->clients->phone, $command->admins);
         }
-        // dd($toReturnCommands[0]);
 
         return view('commands.delivered_product', compact('toReturnCommands','commands'));
 
