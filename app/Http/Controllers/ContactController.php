@@ -22,14 +22,14 @@ class ContactController extends Controller
     {
 
 
-        $data = request()->validate([
+        request()->validate([
 
             'name' => ['required', 'string', 'max:50'],
             'email' => ['required', 'string', 'email'],
             'subject' => ['required', 'string'],
             'message' => ['required', 'string'],
-           
-        ]); 
+
+        ]);
 
 
         Mail::to('dev.smtgroup@gmail.com')->send(new contactMail($request->except('_token')));
@@ -48,8 +48,7 @@ class ContactController extends Controller
         Mail::to('dev.smtgroup@gmail.com')->send(new DevisMail($request->except('_token')));
         return redirect()->back()->with('Dévis', 'Votre message de demande de dévis a éte envoyer!');
 
-        return view('client.layout.contact',compact('categories'));
-
+        return view('client.layout.contact', compact('categories'));
     }
     public function intervention_store(Request $request)
     {
