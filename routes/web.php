@@ -70,7 +70,6 @@ Route::prefix('staff')->middleware('admin')->group(function () {
         Route::post('/validate_witdrawal', [AdminController::class, 'validateWithdraw'])->name('admin.validateWithdrawal');
         Route::get('/reject_withdrawal/{id}', [AdminController::class, 'rejectWithdraw'])->name('admin.rejectWithdrawal');
 
-
         //Users management
 
         Route::get('/users/{users?}', [UsersController::class, 'index']);
@@ -134,13 +133,9 @@ Route::middleware('clientisloggedin')->group(function () {
 
 Route::get('/logout', [ClientAuthController::class, 'logout'])->name('client.logout');
 
-
-
-
 //Accordion
 Route::resource('faqs', 'AccordionController');
 Route::resource('Faqs', 'FaqsController');
-
 
 //Front uniquement
 Route::get('/about', 'FrontController@about')->name('about');

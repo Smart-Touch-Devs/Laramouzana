@@ -1,7 +1,7 @@
 @extends('../layout/' . $layout)
 
 @section('head')
-    <title>Login - Midone - Laravel Admin Dashboard Starter Kit</title>
+    <title>Login | LARAMOUZANA </title>
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@
                 <a href="" class="-intro-x flex items-center pt-5">
                     <img alt="Midone Tailwind HTML Admin Template" class="w-6" src="{{ asset('dist/images/logo.svg') }}">
                     <span class="text-white text-lg ml-3">
-                        Mid<span class="font-medium">One</span>
+                        LARAMOUZANA
                     </span>
                 </a>
                 <div class="my-auto">

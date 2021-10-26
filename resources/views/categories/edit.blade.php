@@ -1,7 +1,7 @@
 @extends('layout/top-menu')
 
 @section('subhead')
-<title>CRUD Form - Midone - Tailwind HTML Admin Template</title>
+<title>Categorie</title>
 @endsection
 
 @section('subcontent')
