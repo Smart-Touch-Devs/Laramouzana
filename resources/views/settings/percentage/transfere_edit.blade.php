@@ -1,7 +1,7 @@
 @extends('layout/top-menu')
 
 @section('subhead')
-<title>Paramètrage</title>
+<title>Paramètrage | Transfere</title>
 @endsection
 @section('subcontent')
 <div class="intro-y flex items-center mt-8">
@@ -10,9 +10,9 @@
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 lg:col-span-4"></div>
     <div class="intro-y col-span-12 lg:col-span-4">
-        <form action="{{ route('setting_percentage.update',$deposit_percentage->id) }}" method="post" >
+        <form action="{{route('updateTransfere_percentage',$transfere_percentage->id)}}" method="post" >
             @csrf
-            @method('PATCH')
+
             @if ($message = Session::get('success'))
                 <div class="">
                     <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-18 text-theme-9"> <i data-feather="alert-triangle" class="w-6 h-6 mr-2 text-theme-9"></i> <strong>{{ $message }}</strong><i data-feather="x" class="w-4 h-4 ml-auto" onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;' id="close"></i> </div>
@@ -20,12 +20,14 @@
             @endif
             <div class="intro-y box p-5">
                 <div>
-                    <label>Pourcentage dépot</label>
-                    <input type="text" class="input w-full border mt-2" name="deposit_percentage" value="{{ $deposit_percentage->deposit_percentage }}">
-                    {!! $errors->first('deposit_percentage', '<small class="text-danger">:message</small>') !!}
+                    <label>Pourcentage Transfere</label>
+                    <input type="text" class="input w-full border mt-2" name="transfere_percentage" value="{{ $transfere_percentage->transfere_percentage }}">
+                    {!! $errors->first('transfere_percentage', '<small class="text-danger">:message</small>') !!}
                 </div>
                 <div class="text-right mt-5">
-                    <button type="button" class="button w-24 border dark:border-dark-5 text-gray-700 dark:text-gray-300 mr-1">Retour</button>
+                    <a href="{{ asset('staff/setting_percentage') }}">
+                        <button type="submit" class="button w-24 border dark:border-dark-5 text-gray-700 dark:text-gray-300 mr-1">Retour</button>
+                       </a>
                     <button type="submit" class="button w-24 bg-theme-1 text-white">Modifier</button>
                 </div>
             </div>
