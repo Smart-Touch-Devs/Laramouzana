@@ -212,9 +212,18 @@
                                 </li>
                             </ul>
                         </li>
+                        <li>
+                            <a href="{{ route('admin.withdrawRequest') }}" class="top-menu @if(Request::route()->uri === 'staff/withdraw_requests') top-menu--active @endif">
+                                <div class="top-menu__icon">
+                                    <i data-feather="corner-up-right"></i>
+                                </div>
+                                <div class="top-menu__title">
+                                    Demandes de rétrait
+                                </div>
+                            </a>
+                        </li>
                     </ul>
                 </li>
-
 
         @elseif (Auth::guard('admin')->user()->role_id === 3)
         <li>

@@ -14,15 +14,25 @@ class ClientAccountSeeder extends Seeder
      */
     public function run()
     {
-       DB::table('clients_accounts')
+       DB::table('client_accounts')
        ->insert([
            "client_id" => 1,
            "amount" => 17500
        ]);
-       DB::table('clients_accounts')
+       DB::table('client_accounts')
        ->insert([
            "client_id" => 2,
-           "amount" => 0
+           "amount" => 10000
+       ]);
+       DB::table('client_accounts')
+       ->insert([
+           "client_id" => 3,
+           "amount" => 5500
+       ]);
+       DB::table('client_accounts')
+       ->insert([
+           "client_id" => 4,
+           "amount" => 28000
        ]);
     }
 }

@@ -9,7 +9,7 @@ class ClientAccount extends Model
 {
     use HasFactory;
     protected $fillable = ['client_id', 'amount'];
-    public function client() {
-        return $this->hasOne(clients::class);
+    public function clients() {
+        return $this->belongsTo(clients::class, 'client_id');
     }
 }

@@ -42,11 +42,23 @@ class clients extends Authenticatable
     }
 
     public function account() {
-        return $this->hasOne(ClientAccount::class);
+        return $this->hasOne(ClientAccount::class, 'client_id');
     }
 
     public function commands() {
         return $this->hasMany(Command::class);
+    }
+
+    public function deposits() {
+        $this->hasMany(Deposit::class, 'client_id');
+    }
+
+    public function withdraws() {
+        $this->hasMany(Withdraw::class, 'client_id');
+    }
+
+    public function transaction() {
+        return $this->hasMany(Transaction::class);
     }
 
     public function parrain() {

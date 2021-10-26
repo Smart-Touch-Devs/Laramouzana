@@ -1,74 +1,68 @@
 import helper from './helper'
 import chart, { helpers } from 'chart.js'
-import axios from 'axios';
 
-(function (cash) {
+(function(cash) { 
     "use strict";
-
-    //Get data from the backend
-    axios.get(window.location.origin + '/staff/chart_line_data')
-    .then(res => {
-
-        if (cash('#report-line-chart').length) {
-            let ctx = cash('#report-line-chart')[0].getContext('2d')
-            let myChart = new chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Dec'],
-                    datasets: [{
-                        label: 'total des ventes ',
-                        data: [0, 50000, 100000, 150000, 200000, 250000, 300000, 350000, 400000, 450000, 500000, 600000, 700000],
-                        borderWidth: 2,
-                        borderColor: '#3160D8',
-                        backgroundColor: 'transparent',
-                        pointBorderColor: 'transparent'
-                    },
-                    {
-                        label: 'total des ventes ',
-                        data: res.data,
-                        borderWidth: 2,
-                        borderDash: [2, 2],
-                        borderColor: '#BCBABA',
-                        backgroundColor: 'transparent',
-                        pointBorderColor: 'transparent'
-                    }]
+        
+    // Chart
+    if (cash('#report-line-chart').length) {
+        let ctx = cash('#report-line-chart')[0].getContext('2d')
+        let myChart = new chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [0, 200, 250, 200, 500, 450, 850, 1050, 950, 1100, 900, 1200],
+                    borderWidth: 2,
+                    borderColor: '#3160D8',
+                    backgroundColor: 'transparent',
+                    pointBorderColor: 'transparent'
                 },
-                options: {
-                    legend: {
-                        display: false
-                    },
-                    scales: {
-                        xAxes: [{
-                            ticks: {
-                                fontSize: '12',
-                                fontColor: cash('html').hasClass('dark') ? '#718096' : '#777777'
-                            },
-                            gridLines: {
-                                display: false
+                {
+                    label: '# of Votes',
+                    data: [0, 300, 400, 560, 320, 600, 720, 850, 690, 805, 1200, 1010],
+                    borderWidth: 2,
+                    borderDash: [2, 2],
+                    borderColor: '#BCBABA',
+                    backgroundColor: 'transparent',
+                    pointBorderColor: 'transparent'
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            fontSize: '12',
+                            fontColor: cash('html').hasClass('dark') ? '#718096' : '#777777'
+                        },
+                        gridLines: {
+                            display: false
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            fontSize: '12',
+                            fontColor: cash('html').hasClass('dark') ? '#718096' : '#777777',
+                            callback: function(value, index, values) {
+                                return '$' + value
                             }
-                        }],
-                        yAxes: [{
-                            ticks: {
-                                fontSize: '12',
-                                fontColor: cash('html').hasClass('dark') ? '#718096' : '#777777',
-                                callback: function (value, index, values) {
-                                    return value + ' F'
-                                }
-                            },
-                            gridLines: {
-                                color: cash('html').hasClass('dark') ? '#718096' : '#D8D8D8',
-                                zeroLineColor: cash('html').hasClass('dark') ? '#718096' : '#D8D8D8',
-                                borderDash: [2, 2],
-                                zeroLineBorderDash: [2, 2],
-                                drawBorder: false
-                            }
-                        }]
-                    }
+                        },
+                        gridLines: {
+                            color: cash('html').hasClass('dark') ? '#718096' : '#D8D8D8',
+                            zeroLineColor: cash('html').hasClass('dark') ? '#718096' : '#D8D8D8',
+                            borderDash: [2, 2],
+                            zeroLineBorderDash:  [2, 2],
+                            drawBorder: false
+                        }
+                    }]
                 }
-            })
-        }
-    })
-
+            }
+        })
+    }
 
     if (cash('#report-pie-chart').length) {
         let ctx = cash('#report-pie-chart')[0].getContext('2d')
@@ -162,14 +156,14 @@ import axios from 'axios';
     }
 
     if (cash('.simple-line-chart-1').length) {
-        cash('.simple-line-chart-1').each(function () {
+        cash('.simple-line-chart-1').each(function() {
             let ctx = cash(this)[0].getContext('2d')
             let myChart = new chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Dec'],
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                     datasets: [{
-                        label: 'total des ventes : ',
+                        label: '# of Votes',
                         data: cash(this).data('random') !== undefined ? helper.randomNumbers(0, 5, 12) : [0, 200, 250, 200, 500, 450, 850, 1050, 950, 1100, 900, 1200],
                         borderWidth: 2,
                         borderColor: cash(this).data('line-color') !== undefined ? cash(this).data('line-color') : '#3160D8',
@@ -206,14 +200,14 @@ import axios from 'axios';
     }
 
     if (cash('.simple-line-chart-2').length) {
-        cash('.simple-line-chart-2').each(function () {
+        cash('.simple-line-chart-2').each(function() {
             let ctx = cash(this)[0].getContext('2d')
             let myChart = new chart(ctx, {
                 type: 'line',
                 data: {
                     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                     datasets: [{
-                        label: 'total des ventes : ',
+                        label: '# of Votes',
                         data: cash(this).data('random') !== undefined ? helper.randomNumbers(0, 5, 12) : [0, 300, 400, 560, 320, 600, 720, 850, 690, 805, 1200, 1010],
                         borderWidth: 2,
                         borderDash: [2, 2],
@@ -291,15 +285,15 @@ import axios from 'axios';
                         ticks: {
                             fontSize: '12',
                             fontColor: '#777777',
-                            callback: function (value, index, values) {
-                                return value + ' F'
+                            callback: function(value, index, values) {
+                                return '$' + value
                             }
                         },
                         gridLines: {
                             color: '#D8D8D8',
                             zeroLineColor: '#D8D8D8',
                             borderDash: [2, 2],
-                            zeroLineBorderDash: [2, 2],
+                            zeroLineBorderDash:  [2, 2],
                             drawBorder: false
                         }
                     }]
@@ -313,7 +307,7 @@ import axios from 'axios';
         let myChart = new chart(ctx, {
             type: 'horizontalBar',
             data: {
-                labels: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Dec'],
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
                 datasets: [{
                     label: 'Html Template',
                     barPercentage: 0.5,
@@ -339,8 +333,8 @@ import axios from 'axios';
                         ticks: {
                             fontSize: '12',
                             fontColor: '#777777',
-                            callback: function (value, index, values) {
-                                return value + ' F'
+                            callback: function(value, index, values) {
+                                return '$' + value
                             }
                         },
                         gridLines: {
@@ -356,7 +350,7 @@ import axios from 'axios';
                             color: '#D8D8D8',
                             zeroLineColor: '#D8D8D8',
                             borderDash: [2, 2],
-                            zeroLineBorderDash: [2, 2],
+                            zeroLineBorderDash:  [2, 2],
                             drawBorder: false
                         }
                     }]
@@ -370,7 +364,7 @@ import axios from 'axios';
         let myChart = new chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Dec'],
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                 datasets: [{
                     label: 'Html Template',
                     barPercentage: 0.5,
@@ -406,15 +400,15 @@ import axios from 'axios';
                         ticks: {
                             fontSize: '12',
                             fontColor: '#777777',
-                            callback: function (value, index, values) {
-                                return value + ' frs'
+                            callback: function(value, index, values) {
+                                return '$' + value
                             }
                         },
                         gridLines: {
                             color: '#D8D8D8',
                             zeroLineColor: '#D8D8D8',
                             borderDash: [2, 2],
-                            zeroLineBorderDash: [2, 2],
+                            zeroLineBorderDash:  [2, 2],
                             drawBorder: false
                         }
                     }]
@@ -428,7 +422,7 @@ import axios from 'axios';
         let myChart = new chart(ctx, {
             type: 'line',
             data: {
-                labels: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Dec'],
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                 datasets: [{
                     label: 'Html Template',
                     data: [0, 200, 250, 200, 500, 450, 850, 1050, 950, 1100, 900, 1200],
@@ -462,15 +456,15 @@ import axios from 'axios';
                         ticks: {
                             fontSize: '12',
                             fontColor: '#777777',
-                            callback: function (value, index, values) {
-                                return value + ' F'
+                            callback: function(value, index, values) {
+                                return '$' + value
                             }
                         },
                         gridLines: {
                             color: '#D8D8D8',
                             zeroLineColor: '#D8D8D8',
                             borderDash: [2, 2],
-                            zeroLineBorderDash: [2, 2],
+                            zeroLineBorderDash:  [2, 2],
                             drawBorder: false
                         }
                     }]

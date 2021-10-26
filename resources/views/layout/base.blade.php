@@ -25,15 +25,6 @@
 <script src="{{asset('assets/jquery/jquery.min.js')}}"></script>
 <script src="{{asset('assets/jquery-ui/jquery-ui.min.js')}}"></script>
 <script>
-    let dpdw = document.querySelector('#_qpwzbdttb')
-    document.querySelector('.dropdown-toggle').addEventListener('click', function() {
-        if(Array.from(dpdw.classList).includes('dropdown-box')) {
-            dpdw.classList.remove('dropdown-box')
-        } else {
-            dpdw.classList.add('dropdown-box')
-        }
-
-    })
     $.widget.bridge('uibutton', $.ui.button)
 </script>
 

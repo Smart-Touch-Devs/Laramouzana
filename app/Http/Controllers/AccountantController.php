@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Command;
 use App\Models\Commanded_products;
+use Illuminate\Support\Facades\Request;
 
 class AccountantController extends Controller
 {

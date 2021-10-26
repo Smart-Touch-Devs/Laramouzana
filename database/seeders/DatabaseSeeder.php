@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
             AdminAccountSeeder::class,
             ClientAccountSeeder::class,
             CommandSeeder::class,
+            DepositSeeder::class,
+            WithdrawSeeder::class
            // CommandedProductSeeder::class
         ]);
     }

@@ -5,16 +5,19 @@ namespace App\Http\Controllers;
 use App\Mail\ConfirmMail;
 use App\Models\categories;
 use App\Models\City;
+use App\Models\ClientAccount;
 use App\Models\clients;
 use App\Models\Command;
 use App\Models\Commanded_products;
 use App\Models\Country;
-use App\Models\products;
+use App\Models\rejectedWithdraws;
+use App\Models\Transaction;
+use App\Models\Withdraw;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Session;
 
 class AccountController extends Controller
 {
@@ -56,34 +59,42 @@ class AccountController extends Controller
             'cnib' => 'required|starts_with:B'
         ]);
 
-        $inputs = $request->all();
+        $inputs = $request->all([
+            'lastname',
+            'firstname',
+            'email',
+            'birthday',
+            'phone',
+            'country',
+            'city',
+            'cnib'
+        ]);
 
 
         if (isset($request->selfie)) {
-            $request->validate(['selfie' => 'image']);
             if ($selfie = $request->file('selfie')) {
                 $destinationPath = 'assets/selfies_folder';
                 $pic = date('Ymdhis') . "." . $selfie->getClientOriginalExtension();
-                $selfie->move($destinationPath, $pic);
-                $input['selfie'] = "$pic";
+                $finalImg = $selfie->move($destinationPath, $pic);
+                $inputs['selfie'] = $finalImg->getFilename();
             };
         }
+
+
         if (isset($request->card_recto)) {
-            $request->validate(['card_recto' => 'image']);
             if ($card_recto = $request->file('card_recto')) {
                 $destinationPath = 'assets/cardsRectos_folder';
                 $pic = date('Ymdhis') . "." . $card_recto->getClientOriginalExtension();
                 $card_recto->move($destinationPath, $pic);
-                $input['card_recto'] = "$pic";
+                $inputs['card_recto'] = "$pic";
             };
         }
         if (isset($request->card_verso)) {
-            $request->validate(['card_verso' => 'image']);
             if ($card_verso = $request->file('card_verso')) {
                 $destinationPath = 'assets/cardsVersos_folder';
                 $pic = date('Ymdhis') . "." . $card_verso->getClientOriginalExtension();
                 $card_verso->move($destinationPath, $pic);
-                $input['card_verso'] = "$pic";
+                $inputs['card_verso'] = "$pic";
             };
         }
 
@@ -138,30 +149,99 @@ class AccountController extends Controller
 
     public function deposit(Request $request)
     {
-        //Traitement
+        $request->validate([
+            'phone' => 'required',
+            'amount' => 'required',
+            'otp_code' => 'required'
+        ]);
+
+        $response = Http::withHeaders([
+            'Authorization' => "Bearer " . env('SMTPAY_API_KEY')
+        ])->post("http://smtpay.net/api/payment/v1/pay", [
+            'id' => 'OM',
+            'customer_msisdn' => $request->phone,
+            'amount' => $request->amount,
+            'otp' => $request->otp_code
+        ]);
+
+        $credit = ((int) $request->amount) - ((((int) $request->amount) * 9) / 100);
+
+        $result = json_decode((string) $response->getBody(), true);
+        if(((int) $result['status']) === 200) {
+            $clientAccountAmount = auth()->user()->account->amount;
+            auth()->user()->account->update(['amount' => (int) $clientAccountAmount + $credit]);
+            return redirect()->back()->with("success", "Votre dépôt a été un succès!");
+        } else {
+            return redirect()->back()->with('error', "Il y'a eu une erreur!Veuillez réessayer!");
+        }
+
+
     }
 
     public function sendMoneyIndex()
     {
         $categories = categories::all();
-        $clients = clients::all(['email', 'firstname', 'lastname']);
+        $clients = clients::where('id', '!=', auth()->user()->id)->get(['email', 'firstname', 'lastname']);
         return view('client.account.layouts.sendMoney', ['categories' => $categories, 'clients' => $clients]);
     }
 
     public function sendMoney(Request $request)
     {
-        //Traitement
+        $request->validate([
+            'receiver' => 'required|email',
+            'amount' => 'required|max:' . auth()->user()->account->amount
+        ]);
+
+        Auth::user()->account->update([
+            'amount' => (int) auth()->user()->account->amount - (int) $request->amount
+        ]);
+
+        $receiverId = clients::where('email', $request->receiver)->first()->id;
+
+        $amount = ((int) ClientAccount::where('client_id', $receiverId)
+        ->first()
+        ->amount) + (((int) $request->amount) - ((((int) $request->amount) * 1) / 100));
+
+        ClientAccount::where('client_id', $receiverId)
+        ->first()
+        ->update(['amount' => $amount]);
+
+        Transaction::create([
+            'sender' => auth()->user()->id,
+            'receiver' => $receiverId,
+            'amount' => $request->amount
+        ]);
+
+        return redirect()->back()->with('success', 'Le transfert a été un succès!');
     }
 
     public function withdrawIndex()
     {
         $categories = categories::all();
-        return view('client.account.layouts.withdraw', ['categories' => $categories]);
+        $validated_withdrawals = Withdraw::where(['client_id' => auth()->user()->id, 'done'=> true])->get();
+        $rejected_withdrawals = rejectedWithdraws::where('client_id', auth()->user()->id)->get();
+        return view('client.account.layouts.withdraw', [
+            'categories' => $categories,
+            'validated_withdrawals' => $validated_withdrawals,
+            'rejected_withdrawals' => $rejected_withdrawals
+        ]);
     }
 
-    public function withdraw(Request $request)
-    {
-        //
+    public function requestWithdrawal(Request $request) {
+        $request->validate([
+            'client' => 'required|email',
+            'withdrawAmount' => 'required'
+        ]);
+
+        $client = clients::where('email', $request->client)->first();
+        $withdrawAmount = ((int) $request->withdrawAmount) - ((((int) $request->withdrawAmount) * 5) / 100);
+        Withdraw::create([
+            'client_id' => $client->id,
+            'amount' => $withdrawAmount,
+            'done' => false
+        ]);
+
+        return redirect()->back()->with('success', 'Votre demande a été envoyer avec succès');
     }
 
     public function orders()
@@ -197,7 +277,14 @@ class AccountController extends Controller
     public function transactions()
     {
         $categories = categories::all();
-        return view('client.account.layouts.transactions', ['categories' => $categories]);
+        $inner_transactions = Transaction::where('receiver', auth()->user()->id)->get();
+        $outer_transactions = Transaction::where('sender', auth()->user()->id)->get();
+        //dd($outer_transactions);
+        return view('client.account.layouts.transactions', [
+            'categories' => $categories,
+            'inner_transactions' => $inner_transactions,
+            'outer_transactions' => $outer_transactions
+        ]);
     }
 
 }

@@ -334,6 +334,7 @@
                                                 <li class="nav-item u-header__nav-item">
                                                     <a class="nav-link u-header__nav-link @if(Request::route()->uri === 'faqs') activeNav @endif" href="{{asset('faqs')}}">FAQs</a>
                                                 </li>
+                                                @auth
                                                 <div class="w-100 border-top">
                                                     <h6 class="mt-3 font-weight-bold">Mon compte</h6>
                                                     <li class="nav-item u-header__nav-item">
@@ -361,6 +362,7 @@
                                                         <a href="{{ route('client.logout') }}" class="btn mb-md-0 font-weight-normal px-5 px-md-4 px-lg-5 w-100 w-md-auto my-sm-4 my-1">Se déconnecter</a>
                                                     </li>
                                                 </div>
+                                                @endauth
                                             </ul>
                                         </div>
 
@@ -407,6 +409,21 @@
                                 data-unfold-type="css-animation" data-unfold-animation-in="fadeInRight"
                                 data-unfold-animation-out="fadeOutRight" data-unfold-duration="500">
                                 <i class="ec ec-user mr-1"></i>Mon compte
+                            </a>
+                            @else
+                            <a id="sidebarNavToggler" href="{{ route('client.login') }}" role="button" class="u-header-topbar__nav-link"
+                            aria-controls="sidebarContent"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                            data-unfold-event="click"
+                            data-unfold-hide-on-scroll="false"
+                            data-unfold-target="#sidebarContent"
+                            data-unfold-type="css-animation"
+                            data-unfold-animation-in="fadeInRight"
+                            data-unfold-animation-out="fadeOutRight"
+
+                            data-unfold-duration="500">
+                            <i class="ec ec-user mr-1"></i>Se connecter
                             </a>
                                 @endif
 

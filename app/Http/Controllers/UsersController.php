@@ -305,18 +305,7 @@ class UsersController extends Controller
     public function showClient($id)
     {
         $clientDetails = DB::table('clients')
-            ->select([
-                'lastname',
-                'firstname',
-                'birthday',
-                'email',
-                'phone',
-                'cnib',
-                'countryName',
-                'cityName',
-                'affiliate_code',
-                'sup_code'
-            ])
+            ->select()
             ->join('countries', 'clients.country', '=', 'countries.id')
             ->join('cities', 'clients.city', '=', 'cities.id')
             ->where('clients.id', '=', $id)
@@ -332,7 +321,10 @@ class UsersController extends Controller
             'Pays' => $clientDetails->countryName,
             'Ville' => $clientDetails->cityName,
             'Code de parrainnage' => $clientDetails->affiliate_code,
-            'Parrain' => $clientDetails->sup_code
+            'Parrain' => $clientDetails->sup_code,
+            'selfie' => $clientDetails->selfie,
+            'card_recto' => $clientDetails->card_recto,
+            'card_verso' => $clientDetails->card_verso
         ];
 
         return $returnData;

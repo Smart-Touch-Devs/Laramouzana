@@ -14,6 +14,9 @@
           </ul>
           <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                @if (count($todeliver_products) === 0)
+                    <h5 class="text-secondary mt-5 mx-auto">Vous n'avez aucune commande en cours!</h5>
+                @else
                 <table class="table table-striped">
                     <thead>
                       <tr>
@@ -34,6 +37,7 @@
                       @endforeach
                     </tbody>
                   </table>
+                @endif
             </div>
             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                 @if (count($delivered_products) === 0)

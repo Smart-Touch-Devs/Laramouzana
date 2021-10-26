@@ -29,11 +29,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/account/update', [AccountController::class, 'updateIndex'])->name('account.updateIndex');
     Route::post('/account/update', [AccountController::class, 'update'])->name('account.update');
     Route::get('/account/deposit', [AccountController::class, 'depositIndex'])->name('account.depositIndex');
-    Route::post('/account/deposit', [AccountController::class, 'depposit'])->name('account.deposit');
+    Route::post('/account/deposit', [AccountController::class, 'deposit'])->name('account.deposit');
     Route::get('/account/send', [AccountController::class, 'sendMoneyIndex'])->name('account.sendMoneyIndex');
     Route::post('/account/send', [AccountController::class, 'sendMoney'])->name('account.sendMoney');
     Route::get('/account/withdraw', [AccountController::class, 'withdrawIndex'])->name('account.withdrawIndex');
-    Route::post('/account/withdraw', [AccountController::class, 'withdraw'])->name('account.withdraw');
+    Route::post('/account/requestWithdrawal', [AccountController::class, 'requestWithdrawal'])->name('account.requestWithdrawal');
     Route::get('/account/orders', [AccountController::class, 'orders'])->name('account.orders');
     Route::get('/account/transactions', [AccountController::class, 'transactions'])->name('account.transactions');
     Route::get('/account/changePassword', [AccountController::class, 'changePw'])->name('account.changePw');
@@ -43,7 +43,7 @@ Route::get('/cart', [AccountController::class, 'returnCart'])->name('client.cart
 
 //Admin
 
-Route::prefix('staff')->middleware(['prevent_from_client', 'loggedin'])->group(function () {
+Route::prefix('staff')->middleware('loggedin')->group(function () {
     Route::get('/login', [AuthController::class, 'loginView'])->name('login-view');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
     Route::get('/register', [AuthController::class, 'registerView'])->name('register-view');
@@ -64,6 +64,9 @@ Route::prefix('staff')->middleware('admin')->group(function () {
         Route::resource('all_products', 'All_productsController');
         Route::resource('add_products', 'Add_productsController');
         Route::resource('add_categories', 'Add_categoriesController');
+        Route::get('/withdraw_requests', [AdminController::class, 'withdrawRequests'])->name('admin.withdrawRequest');
+        Route::post('/validate_witdrawal', [AdminController::class, 'validateWithdraw'])->name('admin.validateWithdrawal');
+        Route::get('/reject_withdrawal/{id}', [AdminController::class, 'rejectWithdraw'])->name('admin.rejectWithdrawal');
 
 
         //Users management

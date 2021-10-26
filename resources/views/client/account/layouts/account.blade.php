@@ -9,7 +9,7 @@
         <div class="mt-5">
             <p style="font-size: 24px;">
                 <strong style="color: #3D3D3D;">Solde : </strong>
-                <span>22500 FCFA</span>
+                <span>{{Auth::user()->account->amount}} FCFA</span>
                 <span style="font-size: 17px;">(plus bonus)</span>
             </p>
         </div>
@@ -74,18 +74,17 @@
         <h2>Mes parrainages</h2>
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
-              <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">1ère génération</a>
+              <a class="nav-link active" id="pills-first_generation-tab" data-toggle="pill" href="#pills-first_generation" role="tab" aria-controls="pills-first_generation" aria-selected="true">1ère génération</a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">2ème génération</a>
+              <a class="nav-link" id="pills-second_generation-tab" data-toggle="pill" href="#pills-second_generation" role="tab" aria-controls="pills-second_generation" aria-selected="false">2ème génération</a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">3ème génération</a>
+              <a class="nav-link" id="pills-third_generation-tab" data-toggle="pill" href="#pills-third_generation" role="tab" aria-controls="pills-third_generation" aria-selected="false">3ème génération</a>
             </li>
           </ul>
           <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div class="tab-pane fade show active" id="pills-first_generation" role="tabpanel" aria-labelledby="pills-first_generation-tab">
                     <table class="table table-striped">
                         <thead>
                           <tr>
@@ -105,8 +104,7 @@
                         </tbody>
                       </table>
                 </div>
-            </div>
-            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+            <div class="tab-pane fade" id="pills-second_generation" role="tabpanel" aria-labelledby="pills-second_generation-tab">
                 <table class="table table-striped">
                     <thead>
                       <tr>
@@ -132,7 +130,7 @@
                     </tbody>
                   </table>
             </div>
-            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+            <div class="tab-pane fade" id="pills-third_generation" role="tabpanel" aria-labelledby="pills-third_generation-tab">
                 <table class="table table-striped">
                     <thead>
                       <tr>

@@ -32,7 +32,7 @@ class FrontController extends Controller
 
 
     public function store(Request $request){
-
+        
         $data=request()->validate([
         	'name'=>['required','string','max:50'],
         	'email'=>['required','string','email'],

@@ -13,7 +13,7 @@ class CreateClientAccountsTable extends Migration
      */
     public function up()
     {
-        Schema::create('clients_accounts', function (Blueprint $table) {
+        Schema::create('client_accounts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('client_id');
             $table->bigInteger('amount');

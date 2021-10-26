@@ -18,7 +18,7 @@
             </div>
             {{Session::forget('success')}}
         @endif
-        <form class="js-validate my-5" action="{{ route('account.update') }}" method="post">
+        <form class="js-validate my-5" action="{{ route('account.update') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="js-form-message form-group col-md-6 col-12">
@@ -91,21 +91,21 @@
                 </div>
                 <div class="js-form-message form-group col-md-6 col-12">
                     <label class="form-label" for="selfie">Entrez une photo selfie de vous tenant votre CNIB</label>
-                    <input type="file" class="form-control" name="selfie" id="selfie" placeholder="Votre numéro de téléphone"><br>
+                    <input type="file" accept="image/*" class="form-control" name="selfie" id="selfie" placeholder="Votre numéro de téléphone"><br>
                     @error('selfie')
                     <span class="text-danger font-weight-bold">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="js-form-message form-group col-md-6 col-12">
                     <label class="form-label" for="card_recto">Photo recto de la CNIB</label>
-                    <input type="file" class="form-control" name="card_recto" id="card_recto"><br>
+                    <input type="file" accept="image/*" class="form-control" name="card_recto" id="card_recto"><br>
                     @error('card_recto')
                     <span class="text-danger font-weight-bold">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="js-form-message form-group col-md-6 col-12">
                     <label class="form-label" for="card_verso">Photo verso de la CNIB</label>
-                    <input type="file" class="form-control" name="card_verso" id="card_verso"><br>
+                    <input type="file" accept="image/*" class="form-control" name="card_verso" id="card_verso"><br>
                     @error('card_verso')
                     <span class="text-danger font-weight-bold">{{ $message }}</span>
                     @enderror

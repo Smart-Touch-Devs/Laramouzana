@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Collection;
 use App\Models\clients;
 use App\Models\Commanded_products;
 use App\Models\products;
+use App\Models\rejectedWithdraws;
+use App\Models\Withdraw;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -203,5 +205,29 @@ class AdminController extends Controller
         admin::find($request->id)->update(['password' => Hash::make($request->password)]);
 
         return redirect()->intended('/staff')->with('success', 'Mot de passe changé avec succès!');
+    }
+
+    public function withdrawRequests() {
+        $withdrawRequests = Withdraw::where('done', false)->get();
+        return view('layout.withdraw_requests', ['withdrawRequests' => $withdrawRequests]);
+    }
+
+    public function validateWithdraw() {
+        $withdrawal = Withdraw::find(request('id'));
+        $withdrawal->update(['done' => true]);
+        
+        return redirect()->back()->with('success', 'Le rétrait a été validé avec succès!');
+    }
+
+    public function rejectWithdraw($id) {
+        $rejectedWithdrawal = Withdraw::find($id);
+        rejectedWithdraws::create([
+            'client_id' => $rejectedWithdrawal->client_id,
+            'amount' => $rejectedWithdrawal->amount,
+            'created_at' => $rejectedWithdrawal->created_at,
+            'updated_at' => now()
+        ]);
+        $rejectedWithdrawal->delete();
+        return redirect()->back()->with('success', 'Vous aviez rejété le rétrait!');
     }
 }

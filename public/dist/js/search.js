@@ -71,5 +71,3 @@ input.addEventListener("input", function () {
         })
     });
 });
-
-document.onclick = () => resultContainer.classList.remove("show");
