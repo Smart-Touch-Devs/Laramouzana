@@ -134,7 +134,7 @@
                     <i data-feather="settings"></i>
                 </div>
                 <div class="top-menu__title">
-                    Paramètrage
+                    Configuration
                     <i data-feather="chevron-down" class="top-menu__sub-icon"></i>
                 </div>
             </a>
@@ -142,12 +142,12 @@
                 <li>
                     <a href="{{ asset('staff/setting_percentage') }}" class="top-menu">
                         <div class="top-menu__title">
-                            Paramètre pourcentage
+                            Configuration pourcentage
                         </div>
                     </a>
                     <a href="{{ asset('staff/front_picture') }}" class="top-menu">
                         <div class="top-menu__title">
-                            Paramètre images
+                            Configuration images
                         </div>
                     </a>
                 </li>

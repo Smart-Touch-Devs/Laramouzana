@@ -64,9 +64,9 @@ Route::prefix('staff')->middleware('admin')->group(function () {
     //Admin part
     Route::middleware('admin.isadmin')->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('dashboard');
-        Route::resource('all_products', 'All_productsController');
-        Route::resource('add_products', 'Add_productsController');
-        Route::resource('add_categories', 'Add_categoriesController');
+        // Route::resource('all_products', 'All_productsController');
+        // Route::resource('add_products', 'Add_productsController');
+        // Route::resource('add_categories', 'Add_categoriesController');
         Route::get('/withdraw_requests', [AdminController::class, 'withdrawRequests'])->name('admin.withdrawRequest');
         Route::post('/validate_witdrawal', [AdminController::class, 'validateWithdraw'])->name('admin.validateWithdrawal');
         Route::get('/reject_withdrawal/{id}', [AdminController::class, 'rejectWithdraw'])->name('admin.rejectWithdrawal');
@@ -109,7 +109,7 @@ Route::prefix('staff')->middleware('admin')->group(function () {
     Route::get('/showStaff/{staffId}', [UsersController::class, 'showStaff'])->name('user.showStaff');
     //products and categories
     Route::resource('all_products', 'All_productsController')->except(['create']);;
-    Route::resource('add_products', 'Add_productsController');
+    // Route::resource('add_products', 'Add_productsController');
     Route::resource('add_categories', 'Add_categoriesController')->except(['create', 'show']);
     Route::resource('commands', 'CommandsController')->only(['index', 'edit', 'update']);
     Route::get('/delivered_product', [DelivererController::class, 'history']);
@@ -123,8 +123,12 @@ Route::prefix('staff')->middleware('admin')->group(function () {
     Route::resource('front_picture1', 'FrontPicture1Controller');
     Route::resource('front_picture2', 'FrontPicture2Controller');
 
+
     //front image
     Route::get('front_picture', [FrontPictureController::class, 'index'])->name('front_picture');
+    // Route::post('/front_picture1', [FrontPictureController::class, 'storePicture1']);
+    // Route::get('/picture1/{id}', [FrontPictureController::class, 'editPicture1'])->name('front_picture1');
+
 });
 
 Route::middleware('clientisloggedin')->group(function () {

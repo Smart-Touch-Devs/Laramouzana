@@ -1,6 +1,6 @@
 @extends('layout/top-menu')
 @section('subhead')
-<title>Paramètrage</title>
+<title>Configuration</title>
 @endsection
 @section('subcontent')
 <div class="intro-y flex items-center mt-8">
@@ -15,7 +15,7 @@
             <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-18 text-theme-9"> <i data-feather="alert-triangle" class="w-6 h-6 mr-2 text-theme-9"></i> <strong>{{ $message }}</strong><i data-feather="x" class="w-4 h-4 ml-auto" onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;' id="close"></i> </div>
         </div>
         @endif
-        <h2 class="text-lg font-medium ml-4 my-6">Paramètrage pourcentage</h2>
+        <h2 class="text-lg font-medium ml-4 my-6">Modification de la configuration-pourcentage</h2>
         <div class="overflow-x-auto">
             <table class="table">
                 <thead>

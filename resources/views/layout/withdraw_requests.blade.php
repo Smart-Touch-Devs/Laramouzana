@@ -33,8 +33,8 @@
                                     <th class="border-b-2 dark:border-dark-5 whitespace-no-wrap">Noms</th>
                                     <th class="border-b-2 dark:border-dark-5 whitespace-no-wrap">Prénom</th>
                                     <th class="border-b-2 dark:border-dark-5 whitespace-no-wrap">Téléphone</th>
-                                    <th class="border-b-2 dark:border-dark-5 whitespace-no-wrap">Date</th>
                                     <th class="border-b-2 dark:border-dark-5 whitespace-no-wrap">Montant</th>
+                                    <th class="border-b-2 dark:border-dark-5 whitespace-no-wrap">Date</th>
                                     <th class="border-b-2 dark:border-dark-5 whitespace-no-wrap">Valider</th>
                                     <th class="border-b-2 dark:border-dark-5 whitespace-no-wrap">Rejéter</th>
                                 </tr>

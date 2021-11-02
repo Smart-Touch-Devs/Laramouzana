@@ -1,11 +1,11 @@
 @extends('layout/top-menu')
 
 @section('subhead')
-<title>Paramètrage | Transfere</title>
+<title>Configuration | Pourcentage-Transfere</title>
 @endsection
 @section('subcontent')
 <div class="intro-y flex items-center mt-8">
-    <h2 class="text-lg font-medium m-auto">Modification Paramètrage pourcentage</h2>
+    <h2 class="text-lg font-medium m-auto">Modification de la configuration-pourcentage</h2>
 </div>
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 lg:col-span-4"></div>
@@ -26,7 +26,7 @@
                 </div>
                 <div class="text-right mt-5">
                     <a href="{{ asset('staff/setting_percentage') }}">
-                        <button type="submit" class="button w-24 border dark:border-dark-5 text-gray-700 dark:text-gray-300 mr-1">Retour</button>
+                        <button type="button" class="button w-24 border dark:border-dark-5 bg-theme-3 text-white dark:text-gray-300 mr-1">Retour</button>
                        </a>
                     <button type="submit" class="button w-24 bg-theme-1 text-white">Modifier</button>
                 </div>

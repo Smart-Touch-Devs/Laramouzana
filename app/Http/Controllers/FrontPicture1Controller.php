@@ -47,6 +47,7 @@ class FrontPicture1Controller extends Controller
             $input['picture_lat1'] = "$pic";
         };
         FrontPicture1::create( $input);
+
         return back()->with('success','Enregistrement effectué avec succés');
     }
 
@@ -69,8 +70,8 @@ class FrontPicture1Controller extends Controller
      */
     public function edit($id)
     {
-        $frontpicture = FrontPicture1::find($id);
-        return view('settings.picture.edit',compact('frontpicture'));
+        $frontpicture1 = FrontPicture1::find($id);
+        return view('settings.picture.picture1.edit',compact('frontpicture1'));
     }
 
     /**

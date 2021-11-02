@@ -1,7 +1,7 @@
 @extends('layout/top-menu')
 
 @section('subhead')
-<title>CRUD Form - Midone - Tailwind HTML Admin Template</title>
+<title>Gestion des catégories</title>
 @endsection
 
 @section('subcontent')
@@ -25,20 +25,19 @@
                     {!! $errors->first('category_name', '<small class="text-red-500 font-extrabold">:message</small>') !!}
                 </div>
                 <div class="mt-3">
-                    <label>image </label>
+                    <label>Image de la categorie correspondante </label>
                         <div class="relative mt-2">
-                            <input type="file" class="input pr-12 w-full border col-span-4" placeholder=""  accept="image/*" name="picture">
+                            <input type="file" class="input pr-12 w-full border col-span-4"  accept="image/*" name="cat_picture">
                         </div>
                     </div>
                 <div class="mt-3">
-                    <label class="font-bold-600">Description</label>
+                    <label class="font-bold-600">Description de la catégorie</label>
                     <div class="mt-2">
-                        <textarea data-simple-toolbar="true" class="editor" placeholder=description name="category_desc"></textarea>
+                        <textarea data-simple-toolbar="true" class="editor" placeholder="Renseigner les informations de la catégorie "name="category_desc"></textarea>
                         {!! $errors->first('category_desc', '<small class="text-red-500 font-extrabold">:message</small>') !!}
                     </div>
                 </div>
                 <div class="text-right mt-5">
-
                     <button type="submit" class="button w-26 bg-theme-1 text-white">Ajouter la catégorie</button>
                 </div>
             </div>
@@ -51,26 +50,27 @@
             <table class="table table-report table-report--bordered display datatable w-full">
                 <thead>
                     <tr>
-                        <th class="border-b-2 text-center">Nom</th>
-                        <th class="border-b-2 text-center">Image</th>
+                        <th class="border-b-2 text-center">Nom de la catégorie</th>
+                        <th class="border-b-2 text-center">Image de la catégorie</th>
                         <th class="border-b-2 text-center">Description</th>
-                        <th class="border-b-2 text-center">ACTIONS</th>
+                        <th class="border-b-2 text-center">Editer</th>
+                        <th class="border-b-2 text-center">Supprimer</th>
                     </tr>
                 </thead>
                 @forelse($categories as $categorie)
                 <tbody>
                     <tr>
                         <td class="text-center border-b">
-                            <div class="font-medium whitespace-no-wrap">{{ $categorie->category_name }}</div>
+                            <div class="font-medium whitespace-wrap">{{ $categorie->category_name }}</div>
                         </td>
                         <td class="w-40 border-b">
                             <div class="flex items-center sm:justify-center ">
-                               @if ($categorie->picture === null)
+                               @if ($categorie->cat_picture === null)
                             <div>
                                 <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-17 text-theme-11"> <i data-feather="alert-circle" class="w-6 h-6 mr-2"></i> Aucune image </div>
                             </div>
                                @else
-                               <img alt=""  width="75px" height="75px"   src="{{asset('assets/categorie_Picture').'/'.$categorie->picture}}">
+                               <img alt=""  width="75px" height="75px"  src="{{asset('assets/categorie_Picture').'/'.$categorie->cat_picture}}">
                                @endif
                             </div>
                         </td>
@@ -83,7 +83,7 @@
                                     </h3>
                                 </div>
                                 @else
-                                <div class="font-medium wrap">{{ strip_tags($categorie->category_desc)}}</div>
+                                <div class="font-medium  whitespace-wrap">{{ strip_tags($categorie->category_desc)}}</div>
                                 @endif
                             </div>
                         </td>
@@ -97,24 +97,40 @@
                                     </button>
                                     </a>
                                 </div>
-                                <form action="{{ route('add_categories.destroy',$categorie->id) }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="button px-2 mr-1 mb-2 bg-theme-6 text-white flex items-center" onclick="myFunction()" type="submit">
-                                        <span class="w-5 h-5 flex items-center justify-center">
-                                            <i data-feather="trash-2" class="w-4 h-4"></i>
-                                        </span>
-                                    </button>
-                                </form>
                             </div>
                         </td>
+                        <td>
+                            <a href="javascript:;" style="width: fit-content; height: fit-content;" class="deleteUserbtn" data-toggle="modal" data-target="#delete-modal-preview">
+                                <button class="button px-2 mr-1 mb-2 bg-theme-6 text-white flex items-center" >
+                                    <span class="w-5 h-5 flex items-center justify-center">
+                                        <i data-feather="trash-2" class="w-4 h-4"></i>
+                                    </span>
+                                </button>
+                            </a>
+                        </td>
                     </tr>
+                    <div class="modal" id="delete-modal-preview">
+                        <div class="modal__content">
+                            <div class="p-5 text-center"> <i data-feather="x-circle" class="w-16 h-16 text-theme-6 mx-auto mt-3"></i>
+                                <div class="text-3xl mt-5">Êtes vous sûr?</div>
+                                <div class="text-gray-600 mt-2">Voudriez-vous vraiment supprimer cette categorie?</div>
+                            </div>
+                            <div class="px-5 pb-8 text-center">
+                                 <button type="button" data-dismiss="modal" class="button w-24 border text-gray-700 dark:border-dark-5 dark:text-gray-300 mr-1">Annuler</button>
+                                    <form action="{{ route('add_categories.destroy',$categorie->id) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <a href="javascript:void()" id="confirmDeleteBtn">
+                                          <button type="submit" class="button w-24 bg-theme-6 text-white">Supprimer</button>
+                                        </a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                     @empty
-                    <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-18 text-theme-9">
                         <div class="m-auto">
                             <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-17 text-theme-11"> <i data-feather="alert-circle" class="w-6 h-6 mr-2"></i> Aucune categorie disponible</div>
                         </div>
-                    </div>
                 </tbody>
                 @endforelse
             </table>
@@ -177,4 +193,5 @@ function myFunction() {
     })
 
 </script>
+<script src="{{ asset('dist/js/manageUser.js') }}" type="text/javascript"></script>
 @endsection
