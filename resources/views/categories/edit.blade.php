@@ -1,7 +1,7 @@
 @extends('layout/top-menu')
 
 @section('subhead')
-<title>Categorie</title>
+<title>Modification | Categorie</title>
 @endsection
 
 @section('subcontent')
@@ -18,34 +18,34 @@
         </div>
         @endif
         <!-- BEGIN: Form Layout -->
-        <form action="{{ route('add_categories.update',$categories->id) }}" method="post" class=" mt-6" enctype="multipart/form-data">
+        <form action="{{ route('add_categories.update',$categorie->id) }}" method="post" class=" mt-6" enctype="multipart/form-data">
             @method('PATCH')
             @csrf
             <div class="intro-y box p-5">
                 <div>
                     <label class="font-bold-600">Nom de la categorie</label>
-                    <input type="text" class="input w-full border mt-2" value="{{ $categories->category_name}}" name="category_name">
+                    <input type="text" class="input w-full border mt-2" value="{{ $categorie->category_name}}" name="category_name">
                     {!! $errors->first('category_name', '<small class="text-red-500 font-extrabold">:message</small>') !!}
                 </div>
                 <div class="mt-3">
-                    <label>image </label>
+                    <label>Image de la categorie correspondante  </label>
                         <div class="relative mt-2">
-                            <input type="file" class="input pr-12 w-full border col-span-4" placeholder="" accept="image/*" name="picture">
-                            <img alt=""   src="{{asset('assets/categorie_Picture').'/'.$categories->picture}}">
+                            <input type="file" class="input pr-12 w-full border col-span-4" placeholder="" accept="image/*" name="cat_picture">
+                            <img alt="" width="100px" height="100px"   src="{{asset('assets/categorie_Picture').'/'.$categorie->cat_picture}}">
+                            {!! $errors->first('cat_picture', '<small class="text-red-500 font-extrabold">:message</small>') !!}
                         </div>
                     </div>
                 <div class="mt-3">
-                    <label class="font-bold-600">Description</label>
+                    <label class="font-bold-600">Description de la catégorie</label>
                     <div class="mt-2">
-                        <textarea data-simple-toolbar="true" class="editor" placeholder=description name="category_desc">
-                            {{ strip_tags($categories->category_desc) }}
+                        <textarea data-simple-toolbar="true" class="editor" placeholder="Renseigner les informations de la catégorie" name="category_desc">
+                            {{ strip_tags($categorie->category_desc) }}
                         </textarea>
                         {!! $errors->first('category_desc', '<small class="text-red-500 font-extrabold">:message</small>') !!}
                     </div>
                 </div>
-
                 <div class="text-right mt-5">
-                  <a href="{{asset('add_categories')}}">  <button type="submit" class="button w-20 bg-theme-1 text-white">Retour</button></a>
+                  <a href="{{asset('staff/add_categories')}}">  <button type="button" class="button w-20 bg-theme-1 text-white">Retour</button></a>
                     <button type="submit" class="button w-26 bg-theme-1 text-white">Modifier la categorie</button>
                 </div>
             </div>
@@ -56,48 +56,4 @@
 </div>
 
 <!-- modal popup -->
-
-<script>
-
-
-    // const $ = el => document.querySelector(el)
-    // const $All = els => document.querySelectorAll(els)
-    // window.onload = function() {
-    //     document.getElementById('close').onclick = function() {
-    //         this.parentNode.parentNode.parentNode
-    //             .removeChild(this.parentNode.parentNode);
-    //         return false;
-    //     };
-    // };
-    // // console.log($('#modal_desc'));
-    // $All('.edit_btn').forEach(el => {
-    //     el.addEventListener("click", function(e) {
-    //     e.preventDefault()
-    //     const xhr = new XMLHttpRequest()
-    //     xhr.open('GET', this.href, true)
-    //     xhr.onload = () => {
-    //         const result = JSON.parse(xhr.response)
-    //         const editBtnUrl = this.href
-    //         const formAction = $('#modal_form').action
-
-    //         const splitedBtnUrl = editBtnUrl.split('/')
-    //         const splitedFormAction = formAction.split('/')
-
-    //         const categoryId = splitedBtnUrl[splitedBtnUrl.length - 1]
-
-    //         splitedFormAction.splice(splitedFormAction.length - 1, 1, categoryId)
-
-    //         const finalFormAction = splitedFormAction.join('/')
-
-    //         console.log(finalFormAction);
-
-    //         $('#modal_category').value = result.category_name;
-    //         $('#modal_desc').innerText = result.category_desc;
-    //         $('#modal_form').action = finalFormAction
-    //     }
-    //     xhr.send(null)
-    // })
-    // })
-
-</script>
 @endsection

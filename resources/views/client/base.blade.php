@@ -3,7 +3,7 @@
 
 <head>
     <!-- Title -->
-    <title>Home-v2 | Electro - Responsive Website Template</title>
+    <title>Laramouzana</title>
 
     <!-- Required Meta Tags Always Come First -->
     <meta charset="utf-8">

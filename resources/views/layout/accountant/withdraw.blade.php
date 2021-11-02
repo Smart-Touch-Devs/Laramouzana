@@ -27,7 +27,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-
                                 <tr>
                                     <td class="border-b whitespace-no-wrap">John</td>
                                     <td class="border-b whitespace-pre-wrap">Doe</td>
@@ -35,7 +34,6 @@
                                     <td class="border-b whitespace-no-wrap">10 Octobre 2021 à 8H</td>
                                     <td class="border-b whitespace-no-wrap">100.000 FCFA</td>
                                 </tr>
-
                             </tbody>
                         </table>
                     </div>

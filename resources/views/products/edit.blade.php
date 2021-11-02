@@ -1,7 +1,7 @@
 @extends('layout/top-menu')
 
 @section('subhead')
-<title>CRUD Form - Midone - Tailwind HTML Admin Template</title>
+<title>Modification | Produit</title>
 @endsection
 @section('subcontent')
 <div class="intro-y flex items-center mt-8">
@@ -135,7 +135,8 @@
                     </div>
                 </div>
                 <div class="text-right mt-5">
-                    <button type="submit" class="button w-28 bg-theme-1 text-white">Mettre à jour</button>
+                    <a href="{{asset('staff/all_products')}}">  <button type="button" class="button w-20 bg-theme-1 text-white">Retour</button></a>
+                    <button type="submit" class="button w-28 bg-theme-1 text-white">Modifier le produit</button>
                 </div>
     </div>
 

@@ -39,15 +39,16 @@ class Add_categoriesController extends Controller
         $request->validate([
             'category_name' => 'required|string|',
             'category_desc' => 'required|string|',
+            'cat_picture' => 'required|image'
 
         ]);
         $input = $request->all();
 
-        if ($picture = $request->file('picture')) {
+        if ($picture = $request->file('cat_picture')) {
             $destinationPath = 'assets/categorie_Picture';
             $pic = date('Ymdhis') . "." . $picture->getClientOriginalExtension();
             $picture->move($destinationPath, $pic);
-            $input['picture'] = "$pic";
+            $input['cat_picture'] = "$pic";
         };
         categories::create($input);
         return redirect()->intended('staff/add_categories')->with('success', 'Catégorie  ajouté avec succes');
@@ -72,8 +73,8 @@ class Add_categoriesController extends Controller
      */
     public function edit($id)
     {
-        $categories = categories::find($id);
-        return view('categories.edit', compact('categories'));
+        $categorie = categories::find($id);
+        return view('categories.edit', compact('categorie'));
     }
 
     /**
@@ -87,21 +88,18 @@ class Add_categoriesController extends Controller
     {
         $request->validate([
             'category_name' => 'required|string|',
-            'category_desc' => 'required|string|'
+            'category_desc' => 'required|string|',
+            'cat_picture' => 'required|image'
         ]);
-
-        $input = [
-            'category_name' => $request->category_name,
-            'category_desc' => $request->category_desc,
-        ];
-        if ($picture = $request->file('picture')) {
+        $input =$request->all();
+        if ($picture = $request->file('cat_picture')) {
             $destinationPath = 'assets/categorie_Picture';
             $pic = date('Ymdhis') . "." . $picture->getClientOriginalExtension();
             $picture->move($destinationPath, $pic);
-            $input['picture'] = "$pic";
+            $input['cat_picture'] = "$pic";
         };
 
-        categories::whereId($id)->update($input);
+        categories::find($id)->update($input);
         return redirect()->intended('staff/add_categories')->with('success', 'Categorie mise à jour avec succès');
     }
 

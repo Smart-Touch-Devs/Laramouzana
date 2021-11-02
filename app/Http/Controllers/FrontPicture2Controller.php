@@ -69,8 +69,8 @@ class FrontPicture2Controller extends Controller
      */
     public function edit($id)
     {
-        $frontpicture = FrontPicture2::find($id);
-        return view('settings.picture.picture2.edit',compact('frontpicture'));
+        $frontpicture2 = FrontPicture2::find($id);
+        return view('settings.picture.picture2.edit',compact('frontpicture2'));
     }
 
     /**

@@ -33,7 +33,7 @@
                                     <th class="border-b-2 dark:border-dark-5 whitespace-no-wrap">Prénom</th>
                                     <th class="border-b-2 dark:border-dark-5 whitespace-no-wrap">Addrese email</th>
                                     <th class="border-b-2 dark:border-dark-5 whitespace-no-wrap">Téléphone</th>
-                                    <th class="border-b-2 dark:border-dark-5 whitespace-no-wrap">Detail</th>
+                                    <th class="border-b-2 dark:border-dark-5 whitespace-no-wrap">Details</th>
                                     <th class="border-b-2 dark:border-dark-5 whitespace-no-wrap">Supprimer</th>
                                 </tr>
                             </thead>

@@ -44,8 +44,8 @@ class All_productsController extends Controller
         $request->validate([
             'product_name' => 'required|string|',
             'category_id' => 'integer',
-            'stock' => 'required|integer|',
-            'price' => 'required|integer|',
+            'stock' => 'required|integer|min:1',
+            'price' => 'required|integer|min:1',
             'product_desc' => 'required|string|'
         ]);
 
@@ -140,7 +140,7 @@ class All_productsController extends Controller
             'price' => 'required|integer|',
             'delivery_time' => 'integer|nullable|',
             'delivery_time_rup' => 'integer',
-            'product_desc' => 'required|string|'
+            'product_desc' => 'required|string|',
         ]);
         $input = [
             'product_name' => $request->product_name,

@@ -1,11 +1,11 @@
 @extends('layout/top-menu')
 
 @section('subhead')
-<title>Paramètrage</title>
+<title>Configuration</title>
 @endsection
 @section('subcontent')
 <div class="intro-y flex items-center mt-8">
-    <h2 class="text-lg font-medium mr-auto">Paramétrage Image</h2>
+    <h2 class="text-lg font-medium mr-auto">Configuration Image</h2>
 </div>
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 lg:col-span-5">
@@ -16,6 +16,11 @@
                     <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-18 text-theme-9"> <i data-feather="alert-triangle" class="w-6 h-6 mr-2 text-theme-9"></i> <strong>{{ $message }}</strong><i data-feather="x" class="w-4 h-4 ml-auto" onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;' id="close"></i> </div>
                 </div>
             @endif
+            @if(!$frontpicture1->isEmpty())
+            <div class="intro-y box p-5">
+                <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-17 text-theme-11"> <i data-feather="alert-triangle" class="w-6 h-6 mr-2 text-theme-11"></i> <strong>Impossible d'ajouter à nouveau une image ,veuillez proceder à une modification</strong><i class="w-4 h-4 ml-auto" ></i> </div>
+            </div>
+            @else
             <div class="intro-y box p-5">
                 <div>
                     <label>Image 1| barre latérale</label>
@@ -26,6 +31,8 @@
                     <button type="submit" class="button w-24 bg-theme-1 text-white">Publier</button>
                 </div>
             </div>
+            @endif
+
         </form>
 
         <form action="{{ route('front_picture2.store') }}" method="post" enctype="multipart/form-data" >
@@ -35,6 +42,11 @@
                     <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-18 text-theme-9"> <i data-feather="alert-triangle" class="w-6 h-6 mr-2 text-theme-9"></i> <strong>{{ $message }}</strong><i data-feather="x" class="w-4 h-4 ml-auto" onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;' id="close"></i> </div>
                 </div>
             @endif
+            @if(!$frontpicture2->isEmpty())
+            <div class="intro-y box p-5">
+                <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-17 text-theme-11"> <i data-feather="alert-triangle" class="w-6 h-6 mr-2 text-theme-11"></i> <strong>Impossible d'ajouter à nouveau une image ,veuillez proceder à une modification</strong><i class="w-4 h-4 ml-auto" ></i> </div>
+            </div>
+            @else
             <div class="intro-y box p-5">
                 <div>
                     <label>Image 2| barre latérale</label>
@@ -46,6 +58,7 @@
                 </div>
             </div>
         </form>
+        @endif
     </div>
     <div class="intro-y col-span-12 lg:col-span-7 ">
         <div class="overflow-x-auto">
@@ -66,7 +79,7 @@
                           @endif
                         </td>
                         <td class="border-b whitespace-no-wrap">
-                            <a href="{{ route('front_picture1.edit',$frontpicture->id) }}" style="width: fit-content; height: fit-content;" class="detailBtn" data-toggle="modal" data-target="#userDetails" data-detail_url="">
+                            <a href="{{ route('front_picture1.edit',$frontpicture->id) }}" >
                                 <button class="button px-2 mr-1 mb-2 bg-theme-3 text-white">
                                     <span class="w-5 h-5 flex items-center justify-center">
                                         <i data-feather="more-vertical" class="w-4 h-4"></i>
@@ -78,13 +91,12 @@
                             <form action="{{ route('front_picture1.destroy',$frontpicture->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <a href="">
+
                                 <button class="button px-2 mr-1 mb-2 bg-theme-6 text-white" type="submit">
                                     <span class="w-5 h-5 flex items-center justify-center">
                                         <i data-feather="trash-2" class="w-4 h-4"></i>
                                     </span>
                                 </button>
-                            </a>
                             </form>
                         </td>
                         @empty

@@ -1,8 +1,7 @@
 @extends('layout/top-menu')
 
 @section('subhead')
-<title>CRUD Form - Midone - Tailwind HTML Admin Template</title>
-@endsection
+<title>Gestion | produit </title>
 
 @section('subcontent')
 <div class="intro-y col-span-12 lg:col-span-2">
@@ -18,7 +17,9 @@
                     <th class="border-b-2 text-center whitespace-no-wrap">Stock</th>
                     <th class="border-b-2 text-center whitespace-no-wrap">Prix</th>
                     <th class="border-b-2 text-center whitespace-no-wrap">Delais de livraison</th>
-                    <th class="border-b-2 text-center whitespace-no-wrap">PDF</th>
+                    <th class="border-b-2 text-center whitespace-no-wrap">PDF1</th>
+                    <th class="border-b-2 text-center whitespace-no-wrap">PDF2</th>
+                    <th class="border-b-2 text-center whitespace-no-wrap">PDF3</th>
                     <th class="border-b-2 text-center whitespace-no-wrap">Image1</th>
                     <th class="border-b-2 text-center whitespace-no-wrap">Image2</th>
                     <th class="border-b-2 text-center whitespace-no-wrap">Image3</th>
@@ -29,7 +30,7 @@
             <tbody>
                 <tr>
                     <td class="border-b">
-                        <div class="font-medium whitespace-no-wrap">{{ $product->product_name }}</div>
+                        <div class="font-medium whitespace-wrap">{{ $product->product_name }}</div>
                     </td>
                     <td class="text-center border-b">
                         <div class="font-medium whitespace-no-wrap">{{ $product->category->category_name }}</div>
@@ -58,11 +59,36 @@
                     <td class="w-40 border-b">
                         <div class="flex items-center sm:justify-center ">
                             <div class="font-medium whitespace-no-wrap">
-                               @if ($product->pdf1 === null)
+                               @if ($product->pdf1 === null )
                                <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-17 text-theme-11"> <i data-feather="alert-circle" class="w-6 h-6 mr-2"></i>Aucun Pdf </div>
                             </div>
                                @else
-                               <img alt="" class="" width="50px" height="60px" src="{{asset('/pdf/PDF.jpg')}}">
+                               <a href="{{asset('pdf/pdf_notice').'/'.$product->pdf2}}" target="_blank">pdf caracteristique</a>
+                               @endif
+                            </div>
+                        </div>
+                    </td>
+                    <td class="w-40 border-b">
+                        <div class="flex items-center sm:justify-center ">
+                            <div class="font-medium whitespace-no-wrap">
+                               @if ($product->pdf2 === null )
+                               <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-17 text-theme-11"> <i data-feather="alert-circle" class="w-6 h-6 mr-2"></i>Aucun Pdf </div>
+                            </div>
+                               @else
+                               <a href="{{asset('pdf/pdf_notice').'/'.$product->pdf2}}" target="_blank">pdf notice</a>
+                               @endif
+                            </div>
+                        </div>
+                    </td>
+                    <td class="w-40 border-b">
+                        <div class="flex items-center sm:justify-center ">
+                            <div class="font-medium whitespace-no-wrap">
+                               @if ($product->pdf3 === null )
+                               <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-17 text-theme-11"> <i data-feather="alert-circle" class="w-6 h-6 mr-2"></i>Aucun Pdf </div>
+                            </div>
+                               @else
+                               <img alt="" class="" width="50px" height="60px" src="{{asset('pdf/pdf_presentation').'/'.$product->pdf3}}">
+                               <a href="{{asset('pdf/pdf_notice').'/'.$product->pdf2}}" target="_blank">pdf presentation</a>
                                @endif
                             </div>
                         </div>
@@ -71,9 +97,8 @@
                         <div class="flex items-center sm:justify-center ">
                             <div class="font-medium whitespace-no-wrap">
                                 @if ($product->picture1 === null)
-                                <div>
-                                    <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-17 text-theme-11"> <i data-feather="alert-circle" class="w-6 h-6 mr-2"></i> Aucune image </div>
-                                </div>
+                                 Aucune image
+
                             @else
                                 <img alt="" class="" src="{{asset('assets/product_Picture').'/'.$product->picture1}}">
                             @endif
@@ -84,7 +109,7 @@
                         <div class="flex items-center sm:justify-center ">
                             <div class="font-medium whitespace-no-wrap">
                                 @if ($product->picture2 === null)
-                                        <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-17 text-theme-11"> <i data-feather="alert-circle" class="w-6 h-6 mr-2"></i> Aucune image </div>
+                                        Aucune image
                                 @else
                                     <img alt="" class="" src="{{asset('assets/product_Picture').'/'.$product->picture2}}">
                                 @endif
@@ -95,9 +120,8 @@
                         <div class="flex items-center sm:justify-center ">
                             <div class="font-medium whitespace-no-wrap">
                                 @if ($product->picture3 === null)
-                                <div>
-                                    <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-17 text-theme-11"> <i data-feather="alert-circle" class="w-6 h-6 mr-2"></i> Aucune image </div>
-                                </div>
+                                 Aucune image
+                             </div>
                             @else
                                 <img alt="" class="" src="{{asset('assets/product_Picture').'/'.$product->picture3}}">
                             @endif
@@ -118,8 +142,8 @@
         </table>
     </div>
     <div class="text-right mt-5">
-        <a href="{{asset('all_products')}}">
-            <button type="submit" class="button w-28 bg-theme-1 text-white">Retour</button>
+        <a href="{{asset('staff/all_products')}}">
+            <button type="button" class="button w-28 bg-theme-1 text-white">Retour</button>
         </a>
     </div>
 </div>

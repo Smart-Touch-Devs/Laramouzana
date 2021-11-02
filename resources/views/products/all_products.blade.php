@@ -1,12 +1,12 @@
 @extends('layout/top-menu')
 
 @section('subhead')
-<title>CRUD Form - Midone - Tailwind HTML Admin Template</title>
+<title>Gestion de produits | catégories </title>
 @endsection
 
 @section('subcontent')
 <div class="intro-y flex items-center mt-8">
-    <h2 class="text-lg font-medium mr-auto">Formulaire d'ajout de Produit</h2>
+    <h2 class="text-lg font-medium mr-auto">Formulaire d'ajout de nouveaux produits</h2>
 </div>
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 lg:col-span-4">
@@ -15,9 +15,6 @@
             <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-18 text-theme-9"> <i data-feather="alert-triangle" class="w-6 h-6 mr-2 text-theme-9"></i> <strong>{{ $message }}</strong><i data-feather="x" class="w-4 h-4 ml-auto" onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;' id="close"></i> </div>
         </div>
         @endif
-       {{-- @error('product_name')
-{{message }}
-       @enderror --}}
         <form action="{{ route('all_products.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="intro-y box p-5">
@@ -27,7 +24,7 @@
                     {!! $errors->first('product_name', '<small class="text-red-500 font-extrabold">:message</small>') !!}
                 </div>
                 <div class="mt-3">
-                    <label>Catégorie</label>
+                    <label>Catégories</label>
                     <div class="mt-2">
                         <select data-placeholder="Selectionner une catégorie" class="tail-select w-full" name="category_id">
                             @foreach($categories as $categorie)
@@ -39,7 +36,7 @@
                 <div class="mt-3">
                     <label>Stock disponible</label>
                     <div class="relative mt-2">
-                        <input type="number" class="input pr-12 w-full border col-span-4" placeholder="" name="stock" required="required" value="{{ old('stock') }}">
+                        <input type="number" class="input pr-12 w-full border col-span-4" placeholder="Renseigner le stock du produit" name="stock" required="required" value="{{ old('stock') }}">
                         <div class="absolute top-0 right-0 rounded-r w-12 h-full flex items-center justify-center bg-gray-100 dark:bg-dark-1 dark:border-dark-4 border text-gray-600">pièces</div>
                     </div>
                     {!! $errors->first('stock', '<small class="text-red-500 font-extrabold">:message</small>') !!}
@@ -61,7 +58,7 @@
                 <div class="mt-3">
                     <label>Prix</label>
                     <div class="relative mt-2">
-                        <input type="number" class="input pr-16 w-full border col-span-4" placeholder="Prix unitaire" name="price" value="{{ old('price') }}">
+                        <input type="number" class="input pr-16 w-full border col-span-4" placeholder="Prix unitaire du produit" name="price" value="{{ old('price') }}">
                         <div class="absolute top-0 right-0 rounded-r w-16 h-full flex items-center justify-center bg-gray-100 dark:bg-dark-1 dark:border-dark-4 border text-gray-600">Prix</div>
                     </div>
                     {!! $errors->first('price', '<small class="text-red-500 font-extrabold">:message</small>') !!}
@@ -101,27 +98,27 @@
                     </div>
                 </div>
                  <div class="mt-3">
-                <label>image 1</label>
+                <label>Image 1 du produit</label>
                     <div class="relative mt-2">
                         <input type="file" class="input pr-12 w-full border col-span-4" placeholder="" accept="image/*" name="picture1">
                     </div>
                 </div>
                 <div class="mt-3">
-                    <label>image 2</label>
+                    <label>Image 2 du produit</label>
                         <div class="relative mt-2">
                             <input type="file" class="input pr-12 w-full border col-span-4" placeholder="" accept="image/*" name="picture2">
                         </div>
                     </div>
                     <div class="mt-3">
-                        <label>image 3</label>
+                        <label>Image 3 du produit</label>
                             <div class="relative mt-2">
                                 <input type="file" class="input pr-12 w-full border col-span-4" placeholder="" accept="image/*" name="picture3">
                             </div>
                         </div>
                  <div class="mt-3">
-                    <label>Description</label>
+                    <label>Description </label>
                     <div class="mt-2">
-                        <textarea data-simple-toolbar="true" class="editor" name="product_desc">
+                        <textarea data-simple-toolbar="true" class="editor" name="product_desc" placeholder="Renseigner les différents informations du produit">
 
                         </textarea>
                         {!! $errors->first('product_desc', '<small class="text-red-500 font-extrabold">:message</small>') !!}
@@ -140,19 +137,20 @@
             <table class="table table-report table-report--bordered display datatable w-full">
                 <thead>
                     <tr>
-                        <th class="border-b-2 whitespace">Nom</th>
+                        <th class="border-b-2 whitespace">Nom du produit</th>
                         <th class="border-b-2 text-center whitespace-no-wrap">Catégorie</th>
-                        <th class="border-b-2 text-center whitespace-no-wrap">Stock</th>
-                        <th class="border-b-2 text-center whitespace-no-wrap">Prix</th>
-                        <th class="border-b-2 text-center whitespace-no-wrap">Details</th>
-                        <th class="border-b-2 text-center whitespace-no-wrap">ACTIONS</th>
+                        <th class="border-b-2 text-center whitespace-no-wrap">Stock Disponible</th>
+                        <th class="border-b-2 text-center whitespace-no-wrap">Prix unitaire</th>
+                        <th class="border-b-2 text-center whitespace-no-wrap">Détails</th>
+                        <th class="border-b-2 text-center whitespace-no-wrap">Editer</th>
+                        <th class="border-b-2 text-center whitespace-no-wrap">Supprimer</th>
                     </tr>
                 </thead>
                 @forelse ($products as $product )
                 <tbody>
                     <tr>
                         <td class="border-b">
-                            <div class="font-medium whitespace-no-wrap">{{ $product->product_name }}</div>
+                            <div class="font-medium whitespace-wrap">{{ $product->product_name }}</div>
                         </td>
                         <td class="text-center border-b">
                             <div class="font-medium whitespace-no-wrap">{{ $product->category->category_name }}</div>
@@ -178,22 +176,38 @@
                                     <i data-feather="check-square" class="w-4 h-4 mr-1"></i>
                                 </button>
                                 </a>
-                                <form action="{{ route('all_products.destroy',$product->id) }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="button px-2 mr-1 mb-2 bg-theme-6 text-white flex items-center" type="submit">
-                                        <span class="w-5 h-5 flex items-center justify-center">
-                                            <i data-feather="trash-2" class="w-4 h-4"></i>
-                                        </span>
-                                    </button>
-                               </form>
                             </div>
                         </td>
-                        @empty
-                        <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-18 text-theme-9">
-                            <div class="m-auto">
-                                <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-17 text-theme-11"> <i data-feather="alert-circle" class="w-6 h-6 mr-2"></i> Aucun produit disponible </div>
+                        <td>
+                            <a href="javascript:;" style="width: fit-content; height: fit-content;" class="deleteUserbtn" data-toggle="modal" data-target="#delete-modal-preview">
+                                <button class="button px-2 mr-1 mb-2 bg-theme-6 text-white flex items-center" >
+                                    <span class="w-5 h-5 flex items-center justify-center">
+                                        <i data-feather="trash-2" class="w-4 h-4"></i>
+                                    </span>
+                                </button>
+                            </a>
+                        </td>
+                        <div class="modal" id="delete-modal-preview">
+                            <div class="modal__content">
+                                <div class="p-5 text-center"> <i data-feather="x-circle" class="w-16 h-16 text-theme-6 mx-auto mt-3"></i>
+                                    <div class="text-3xl mt-5">Êtes vous sûr?</div>
+                                    <div class="text-gray-600 mt-2">Voudriez-vous vraiment supprimer cet produit?</div>
+                                </div>
+                                <div class="px-5 pb-8 text-center">
+                                     <button type="button" data-dismiss="modal" class="button w-24 border text-gray-700 dark:border-dark-5 dark:text-gray-300 mr-1">Annuler</button>
+                                        <form action="{{ route('all_products.destroy',$product->id) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="javascript:void()" id="confirmDeleteBtn">
+                                              <button type="submit" class="button w-24 bg-theme-6 text-white">Supprimer</button>
+                                            </a>
+                                    </form>
+                                </div>
                             </div>
+                        </div>
+                        @empty
+                            <div class="m-auto">
+                                <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-17 text-theme-11 text-center"> <i data-feather="alert-circle" class="w-6 h-6 mr-2 "></i> Aucun produit disponible </div>
                         </div>
                     </tr>
                 </tbody>

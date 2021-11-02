@@ -1,11 +1,11 @@
 @extends('layout/top-menu')
 
 @section('subhead')
-<title>Paramètrage</title>
+<title>Configuration | Pourcentage-Retrait</title>
 @endsection
 @section('subcontent')
 <div class="intro-y flex items-center mt-8">
-    <h2 class="text-lg font-medium m-auto">Modification Paramètrage pourcentage</h2>
+    <h2 class="text-lg font-medium m-auto">Modification de la configuration-pourcentage</h2>
 </div>
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 lg:col-span-4"></div>

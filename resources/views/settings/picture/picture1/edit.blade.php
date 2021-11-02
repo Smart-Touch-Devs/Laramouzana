@@ -1,7 +1,7 @@
 @extends('layout/top-menu')
 
 @section('subhead')
-<title>Paramètrage Image 1| barre latérale</title>
+<title>Configuration Image 1| barre latérale</title>
 @endsection
 @section('subcontent')
 <div class="intro-y flex items-center mt-8">
@@ -11,7 +11,7 @@
     <div class="intro-y col-span-12 lg:col-span-3 "></div>
     <div class="intro-y col-span-12 lg:col-span-6">
         <h2 class="text-lg font-medium my-5 ml-4">Modification Image</h2>
-        <form action="{{ route('front_picture1.update',$frontpicture->id) }}" method="post" enctype="multipart/form-data" >
+        <form action="{{ route('front_picture1.update',$frontpicture1->id) }}" method="post" enctype="multipart/form-data" >
             @csrf
             @method('PATCH')
             @if ($message = Session::get('success'))
@@ -21,12 +21,15 @@
             @endif
             <div class="intro-y box p-5">
                 <div>
-                    <label>Image 1| barre latérale</label>
+                    <label>Image 1 | barre latérale</label>
                     <input type="file" class="input w-full border mt-2" name="picture_lat1">
-                    <img src="{{ asset('assets/img/picture_lat'.'/'.$frontpicture->picture_lat1) }}" alt="" width="75px" height="75px">
+                    <img src="{{ asset('assets/img/picture_lat'.'/'.$frontpicture1->picture_lat1) }}" alt="" width="75px" height="75px">
                     {!! $errors->first('picture_lat1', '<small class="text-danger">:message</small>') !!}
                 </div>
                     <div class="text-right mt-5">
+                    <a href="{{ asset('staff/front_picture') }}">
+                        <button type="button" class="button w-24 bg-theme-1 text-white">Retour</button>
+                    </a>
                     <button type="submit" class="button w-24 bg-theme-1 text-white">Modifier</button>
                 </div>
             </div>
