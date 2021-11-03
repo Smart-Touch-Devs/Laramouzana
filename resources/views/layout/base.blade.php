@@ -12,7 +12,7 @@
 
     @yield('head')
 
-    <link rel="stylesheet" href="{{ asset('dist/css/app.css') }}" />
+    <link rel="stylesheet" href="{{ asset('dist/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/icofont/icofont.min.css') }}">
     <!-- css upload img -->
     <link rel="stylesheet" href="{{ asset('assets/css/master.css') }}">
