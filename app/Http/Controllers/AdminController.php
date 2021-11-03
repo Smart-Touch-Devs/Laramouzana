@@ -6,6 +6,7 @@ use App\Models\admin;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\clients;
 use App\Models\Commanded_products;
+use App\Models\Contact;
 use App\Models\products;
 use App\Models\rejectedWithdraws;
 use App\Models\Transaction;
@@ -25,6 +26,7 @@ class AdminController extends Controller
 
     public function index()
     {
+        $contacts = Contact::all();
         $clients = clients::all();
         $allProducts = products::all();
         $commandedProducts = Commanded_products::all();
@@ -58,7 +60,8 @@ class AdminController extends Controller
             'lastMonthIncoming' => $this->getLastMonthIncoming(),
             'mostSaledProducts' => $saledProducts,
             'orderDescProducts' => $orderDescProducts,
-            'transactions' => $transactions
+            'transactions' => $transactions,
+            'contacts' =>$contacts
         ]);
     }
 

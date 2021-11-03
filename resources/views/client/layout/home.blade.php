@@ -107,12 +107,9 @@
                                 @endforeach
                             </ul>
                         </div>
-
                     </div>
-                    <!-- End Tab Content -->
                 </div>
-                <!-- End Tab Prodcut Section -->
-                <!-- Full banner -->
+
                 <div class="mb-8">
                     <a href="../shop/shop.html" class="d-block text-gray-90">
                         <div class="bg-img-hero pt-3" style="background-image: url(../../assets/img/1400X206/fond_solaire.jpg);">
@@ -132,8 +129,7 @@
                         </div>
                     </a>
                 </div>
-                <!-- End Full banner -->
-                <!-- Product-with-banner -->
+
                 <div class="mb-8">
                     <div class=" d-flex justify-content-between border-bottom border-color-1 flex-md-nowrap flex-wrap border-sm-bottom-0">
                         <h3 class="section-title mb-0 pb-2  text-capitalize font-size-22">{{ $product_cat_names[0][0]->category_name }}</h3>
@@ -141,7 +137,7 @@
                     <div class="row">
                         <div class="col-auto bannerSection">
                             <a href="../shop/shop.html" class="d-block">
-                                <img alt="" width="212px" height="305px" src="{{asset('assets/categorie_Picture').'/'.$product_cat_pics[0][0]->picture }}">
+                                <img alt="" width="212px" height="305px" src="{{asset('assets/categorie_Picture').'/'.$product_cat_pics[0][0]->cat_picture }}">
                             </a>
                         </div>
                         <div class="col">
@@ -181,7 +177,7 @@
                     <div class="row">
                         <div class="col-auto bannerSection">
                             <a href="../shop/shop.html" class="d-block">
-                                <img alt="" width="212px" height="305px" src="{{asset('assets/categorie_Picture').'/'.$product_cat_pics[1][0]->picture }}">
+                                <img alt="" width="212px" height="305px" src="{{asset('assets/categorie_Picture').'/'.$product_cat_pics[1][0]->cat_picture }}">
                             </a>
                         </div>
                         <div class="col">
@@ -213,25 +209,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- End Product-with-banner -->
-
-                <!-- Banner 2 columns -->
-                <div class="mb-8">
-                    <div class="row">
-                        <div class="col-md-6 mb-3 mb-md-0">
-                            <a href="../shop/shop.html">
-                                <img class="img-fluid" src="{{ asset('assets/img/536X150/img1.jpg') }}" alt="Image Description">
-                            </a>
-                        </div>
-                        <div class="col-md-6">
-                            <a href="../shop/shop.html">
-                                <img class="img-fluid" src="{{ asset('assets/img/536X150/img2.jpg') }}" alt="Image Description">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Banner 2 columns -->
-
             </div>
         </div>
             @endif

@@ -13,6 +13,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PercentageController;
 use App\Http\Controllers\FrontPictureController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\ContactController;
 
 
 //Client
@@ -152,6 +153,8 @@ Route::resource('Faqs', 'FaqsController');
 //Front uniquement
 Route::get('/about', 'FrontController@about')->name('about');
 Route::get('/contacts', 'ContactController@contact')->name('contact');
+Route::get('deleteContact/{id}','ContactController@destroy')->name('deleteContact');
+// Route::post('/storeContacts', [ContactController::class,'store'])->name('storeContact');
 Route::get('/confirm', 'FrontController@confirm')->name('confirm');
 Route::get('/shop', 'FrontController@shop')->name('shop');
 Route::post('/validation', 'ContactController@store')->name('validation');
