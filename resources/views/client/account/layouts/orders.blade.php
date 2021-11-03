@@ -32,7 +32,7 @@
                         <td>{{ $product->products->product_name }}</td>
                         <td>{{ $product->quantity }}</td>
                         <td>{{ $product->products->price * $product->quantity }} FCFA</td>
-                        <td>{{ $product->products->delivery_time ?? "Aucun temps de livraison" }}</td>
+                        <td>{{ $product->products->delivery_time - round((time() - strtotime($product->created_at)) / (60 * 60 * 24)) . ' jours' ?? "Aucun temps de livraison" }}</td>
                       </tr>
                       @endforeach
                     </tbody>

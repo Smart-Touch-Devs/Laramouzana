@@ -91,33 +91,19 @@
                                     <div class="mb-3">
                                         <div class="font-size-36"> {{$display_prods_cat_2->price}}FCFA</div>
                                     </div>
-                                    <div class="mb-4">
-                                        <h6 class="font-size-14">Quantité</h6>
-                                        <!-- Quantity -->
-                                        <div class="border rounded-pill py-1 w-md-60 height-35 px-3 border-color-1">
-                                            <div class="js-quantity row align-items-center">
-                                                <div class="col">
-                                                    <input class="js-result form-control h-auto border-0 rounded p-0 shadow-none" type="text" value="1">
-                                                </div>
-                                                <div class="col-auto pr-1">
-                                                    <a class="js-minus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0" href="javascript:;">
-                                                        <small class="fas fa-minus btn-icon__inner"></small>
-                                                    </a>
-                                                    <a class="js-plus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0" href="javascript:;">
-                                                        <small class="fas fa-plus btn-icon__inner"></small>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- End Quantity -->
-                                    </div>
 
                                     <div class="mb-3 pb-0dot5">
                                         <a href="#" class="btn btn-block btn-primary-dark"><i class="ec ec-add-to-cart mr-2 font-size-20"></i> Ajouté au panier</a>
                                     </div>
                                     <div class="mb-3">
                                         @if (auth()->check())
-                                        <a href="#" class="btn btn-block btn-dark">Commander</a>
+                                        <form action="{{ route('client.commandOne') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $display_prods_cat_2->id }}" required>
+                                            <input type="hidden" name="product_price" value={{$display_prods_cat_2->price}} required>
+                                            <input type="hidden" name="client_id" value="{{ Auth::user()->id }}" required>
+                                            <button type="submit" class="btn btn-block btn-dark">Commander</button>
+                                        </form>
                                         @else
 
                                         @endif

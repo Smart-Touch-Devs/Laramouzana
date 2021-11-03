@@ -52,8 +52,8 @@ const updateCard = document.querySelector('#updateCard')
 
     updateCard.addEventListener('click', function() {
         localStorage.clear();
-        productNum.innerHTML = '0'
-        productPriceSum.innerHTML = '0 FCFA'
+        productNum.forEach(ele => ele.innerHTML = '0')
+        productPriceSum.forEach(pps => pps.innerHTML = '0 FCFA')
         productsList.innerHTML = ''
     })
 

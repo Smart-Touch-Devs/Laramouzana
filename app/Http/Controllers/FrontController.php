@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session;
 use App\Models\Contact;
 use App\Models\categories;
+use App\Models\ClientAccount;
+use App\Models\clients;
+use App\Models\Command;
+use App\Models\Commanded_products;
 use App\Models\products;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FrontController extends Controller
 {
@@ -32,7 +37,7 @@ class FrontController extends Controller
 
 
     public function store(Request $request){
-        
+
         $data=request()->validate([
         	'name'=>['required','string','max:50'],
         	'email'=>['required','string','email'],
@@ -59,5 +64,30 @@ class FrontController extends Controller
             ->get(['id', 'product_name', 'picture1']);
             return json_encode($products);
         }
+    }
+
+    public function commandOne(Request $request) {
+
+        if($request->product_price > Auth::user()->account->amount) {
+            return redirect()->back()->with('error', 'Votre solde est insuffisant pour commander ce produit!');
+        } else {
+            $commandAdded = Command::create([
+                'clients_id' => $request->client_id,
+                'is_delivered' => 0
+            ]);
+
+            if($commandAdded) {
+                Commanded_products::create([
+                    'command_id' => $commandAdded->id,
+                    'product_id' => $request->product_id,
+                    'quantity' => 1
+                ]);
+
+                ClientAccount::where('client_id', $request->client_id)->update(['amount' => (((int) Auth::user()->account->amount) - ((int) $request->product_price))]);
+
+                return redirect()->back()->with('success', 'Votre commande un succès!');
+            }
+        }
+
     }
 }
