@@ -25,7 +25,8 @@ class DatabaseSeeder extends Seeder
             CommandSeeder::class,
             DepositSeeder::class,
             WithdrawSeeder::class,
-            PercentageSeeder::class
+            PercentageSeeder::class,
+            ImageSeeder::class
            // CommandedProductSeeder::class
         ]);
     }

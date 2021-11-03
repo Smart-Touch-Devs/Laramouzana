@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\categories;
 use App\Models\FrontPicture1;
 use App\Models\products;
+use App\Models\PubPicture;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -16,7 +17,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-
+        // $pubs = PubPicture::all();
         $categories = categories::get();
         $categoriesIds = [];
         foreach ($categories as $category) {
@@ -33,10 +34,11 @@ class HomeController extends Controller
         $display_prods_cat_2 = products::where('category_id', '=', $ids[1])->limit(4)->get();
         $display_prods = [$display_prods_cat_1, $display_prods_cat_2];
         $product_cat_names = [categories::where('id', $ids[0])->get('category_name'), categories::where('id', $ids[1])->get('category_name')];
-        $product_cat_pics = [categories::where('id', $ids[0])->get('picture'), categories::where('id', $ids[1])->get('picture')];
+        $product_cat_pics = [categories::where('id', $ids[0])->get('cat_picture'), categories::where('id', $ids[1])->get('cat_picture')];
         //Produit recemment ajoutés
         $new_products = products::orderBy('created_at', 'DESC')->limit(6)->get();
         $frontpictures = FrontPicture1::latest()->limit(1)->get();
+
 
         return view('client.layout.home', ['categories' => $categories, 'display_prods' => $display_prods, 'product_cat_names' => $product_cat_names, 'display_prods_cat_1' => $display_prods_cat_1, 'display_prods_cat_2' => $display_prods_cat_2, 'new_products' => $new_products, 'product_cat_pics' => $product_cat_pics, 'frontpictures' => $frontpictures]);
     }

@@ -227,7 +227,7 @@
                             class="navbar navbar-expand u-header__navbar py-0 justify-content-xl-between max-width-270 min-width-270">
                             <!-- Logo -->
                             <a class="order-1 order-xl-0 navbar-brand u-header__navbar-brand u-header__navbar-brand-center"
-                                href="../home/index.html" aria-label="Electro">
+                                href="{{ asset('/') }}" aria-label="Electro">
                                 <svg version="1.1" x="0px" y="0px" width="175.748px" height="42.52px"
                                     viewBox="0 0 175.748 42.52" enable-background="new 0 0 175.748 42.52"
                                     style="margin-bottom: 0;">
