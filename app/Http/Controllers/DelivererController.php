@@ -42,9 +42,7 @@ class DelivererController extends Controller
 
     public function history()
     {
-        $commands = Command::where(['is_delivered' => 1, 'deliverer_id' => Auth::guard('admin')
-            ->user()
-            ->id])
+        $commands = Command::where('is_delivered', 1)
             ->orderBy('created_at', 'desc')
             ->limit(20)
             ->get();

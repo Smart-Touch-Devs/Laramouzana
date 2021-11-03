@@ -27,7 +27,7 @@
                 <div class="mt-3">
                     <label>Image de la categorie correspondante </label>
                         <div class="relative mt-2">
-                            <input type="file" class="input pr-12 w-full border col-span-4"  accept="image/*" name="cat_picture">
+                            <input type="file" class="input pr-12 w-full border col-span-4"  accept="image/*" name="cat_picture" required>
                         </div>
                     </div>
                 <div class="mt-3">

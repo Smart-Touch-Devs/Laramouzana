@@ -4,7 +4,7 @@ const updateCard = document.querySelector('#updateCard')
     let reaper_cart = []
     if(localStorage.getItem('cart')) {
         reaper_cart = Array.from(JSON.parse(localStorage.getItem('cart')))
-        
+
     }
 
     if(reaper_cart !== []) {
@@ -25,7 +25,7 @@ const updateCard = document.querySelector('#updateCard')
                 <a href="#" class="text-gray-32 font-size-26"></a>
             </td>
             <td class="d-none d-md-table-cell">
-                <a href="#"><img class="img-fluid max-width-100 p-1 border border-color-1" src="assets/product_Picture/${products[i].img}" alt="Image Description"></a>
+                <a href="#"><img class="max-width-100 p-1 border border-color-1" src="assets/product_Picture/${products[i].img}" alt="Image Description"></a>
             </td>
 
             <td data-title="Product">

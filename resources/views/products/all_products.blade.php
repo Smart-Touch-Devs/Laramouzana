@@ -100,7 +100,7 @@
                  <div class="mt-3">
                 <label>Image 1 du produit</label>
                     <div class="relative mt-2">
-                        <input type="file" class="input pr-12 w-full border col-span-4" placeholder="" accept="image/*" name="picture1">
+                        <input type="file" class="input pr-12 w-full border col-span-4" placeholder="" accept="image/*" name="picture1" required>
                     </div>
                 </div>
                 <div class="mt-3">

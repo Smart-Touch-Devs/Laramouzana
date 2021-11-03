@@ -33,7 +33,7 @@ class HomeController extends Controller
         $display_prods_cat_2 = products::where('category_id', '=', $ids[1])->limit(4)->get();
         $display_prods = [$display_prods_cat_1, $display_prods_cat_2];
         $product_cat_names = [categories::where('id', $ids[0])->get('category_name'), categories::where('id', $ids[1])->get('category_name')];
-        $product_cat_pics = [categories::where('id', $ids[0])->get('picture'), categories::where('id', $ids[1])->get('picture')];
+        $product_cat_pics = [categories::where('id', $ids[0])->get('cat_picture'), categories::where('id', $ids[1])->get('cat_picture')];
         //Produit recemment ajoutés
         $new_products = products::orderBy('created_at', 'DESC')->limit(6)->get();
         $frontpictures = FrontPicture1::latest()->limit(1)->get();
