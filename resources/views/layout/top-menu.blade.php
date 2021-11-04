@@ -223,7 +223,7 @@
                                 </div>
                             </a>
                         </li>
-                        
+
                         @if (Auth::guard('admin')->user()->role_id === 5)
                         <li>
                             <a href="#"  class="top-menu @if(stristr(Request::route()->uri, 'staff/settings')) top-menu--active @endif">
@@ -245,6 +245,11 @@
                                     <a href="{{ asset('staff/front_picture') }}" class="top-menu">
                                         <div class="top-menu__title">
                                             Configuration images
+                                        </div>
+                                    </a>
+                                    <a href="{{ asset('staff/mainPicture') }}" class="top-menu">
+                                        <div class="top-menu__title">
+                                            Configuration image principale
                                         </div>
                                     </a>
                                 </li>

@@ -41,8 +41,8 @@
                                 @if (count($shopManagers) > 0)
                                 @foreach ($shopManagers as $shopManager)
                                 <tr>
-                                    <td class="border-b whitespace-no-wrap">{{ $shopManager->lastname }}</td>
-                                    <td class="border-b whitespace-no-wrap">{{ $shopManager->firstname }}</td>
+                                    <td class="border-b whitespace-no-wrap">{{ $shopManager->last_name }}</td>
+                                    <td class="border-b whitespace-no-wrap">{{ $shopManager->first_name }}</td>
                                     <td class="border-b whitespace-no-wrap">{{ $shopManager->email }}</td>
                                     <td class="border-b whitespace-no-wrap">{{ $shopManager->phone }}</td>
                                     <td class="border-b whitespace-no-wrap">
