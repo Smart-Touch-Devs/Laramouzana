@@ -13,7 +13,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PercentageController;
 use App\Http\Controllers\FrontPictureController;
 use App\Http\Controllers\UsersController;
-use App\Http\Controllers\ContactController;
 
 
 //Client
