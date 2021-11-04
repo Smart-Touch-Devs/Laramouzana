@@ -23,9 +23,12 @@
             <div class="mb-4">
                 <h1 class="text-center">Panier</h1>
             </div>
+            <div class="errorOrSuccess">
+
+            </div>
             <div class="mb-10 cart-table">
                 @auth
-                <form class="mb-4" action="#" method="post">
+                <form class="mb-4" action="{{ route('client.commandMany') }}" method="post" id="commandFromCart">
                 @endauth
                     <table class="table" cellspacing="0">
                         <thead>

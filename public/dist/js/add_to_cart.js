@@ -21,5 +21,3 @@ addBtns.forEach(button => {
         productPriceSum.forEach(sum => sum.innerHTML = parseInt(sum.textContent.split(' ')[0], 10) + JSON.parse(this.dataset.product_info).price + ' FCFA')
     })
 })
-
-console.log(productNum);

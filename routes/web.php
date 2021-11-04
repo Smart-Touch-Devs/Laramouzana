@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientAuthController;
 use App\Http\Controllers\DelivererController;
+use App\Http\Controllers\FrontController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PercentageController;
 use App\Http\Controllers\FrontPictureController;
@@ -23,7 +24,6 @@ Route::get('single_product/{id}', 'Single_productController@index')->name('singl
 Route::get('cat1_product/{id}', 'Single_productController@cat1_product')->name('cat1_product');
 Route::get('cat2_product/{id}', 'Single_productController@cat2_product')->name('cat2_product');
 Route::get('shop_product/{id}', 'Single_productController@shop_product')->name('shop_product');
-
 
 //user account
 Route::middleware('auth')->group(function () {
@@ -163,3 +163,5 @@ Route::post('/devis', 'ContactController@devis_store')->name('devis_store');
 Route::post('/intervention', 'ContactController@intervention_store')->name('intervention_store');
 Route::post('/validation', 'FrontController@store')->name('validation');
 Route::get('/getCategory/{id}', [Add_categoriesController::class, 'getCategory'])->name('getCategory');
+Route::post('/commandone', [FrontController::class, 'commandOne'])->name('client.commandOne');
+Route::post('/commandmany', [FrontController::class, 'commandMany'])->name('client.commandMany');

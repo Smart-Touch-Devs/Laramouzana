@@ -8,8 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Commanded_products extends Model
 {
     use HasFactory;
-    public function Command(){
 
+    protected $fillable = ['command_id', 'product_id', 'quantity'];
+
+    public function Command(){
         return $this->belongsTo(Command::class,'command_id');
     }
 
