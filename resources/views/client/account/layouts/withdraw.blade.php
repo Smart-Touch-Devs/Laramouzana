@@ -17,7 +17,7 @@
             @if (date('D') !== 'Mon')
             <div>
                 <h3 class="font-weight-bolder">Demande de retrait</h3>
-                <p class="text-danger font-weight-bold">Les frais de rétrait sont de 5% du montant de rétrait demandé</p>
+                <p class="text-danger font-weight-bold">Les frais de rétrait sont de {{ $percentage }}% du montant de rétrait demandé</p>
                 <h4 class="my-3">Solde actuel : {{Auth::user()->account->amount}} FCFA</h4>
             </div>
             <form class="js-validate" action="{{ route('account.requestWithdrawal') }}" method="post">

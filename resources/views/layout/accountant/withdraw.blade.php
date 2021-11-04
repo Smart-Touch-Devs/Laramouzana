@@ -1,7 +1,7 @@
 @extends('layout/top-menu')
 
 @section('subhead')
-<title>Page Comptable | Historique des livraisons</title>
+<title>Page Comptable | Rétraits</title>
 @endsection
 
 @section('subcontent')
@@ -27,13 +27,15 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($withdraws as $withdraw)
                                 <tr>
-                                    <td class="border-b whitespace-no-wrap">John</td>
-                                    <td class="border-b whitespace-pre-wrap">Doe</td>
-                                    <td class="border-b whitespace-no-wrap">66292862</td>
-                                    <td class="border-b whitespace-no-wrap">10 Octobre 2021 à 8H</td>
-                                    <td class="border-b whitespace-no-wrap">100.000 FCFA</td>
+                                    <td class="border-b whitespace-no-wrap">{{ $withdraw->clients->firstname }}</td>
+                                    <td class="border-b whitespace-pre-wrap">{{ $withdraw->clients->lastname }}</td>
+                                    <td class="border-b whitespace-no-wrap">{{ $withdraw->clients->phone }}</td>
+                                    <td class="border-b whitespace-no-wrap">{{ date('d/M/Y à H', strtotime($withdraw->created_at)) . 'H' }}</td>
+                                    <td class="border-b whitespace-no-wrap">{{ $withdraw->amount }} FCFA</td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

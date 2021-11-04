@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Command;
 use App\Models\Commanded_products;
+use App\Models\Deposit;
+use App\Models\Transaction;
+use App\Models\Withdraw;
 use Illuminate\Support\Facades\Request;
 
 class AccountantController extends Controller
@@ -27,14 +30,15 @@ class AccountantController extends Controller
     }
 
     public function deposit() {
-        return view('layout.accountant.deposit');
+        $deposits = Deposit::all();
+        return view('layout.accountant.deposit', ['deposits' => $deposits]);
     }
 
     public function withdraw() {
-        return view('layout.accountant.withdraw');
+        return view('layout.accountant.withdraw', ['withdraws' => Withdraw::all()]);
     }
 
     public function remittance() {
-        return view('layout.accountant.remittance');
+        return view('layout.accountant.remittance', ['remittances' => Transaction::all()]);
     }
 }

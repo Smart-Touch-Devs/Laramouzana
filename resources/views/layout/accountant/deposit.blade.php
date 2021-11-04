@@ -1,7 +1,7 @@
 @extends('layout/top-menu')
 
 @section('subhead')
-<title>Page Comptable | Historique des livraisons</title>
+<title>Page Comptable | Dépôts</title>
 @endsection
 
 @section('subcontent')
@@ -27,14 +27,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-
+                                @foreach ($deposits as $deposit)
                                 <tr>
-                                    <td class="border-b whitespace-no-wrap">John</td>
-                                    <td class="border-b whitespace-pre-wrap">Doe</td>
-                                    <td class="border-b whitespace-no-wrap">66292862</td>
-                                    <td class="border-b whitespace-no-wrap">aboubakarycisse410@gmail.com</td>
-                                    <td class="border-b whitespace-no-wrap">100.000 FCFA</td>
+                                    <td class="border-b whitespace-no-wrap">{{ $deposit->clients->firstname }}</td>
+                                    <td class="border-b whitespace-pre-wrap">{{ $deposit->clients->lastname }}</td>
+                                    <td class="border-b whitespace-no-wrap">{{ $deposit->clients->phone }}</td>
+                                    <td class="border-b whitespace-no-wrap">{{ $deposit->clients->email }}</td>
+                                    <td class="border-b whitespace-no-wrap">{{ $deposit->amount }}</td>
                                 </tr>
+                                @endforeach
 
                             </tbody>
                         </table>

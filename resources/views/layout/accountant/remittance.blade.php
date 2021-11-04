@@ -1,7 +1,7 @@
 @extends('layout/top-menu')
 
 @section('subhead')
-<title>Page Comptable | Historique des livraisons</title>
+<title>Page Comptable | Transfert</title>
 @endsection
 
 @section('subcontent')
@@ -29,14 +29,16 @@
                             </thead>
                             <tbody>
 
-                                <tr>
-                                    <td class="border-b whitespace-no-wrap">John Doe</td>
-                                    <td class="border-b whitespace-pre-wrap">Jane Doe</td>
-                                    <td class="border-b whitespace-no-wrap">66292862</td>
-                                    <td class="border-b whitespace-no-wrap">07458765</td>
-                                    <td class="border-b whitespace-no-wrap">10 Octobre 2021</td>
-                                    <td class="border-b whitespace-no-wrap">100.000 FCFA</td>
-                                </tr>
+                                @foreach ($remittances as $remittance)
+                                    <tr>
+                                        <td class="border-b whitespace-no-wrap">{{ $remittance->Sender->firstname . ' ' . $remittance->Sender->lastname }}</td>
+                                        <td class="border-b whitespace-pre-wrap">{{ $remittance->Receiver->firstname . ' ' . $remittance->Receiver->lastname }}</td>
+                                        <td class="border-b whitespace-no-wrap">{{ $remittance->Sender->phone }}</td>
+                                        <td class="border-b whitespace-no-wrap">{{ $remittance->Receiver->phone }}</td>
+                                        <td class="border-b whitespace-no-wrap">{{ date('d/M/Y', strtotime($remittance->created_at)) }}</td>
+                                        <td class="border-b whitespace-no-wrap">{{ $remittance->amount }} FCFA</td>
+                                    </tr>
+                                @endforeach
 
                             </tbody>
                         </table>
