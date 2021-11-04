@@ -162,4 +162,5 @@ Route::post('/devis', 'ContactController@devis_store')->name('devis_store');
 Route::post('/intervention', 'ContactController@intervention_store')->name('intervention_store');
 Route::post('/validation', 'FrontController@store')->name('validation');
 Route::get('/getCategory/{id}', [Add_categoriesController::class, 'getCategory'])->name('getCategory');
-Route::post('/command', [FrontController::class, 'commandOne'])->name('client.commandOne');
+Route::post('/commandone', [FrontController::class, 'commandOne'])->name('client.commandOne');
+Route::post('/commandmany', [FrontController::class, 'commandMany'])->name('client.commandMany');

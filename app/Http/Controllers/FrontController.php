@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Session;
 use App\Models\Contact;
 use App\Models\categories;
 use App\Models\ClientAccount;
-use App\Models\clients;
 use App\Models\Command;
 use App\Models\Commanded_products;
 use App\Models\products;
@@ -83,10 +81,47 @@ class FrontController extends Controller
                     'quantity' => 1
                 ]);
 
+                products::where('id', $request->product_id)->update(['stock' => (((int) products::find($request->product_id)->stock) - 1)]);
+
                 ClientAccount::where('client_id', $request->client_id)->update(['amount' => (((int) Auth::user()->account->amount) - ((int) $request->product_price))]);
 
                 return redirect()->back()->with('success', 'Votre commande un succès!');
             }
+        }
+
+    }
+
+    public function commandMany(Request $request) {
+
+        $total_amount = null;
+        foreach ($request->all() as $data) {
+            $total_amount += ($data['product_price'] *  $data['product_quantity']);
+        }
+
+        if(auth()->user()->account->amount < $total_amount) {
+            return json_encode(['error' => 'Votre solde est insuffisant pour commander ce produit!']);
+        } else if(empty($request->all())) {
+            return json_encode(['error' => 'Vous n\'avez aucun produit dans votre panier!']);
+        } else {
+            $commandAdded = Command::create([
+                'clients_id' => auth()->user()->id,
+                'is_delivered' => 0
+            ]);
+
+            if($commandAdded) {
+                foreach ($request->all() as $data) {
+                    Commanded_products::create([
+                        'command_id' => $commandAdded->id,
+                        'product_id' => $data['product_id'],
+                        'quantity' => $data['product_quantity']
+                    ]);
+                    products::where('id',$data['product_id'])->update(['stock' => (((int) products::find($data['product_id'])->stock) - ((int) $data['product_quantity']))]);
+                }
+            }
+
+            ClientAccount::where('client_id', auth()->user()->id)->update(['amount' => (((int) Auth::user()->account->amount) - ((int) $total_amount))]);
+
+            return json_encode(['success', 'Votre commande a été un succès!']);
         }
 
     }

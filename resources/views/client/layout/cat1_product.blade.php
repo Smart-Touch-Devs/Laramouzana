@@ -16,7 +16,7 @@
                 {{Session::forget('success')}}
                 @endif
                 @if ($message = Session::get('error'))
-                <div class="alert alert-error mt-19 alert-dismissible fade show" role="alert">
+                <div class="alert alert-danger mt-19 alert-dismissible fade show" role="alert">
                     <strong>{{ $message }}</strong>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
