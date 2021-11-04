@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\categories;
 use App\Models\FrontPicture1;
+use App\Models\FrontPicture2;
 use App\Models\MainPicture;
 use App\Models\products;
 use App\Models\PubPicture;
@@ -38,11 +39,13 @@ class HomeController extends Controller
         $product_cat_pics = [categories::where('id', $ids[0])->get('cat_picture'), categories::where('id', $ids[1])->get('cat_picture')];
         //Produit recemment ajoutés
         $new_products = products::orderBy('created_at', 'DESC')->limit(6)->get();
-        $frontpictures = FrontPicture1::latest()->limit(1)->get();
+        $frontpicture1s = FrontPicture1::all();
+        $frontpicture2s = FrontPicture2::all();
+        
         $mainPictures = MainPicture::all();
-        // dd($mainPictures);
 
-        return view('client.layout.home', ['categories' => $categories, 'display_prods' => $display_prods, 'product_cat_names' => $product_cat_names, 'display_prods_cat_1' => $display_prods_cat_1, 'display_prods_cat_2' => $display_prods_cat_2, 'new_products' => $new_products, 'product_cat_pics' => $product_cat_pics, 'frontpictures' => $frontpictures, 'mainPictures' => $mainPictures]);
+
+        return view('client.layout.home', ['categories' => $categories, 'display_prods' => $display_prods, 'product_cat_names' => $product_cat_names, 'display_prods_cat_1' => $display_prods_cat_1, 'display_prods_cat_2' => $display_prods_cat_2, 'new_products' => $new_products, 'product_cat_pics' => $product_cat_pics, 'frontpicture1s' => $frontpicture1s,'frontpicture2s' => $frontpicture2s, 'mainPictures' => $mainPictures]);
     }
 
     /**

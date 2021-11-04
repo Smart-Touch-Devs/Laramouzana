@@ -24,9 +24,15 @@
                 <div class="max-width-270 min-width-270 pt-xl-13 mt-xl-13">
                     <!-- Image Banner -->
                     <aside class="mb-8 bannerSection">
+                        @forelse ($frontpicture1s as $frontpicture1)
+                        <a href="../shop/shop.html" class="d-block">
+                            <img class="img-fluid" src="{{ asset('assets/img/picture_lat/'.'/'.$frontpicture1->picture_lat1) }}" alt="Image Description">
+                        </a>
+                        @empty
                         <a href="../shop/shop.html" class="d-block">
                             <img class="img-fluid" src="{{ asset('assets/img/picture_lat/img1.jpg') }}" alt="Image Description">
                         </a>
+                        @endforelse
                     </aside>
                     <!-- End Image Banner -->
                     <!-- Feature Product -->
@@ -42,9 +48,15 @@
                                             <div class="product-item__inner remove-prodcut-hover ">
                                                 <div class="product-item__body pb-xl-2">
                                                     <aside class="mb-8 bannerSection">
+                                                        @forelse ($frontpicture2s as $frontpicture2)
+                                                        <a href="../shop/shop.html" class="d-block">
+                                                            <img class="img-fluid" src="{{ asset('assets/img/picture_lat/'.'/'.$frontpicture2->picture_lat2) }}" alt="Image Description">
+                                                        </a>
+                                                        @empty
                                                         <a href="../shop/shop.html" class="d-block">
                                                             <img class="img-fluid" src="{{ asset('assets/img/picture_lat/img1.jpg') }}" alt="Image Description">
                                                         </a>
+                                                        @endforelse
                                                     </aside>
                                                 </div>
                                             </div>
