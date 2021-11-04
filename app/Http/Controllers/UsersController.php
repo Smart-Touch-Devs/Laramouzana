@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\admin;
 use App\Models\City;
+use App\Models\ClientAccount;
 use App\Models\clients;
 use App\Models\Country;
 use DateTime;
@@ -175,7 +176,7 @@ class UsersController extends Controller
             ->where('cityName', '=', $request->city)
             ->get();
 
-        clients::create([
+        $addedClient = clients::create([
             'role' => $request->role,
             'country' => $country[0]->id,
             'city' => $city[0]->id,
@@ -188,7 +189,13 @@ class UsersController extends Controller
             'sup_code' => $request->sup_code || null,
             'password' => Hash::make($request->password)
         ]);
-        $userType = $request->role === 1 ? 'Client' : 'Client';
+
+        ClientAccount::create([
+            'client_id' => $addedClient->id,
+            'amount' => 0
+        ]);
+
+        $userType = $request->role === 1 ? 'Client' : 'Technicien';
         $request->session()->put('success', $userType . ' ajouté avec succès!');
         return redirect()->back(302);
     }

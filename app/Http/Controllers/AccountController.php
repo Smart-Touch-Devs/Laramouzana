@@ -59,7 +59,7 @@ class AccountController extends Controller
             'phone' => 'required',
             'country' => 'required',
             'city' => 'required',
-            'cnib' => 'required|starts_with:B'
+            'cnib' => 'required'
         ]);
 
         $inputs = $request->all([
