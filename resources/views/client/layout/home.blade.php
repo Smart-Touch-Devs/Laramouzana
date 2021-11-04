@@ -1,14 +1,21 @@
 @extends('client.base')
-
 @section('main')
 <main id="content" role="main">
     <!-- Slider Section -->
     <div class="mb-4">
-        <div class="bg-img-hero" style="background-image: url(../../assets/img/1920X422/img1.jpg);">
+        @forelse ($mainPictures as $mainPicture)
+        <div class="bg-img-hero "  style="background-image: url({{asset('assets/mainPicture'.'/'.$mainPicture->picture)}});">
             <div class="container min-height-438 overflow-hidden">
 
             </div>
         </div>
+        @empty
+        <div class="bg-img-hero "  style="background-image: url(../../assets/img/1920x422/img1.jpg);">
+            <div class="container min-height-438 overflow-hidden">
+
+            </div>
+        </div>
+        @endforelse
     </div>
     <!-- End Slider Section -->
     <div class="container">

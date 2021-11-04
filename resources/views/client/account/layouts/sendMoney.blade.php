@@ -37,7 +37,13 @@
                             {{ $message }}
                         </span>
                     @enderror
+                    @if (Auth::user()->account->amount === 0)
+                        <p>
+                            Vous ne pouvez pas effectuez de transfere!!!Votre solde est insuffisant
+                        </p>
+                    @else
                     <button type="submit" class="btn btn-primary-dark-w px-5">Envoyer</button>
+                    @endif
                 </div>
             </form>
         </div>

@@ -39,9 +39,10 @@ class HomeController extends Controller
         //Produit recemment ajoutés
         $new_products = products::orderBy('created_at', 'DESC')->limit(6)->get();
         $frontpictures = FrontPicture1::latest()->limit(1)->get();
-        // $mainPictures = MainPicture::all();
+        $mainPictures = MainPicture::all();
+        // dd($mainPictures);
 
-        return view('client.layout.home', ['categories' => $categories, 'display_prods' => $display_prods, 'product_cat_names' => $product_cat_names, 'display_prods_cat_1' => $display_prods_cat_1, 'display_prods_cat_2' => $display_prods_cat_2, 'new_products' => $new_products, 'product_cat_pics' => $product_cat_pics, 'frontpictures' => $frontpictures]);
+        return view('client.layout.home', ['categories' => $categories, 'display_prods' => $display_prods, 'product_cat_names' => $product_cat_names, 'display_prods_cat_1' => $display_prods_cat_1, 'display_prods_cat_2' => $display_prods_cat_2, 'new_products' => $new_products, 'product_cat_pics' => $product_cat_pics, 'frontpictures' => $frontpictures, 'mainPictures' => $mainPictures]);
     }
 
     /**
