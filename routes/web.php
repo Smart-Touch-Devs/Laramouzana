@@ -127,6 +127,7 @@ Route::prefix('staff')->middleware('admin')->group(function () {
 
     //front image
     Route::get('front_picture', [FrontPictureController::class, 'index'])->name('front_picture');
+    Route::resource('mainPicture','MainPictureController');
     // Route::post('/front_picture1', [FrontPictureController::class, 'storePicture1']);
     // Route::get('/picture1/{id}', [FrontPictureController::class, 'editPicture1'])->name('front_picture1');
 

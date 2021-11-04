@@ -188,7 +188,7 @@ class UsersController extends Controller
             'sup_code' => $request->sup_code || null,
             'password' => Hash::make($request->password)
         ]);
-        $userType = $request->role === 1 ? 'Client' : 'Technicien';
+        $userType = $request->role === 1 ? 'Client' : 'Client';
         $request->session()->put('success', $userType . ' ajouté avec succès!');
         return redirect()->back(302);
     }
@@ -234,7 +234,7 @@ class UsersController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        $userType = $request->role === 3 ? 'Comptable' : 'Livreur';
+        $userType = $request->role === 3 ? 'Comptable' : 'Comptable';
         $request->session()->put('success', $userType . ' ajouté avec succès!');
         return redirect()->back(302);
     }
