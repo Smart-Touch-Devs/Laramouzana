@@ -29,7 +29,11 @@
                     @error('withdrawAmount')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
+                    @if (Auth::user()->account->amount === 0)
+<p>Veuillez d'abord recharger votre compte</p>
+                    @else
                     <button type="submit" class="btn btn-primary-dark-w px-5">Envoyer</button>
+                    @endif
                 </div>
             </form>
             @else

@@ -6,17 +6,12 @@
 
 @section('subcontent')
 <div class="grid grid-cols-12 gap-6 mt-5 flex">
-    @if ($message = Session::get('success'))
-        <div class="rounded-md flex justify-between px-5 py-4 mb-2 bg-theme-18 text-theme-9 successAlert">
-            <div class="flex">
-                <i data-feather="alert-triangle" class="w-6 h-6 mr-2"></i>
-                <span>{{ $message }}</span>
-                {{Session::forget('success')}}
-            </div>
-            <button class="closeBtn"><i data-feather="x" style="cursor: pointer;" class="w-4 h-4 ml-auto"></i></button>
-        </div>
-    @endif
     <div class="intro-y col-span-12 lg:col-span-12">
+        @if ($message = Session::get('success'))
+        <div class="">
+            <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-18 text-theme-9"> <i data-feather="alert-triangle" class="w-6 h-6 mr-2 text-theme-9"></i> <strong>{{ $message }}</strong><i data-feather="x" class="w-4 h-4 ml-auto" onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;' id="close"></i> </div>
+        </div>
+        @endif
         <div class="intro-y box mt-5">
             <div class="flex sm:flex-row items-center p-5 border-b border-gray-200">
                 <h2 class="font-size-16 font-semibold text-base mr-auto">
